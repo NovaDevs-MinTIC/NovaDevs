@@ -1,0 +1,13 @@
+DESCRIPOCIÓN DEL PROYECTO
+Diseñar y construir una aplicación software que permita controlar las ventas físicas y virtuales de una empresa de manufactura y hacerles el correspondiente seguimiento,haciendo uso de la metodolgía SCRUM
+en un equipo de 5 integrantes con los roles de Project Owner,SCRUM Master, desarrollador, analista y Administrador de BD.
+
+El software debe contar con :
+
+Módulo administrador de ventas. 
+Módulo para registrar el estado de la venta. 
+Gestión de vendedores
+Gestión de inventarios
+Gestión de usuarios y roles. 
+
+-------------------------------------------------

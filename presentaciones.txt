@@ -1,4 +1,4 @@
-DESCRIPOCIÓN DEL PROYECTO
+﻿DESCRIPOCIÓN DEL PROYECTO
 Diseñar y construir una aplicación software que permita controlar las ventas físicas y virtuales de una empresa de manufactura y hacerles el correspondiente seguimiento,haciendo uso de la metodolgía SCRUM
 en un equipo de 5 integrantes con los roles de Project Owner,SCRUM Master, desarrollador, analista y Administrador de BD.
 
@@ -14,3 +14,6 @@ Gestión de usuarios y roles.
 
 Hola chicos, mi nombre es Nelson Berrio, tengo 25 años y actualmente soy estudiante
 de Entrenamiento Deportivo en la Universidad de Antioquia y vivo en la ciudad de Medellin
+
+Hola mi nombre es Oscar Andres Gomez, tengo 18 a�os, vivo en Palmira, Valle del Cauca, actualmente estudio desarrollo de so
+actualmente estudio desarrollo de software, me gusta el mundo de la animacion y el mundo del desarrollo indie

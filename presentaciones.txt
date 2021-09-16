@@ -23,3 +23,6 @@ soy Ingeniera de Sistemas y soy de la ciudad de Montería.
 
 Hola mi nombre es Daniela Ovalle, tengo 21 años, soy estudiante de Bacteriología
 y vivo en la ciudad de Bogotá.
+
+Hola, mi nombre es Juan Sebastián Suescún, tengo 33 años, soy ingeniero industrial, estudio desarrollo de software,
+soy de Guatapé, Antioquia. Me gusta trotar, jugar al futbol y escuchar buena música

@@ -49,45 +49,6 @@ li{
 }
 }
 
-///PAGE REGISTRO DE PRODUCTOS
-.content-general{
-flex: 50%;
-text-align: center;
-display: flex;
-margin-top: 10vh;
-width: 70%;
-float:right;
-margin-left: 50vh;
-
-}
-.content-form{
-  width: 60vh;
-  margin-left: 220px;
-	margin-right: 80px;
-
-}
-
-.content-producto{
-  width: 90vh;
-  height: 70vh;
-  margin: 0 auto;
- label{
-   float: left;
-   margin: 10px;
- }
-}
-#btn-registrar{
-  
-    height:40px; 
-    width:100px; 
-    margin: -20px -50px; 
-    position:relative;
-    top:50%; 
-    left:50%;
-    margin: 0 auto;
-    text-align:center;
-
-}
 ////LOGO DEL SIDEBAR
 .logo{
   width: 100px;

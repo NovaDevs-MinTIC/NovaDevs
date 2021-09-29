@@ -1,0 +1,16 @@
+h2{
+    text-align: center;
+}
+
+h3{
+    text-align: center;
+}
+
+.formulario{
+    background-color: aqua;
+    width: 70%;
+}
+
+.formulario .row{
+    justify-content: center;
+}

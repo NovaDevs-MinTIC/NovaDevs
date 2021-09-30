@@ -1,9 +1,44 @@
 import React, {useState,useEffect} from 'react'
 
+const VehiculosBackend = [
+    {
+        nombre:"Corolla",
+        marca:"Toyota",
+        modelo:2014,
+    },
+    {
+        nombre:"Sandero",
+        marca:"Renault",
+        modelo:2020,
+    },
+    {
+        nombre:"Rav4",
+        marca:"Toyota",
+        modelo:2021,
+    },
+    {
+        nombre:"Fiesta",
+        marca:"Ford",
+        modelo:2017,
+    },
+    {
+        nombre:"Mazda 3",
+        marca:"Mazda",
+        modelo:2020,
+    }
+]
+
+
 const AprendiendoHooks2 = () => {
 
     const [mostrarTabla, setMostrarTabla] = useState(true);
+    const [vehiculos, setVehiculos] = useState([]);
     const [mostrarTextoBoton, setmostrarTextoBoton] = useState('');
+
+    useEffect(() => {
+        //Obtiene los datos desde el backend
+        setVehiculos(VehiculosBackend)
+    }, []);
 
     useEffect(() => {
         if (mostrarTabla) {
@@ -20,14 +55,36 @@ const AprendiendoHooks2 = () => {
                 setMostrarTabla(!mostrarTabla)
                 }} className="btn mt-3">{mostrarTextoBoton}</button>
 
-            {mostrarTabla ? <TablaVehiculos /> : <FormularioDeCreacion />}
+            {mostrarTabla ? <TablaVehiculos listaVehiculos={vehiculos} /> : <FormularioDeCreacion />}
         </div>
     )
 }
 
-const TablaVehiculos = () =>{
+const TablaVehiculos = ({listaVehiculos}) =>{
+    useEffect(() => {
+        console.log(listaVehiculos)
+    }, [listaVehiculos]);
     return(
-        <div>Esto es un div que se convertirá en una tabla</div>
+        <table className="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {listaVehiculos.map((vehiculo)=>{
+                    return(
+                        <tr>
+                            <td>{vehiculo.nombre}</td>
+                            <td>{vehiculo.marca}</td>
+                            <td>{vehiculo.modelo}</td>
+                        </tr>
+                    )
+                })}
+            </tbody>
+        </table>
     )
 }
 

@@ -11,9 +11,19 @@ h3{
 
 .formulario{
     background-color: aqua;
-    width: 70%;
+    width: 100%;
+    margin: 10px;
 }
 
 .formulario .row{
     justify-content: center;
 }
+
+.btn{
+    margin-left: 10px;
+}
+
+.btn:hover{
+    cursor: pointer;
+}
+

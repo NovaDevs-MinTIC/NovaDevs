@@ -55,6 +55,7 @@ const VentaBackend = [
     }
 ]
 
+//Contacto con la base de datos
 const DataVentas = () => {
     
     const [venta, setVenta] = useState([]);
@@ -64,57 +65,57 @@ const DataVentas = () => {
     }, []);
 
     return(
-        <CamposTbody listaVentas={venta} />
+        <TablaVentas listaVentas={venta} />
     );
 }
 
-const CamposTbody = ({listaVentas}) =>{
-    
-    const [editar, setEditar] = useState(false);
-
-    useEffect(() => {
-        console.log(listaVentas)
-        
-    }, []);
+//tabla SIN contenedores
+const TablaVentas = ({listaVentas}) =>{
     
     return (
-        <tbody>
-            {listaVentas.map((venta) =>{
-                return(
-                    <tr>
-                        <th scope="row">{venta.idVenta}</th>
-                        <td>{venta.descripcionVenta}</td>
-                        <td>{venta.cantidad}</td>
-                        <td>{venta.fechaVenta}</td>
-                        <td>{venta.idCliente}</td>
-                        <td>{venta.nombreCliente}</td>
-                        <td>{venta.idVendedor}</td>
-                        <td>{venta.nombreVendedor}</td>
-                        <td>{venta.valorVenta}</td>
-                        <td className={venta.alerta}>{venta.estado}</td>
+        <table className="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col-sm">ID Venta</th>
+                    <th scope="col-sm">Descripción de venta</th>
+                    <th scope="col-sm">Cantidad</th>
+                    <th scope="col-sm">Fecha de venta</th>
+                    <th scope="col-sm">ID Cliente</th>
+                    <th scope="col-sm">Nombre del cliente</th>
+                    <th scope="col-sm">ID Vendedor</th>
+                    <th scope="col-sm">Nombre del vendedor</th>                                
+                    <th scope="col-sm">Valor Venta</th> 
+                    <th scope="col-sm">Estado</th>
+                    <th scope="col-sm">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {listaVentas.map((venta) =>{
+                    return(
+                        <tr>
+                            <th scope="row">{venta.idVenta}</th>
+                            <td>{venta.descripcionVenta}</td>
+                            <td>{venta.cantidad}</td>
+                            <td>{venta.fechaVenta}</td>
+                            <td>{venta.idCliente}</td>
+                            <td>{venta.nombreCliente}</td>
+                            <td>{venta.idVendedor}</td>
+                            <td>{venta.nombreVendedor}</td>
+                            <td>{venta.valorVenta}</td>
+                            <td className={venta.alerta}>{venta.estado}</td>
 
-                        <td className="iconos">
-                            <button onClick={()=>{
-                                setEditar(!editar)
-                            }} className="btn far fa-edit bg-info rounded"></button>
+                            <td className="iconos">
+                                <button className="btn far fa-edit bg-info"></button>
 
-                            {editar && <TablaEditar/>}
-
-                            <button className="fas fa-trash bg-danger border-0 rounded"></button>
-                        </td>
-                    </tr>
-                )
-            })}    
-        </tbody>
-    )
-}
-
-const TablaEditar =() =>{
-    return(
-        <div>hola</div>
+                                <button className="btn far fa-trash-alt bg-danger ml-1"></button>
+                            </td>
+                        </tr>
+                    )
+                })}    
+            </tbody>
+        </table>
     )
 }
 
 export default DataVentas
 
-//formatear estilos[className={`btn mt-3 bg-${colorFormateado}`}]

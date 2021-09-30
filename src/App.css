@@ -1,8 +1,4 @@
-/*----------------CSS SEGUIMIENTO DE VENTAS-----------------*/
-
-.container-lg{
-  margin-top: 1%;
-}
+/*----------------CSS BUSCAR Y ACTUALIZAR VENTAS-----------------*/
 
 .h1__titBuscarActulizarVentas{
   font-size:x-large;
@@ -30,10 +26,6 @@
   cursor: pointer;
 }
 
-.table{
-  margin-top: 5px;  
-}
-
 .table > thead{
   background-color: #5A5A5A;
   color: white;
@@ -52,4 +44,4 @@
   margin-left: 2px;
 }
 
-/*----------------CSS SEGUIMIENTO DE VENTAS-----------------*/
+/*----------------CSS BUSCAR Y ACTUALIZAR VENTAS-----------------*/

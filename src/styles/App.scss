@@ -70,3 +70,72 @@ margin: 10px;
 #hr-final{
   margin-top: 50%;
 }
+
+///------FORMULARIO DE REGISTRO DE PRODUCTOS-------
+.content-general{
+  flex: 50%;
+  text-align: center;
+  display: flex;
+  margin-top: 10vh;
+  width: 70vh;
+  height: 80vh;
+  float:right;
+  margin-left: 50vh;
+  //background-color: red;
+  
+  }
+  
+  .titulo-form-producto{
+    font-size: 25px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+  }
+  
+  .content-producto{
+    width: 50vh;
+    height: 75vh;
+    margin-top:10px;
+    margin: 0 auto;
+    //background-color: yellow;
+   label{
+     float: left;
+     margin: 10px;
+   }
+  }
+  #btn-registrar{
+    
+      height:40px; 
+      width:100px; 
+      margin: -20px -50px; 
+      position:relative;
+      top:50%; 
+      left:50%;
+      margin: 0 auto;
+      text-align:center;
+  
+  }
+  ////LOGO DEL SIDEBAR
+  .logo{
+    width: 100px;
+    height: 90px;
+    text-align: center;
+    margin-left: 14vh;
+    margin-right: 10vh;
+    margin-top: 10vh;
+  }
+  #logout{
+    //margin-top: 15vh;
+    float: right;
+  }
+  hr{
+    height: 20px;
+  margin: 10px;
+    background-color: white;
+  }
+  #hr-final{
+    margin-top: 50%;
+  }
+
+  .titulo-admin-producto{
+    float: right;
+  }

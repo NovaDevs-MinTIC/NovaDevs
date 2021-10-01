@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2? family = Rubik: wght @ 300 & display = swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+}
+$light:#ffffff;
+$gray:#e7e9eb;
+.flex{
+  display: flex;
+}
+.body{
+
+    width:1000px;
+    margin:0px auto;
+  
+}
+
+////------SIDEBAR---MENÚ LATERAL
+.sidebar{
+  width: 18rem;
+  height: calc(100vh);
+  border-right: 1px solid $gray;
+  background-color: #0A1931;
+  margin-top: 10;
+  padding: 0;
+  float: left;
+
+ 
+ul{
+  list-style: none;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  color: white;
+}
+li{
+  margin-bottom: 1rem;
+  a{
+    text-decoration: none;
+  
+    &.active{
+      background-color: #099494;
+    }
+  }
+  .text-white{
+    color: white;
+  }
+}
+}
+
+////LOGO DEL SIDEBAR
+.logo{
+  width: 100px;
+  height: 90px;
+  text-align: center;
+  margin-left: 14vh;
+  margin-right: 10vh;
+  margin-top: 10vh;
+}
+#logout{
+  //margin-top: 15vh;
+  float: right;
+}
+hr{
+  height: 20px;
+margin: 10px;
+  background-color: white;
+}
+#hr-final{
+  margin-top: 50%;
+}

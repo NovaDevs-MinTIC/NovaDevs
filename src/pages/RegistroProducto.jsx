@@ -1,12 +1,10 @@
-import React, { Fragment,useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
-//import 'react-toastify/dist/ReactToastify.css';
+import React, { Fragment } from 'react'
+
+
 
 const RegistroProductos=()=>{
 
-  const Mensaje= ()=>{
-    toast.success('Producto registrado Exitosamente!')
-  }
+
     return(
       
 <div className="content-general">
@@ -38,13 +36,12 @@ const RegistroProductos=()=>{
         </select>
       </div>
       <div className="col-md-6">
-        <button onClick={Mensaje} id="btn-registrar" className="btn btn-primary" type="submit">Registrar
+        <button id="btn-registrar" className="btn btn-primary" type="submit">Registrar
         </button>
       </div>
          </form>
     </Fragment>
-    <ToastContainer  position="top-right"autoClose={5000}>
-           </ToastContainer>
+    
 </div>
 </div>        
     )

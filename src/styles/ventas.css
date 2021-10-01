@@ -1,22 +1,9 @@
-*{
-    font-family: 'Roboto', sans-serif;
-}
 h2{
     text-align: center;
 }
 
 h3{
     text-align: center;
-}
-
-.formulario{
-    background-color: aqua;
-    width: 100%;
-    margin: 10px;
-}
-
-.formulario .row{
-    justify-content: center;
 }
 
 .btn{
@@ -26,4 +13,5 @@ h3{
 .btn:hover{
     cursor: pointer;
 }
+
 

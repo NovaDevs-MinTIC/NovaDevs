@@ -1,15 +1,12 @@
 import React from 'react'
 
-const FormItem = ({dato, type}) => {
+const LoginFormItem = ({dato, type, className}) => {
     return (
-        <div className="col-md-2">
+        <div className={className}>
             <label className="form-label">{dato}</label>
             <input type={type} className="form-control"required/>
         </div>
     )
 }
 
-export default FormItem
-
-
-               
+export default LoginFormItem

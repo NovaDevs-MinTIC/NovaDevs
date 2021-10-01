@@ -5,9 +5,9 @@ const Ventas = () => {
     return (
         <div>
             <h2>REGISTRO DE VENTAS</h2>
-            <div class="container-fluid">
-                <div class="row align-items-center  justify-content-center">
-                    <div class="col-md-2">
+            <div className="container-fluid">
+                <div className="row align-items-center  justify-content-center">
+                    <div className="col-md-2">
                         <div className="row align-items-center  justify-content-center">
                             <label className="form-label">ID Venta</label>
                         </div>   
@@ -27,7 +27,7 @@ const Ventas = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div className="col-md-2">
                         <div className="row align-items-center  justify-content-center">
                             <label className="form-label">Cliente</label>
                         </div>   
@@ -38,7 +38,7 @@ const Ventas = () => {
                         </div>
                     </div>
 
-                    <div class="col-md-2">
+                    <div className="col-md-2">
                         <div className="row align-items-center  justify-content-center">
                             <label className="form-label">ID Cliente</label>
                         </div>   
@@ -48,7 +48,7 @@ const Ventas = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div className="col-md-2">
                         <div className="row align-items-center  justify-content-center">
                             <label className="form-label">Vendedor</label>
                         </div>   
@@ -58,7 +58,7 @@ const Ventas = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div className="col-md-2">
                         <div className="row align-items-center  justify-content-center">
                             <label className="form-label">ID Vendedor</label>
                         </div>   
@@ -73,8 +73,8 @@ const Ventas = () => {
 
             <h3>Agregar Producto</h3>
             <div className="container">
-                <div class="row align-items-center  justify-content-center">
-                    <div class="col-md-8">
+                <div className="row align-items-center  justify-content-center">
+                    <div className="col-md-8">
                         <div className="row align-items-center  justify-content-left">
                             <div className="col-md-3">
                                 <label className="form-label">ID Producto</label>
@@ -87,7 +87,7 @@ const Ventas = () => {
                             </div>
                         </div>   
                     </div>
-                    <div class="col-md-8">
+                    <div className="col-md-8">
                         <div className="row align-items-center  justify-content-center">
                             <div className="col-md-3">
                                 <input type="number" className="form-control" required/>

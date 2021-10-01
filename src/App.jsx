@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from 'pages/login';
-import RegistroVentas from 'pages/RegistroVentas';
+import Ventas from 'pages/Ventas';
 
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" exact={true} component={Login}></Route>
-          <Route path="/RegistroVentas" exact={true} component={RegistroVentas}></Route>
+          <Route path="/Ventas" exact={true} component={Ventas}></Route>
         </Switch>
       </Router>
     </div>

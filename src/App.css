@@ -20,3 +20,50 @@ h3{
   justify-content: center;
 }
 
+/*----------------CSS BUSCAR Y ACTUALIZAR VENTAS-----------------*/
+
+.h1__titBuscarActulizarVentas{
+  font-size:x-large;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.input-group-prepend{
+  border: 1px;
+  border-style: solid;
+  border-color: #CECECE;
+  padding-top: 6px;
+  padding-left: 2px;
+  padding-right: 2px;
+  background-color: #CECECE;
+}
+
+.btn{
+  transition: none;
+  background-color: #CECECE;
+}
+
+.btn:hover{
+  cursor: pointer;
+}
+
+.table > thead{
+  background-color: #5A5A5A;
+  color: white;
+}
+
+.iconos{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.far, .fas{
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 2px;
+}
+
+/*----------------CSS BUSCAR Y ACTUALIZAR VENTAS-----------------*/

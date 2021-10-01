@@ -14,7 +14,7 @@ function Sidebar(){
             activeClassName="active"><FaIcons.FaShoppingCart/> Registro de Ventas</NavLink>
         </li>
         <li>
-            <NavLink to="/gestionVentas" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1" 
+            <NavLink to="/BuscarActualizarVentas" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1" 
             activeClassName="active"><FaIcons.FaRegCalendar/> Gestión de Ventas</NavLink>
         </li>
         <li>

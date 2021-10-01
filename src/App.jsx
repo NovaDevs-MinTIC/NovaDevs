@@ -3,6 +3,7 @@ import Login from 'pages/login';
 import Ventas from 'pages/Ventas';
 import Sidebar from 'Layouts/Sidebar';
 import 'styles/App.scss'
+import BuscarActualizarVentas from 'pages/BuscarActualizarVentas';
 
 
 // function App() {
@@ -29,7 +30,9 @@ function App() {
       <Sidebar></Sidebar>
       <div className="content">
         <Route path="/Ventas" exact={true} component={Ventas}></Route>
+        <Route path="/BuscarActualizarVentas" exact={true} component={BuscarActualizarVentas}></Route>
       </div>
+
       </div>
     </Router>
   );

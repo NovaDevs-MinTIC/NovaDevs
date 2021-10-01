@@ -1,10 +1,8 @@
 import { NavLink } from 'react-router-dom'
-import logo from './logo.png';
 import * as FaIcons from 'react-icons/fa'
 function Sidebar(){
     return(
         <div className="sidebar">  
-        <img className="logo" src={logo} />
     <ul>
     <hr></hr>
         <li>
@@ -12,7 +10,7 @@ function Sidebar(){
             activeClassName="active"><FaIcons.FaHome/> Inicio</NavLink>
         </li>
         <li>
-            <NavLink to="/registrarVentas" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1" 
+            <NavLink to="/Ventas" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1" 
             activeClassName="active"><FaIcons.FaShoppingCart/> Registro de Ventas</NavLink>
         </li>
         <li>

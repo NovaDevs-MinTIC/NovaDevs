@@ -10,7 +10,7 @@ const BuscarActualizarVentas = () => {
             {/*Título*/}
             <div className="container">
                 <h1 className="h1__titBuscarActulizarVentas mt-2">
-                    Editar y actualizar estado de venta
+                    Estado de venta
                 </h1>
             </div>
 

@@ -1,10 +1,13 @@
 import { NavLink } from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa'
+import Logo from 'media/Logo_1.png'
 function Sidebar(){
     return(
         <div className="sidebar">  
     <ul>
+    <img src={Logo} alt="" className="Logo_1"/>
     <hr></hr>
+
         <li>
             <NavLink to="/" exact className="mr-2 rounded py-1 w-100 d-inline-block px-1 text-white " 
             activeClassName="active"><FaIcons.FaHome/> Inicio</NavLink>
@@ -31,7 +34,7 @@ function Sidebar(){
         </li>
         <hr id="hr-final"></hr>
         <li>
-            <NavLink id="logout" to="/logout" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1"
+            <NavLink id="logout" to="/" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1"
              activeClassName="active"><FaIcons.FaSignOutAlt/> Cerrar Sesión</NavLink>
         </li>
      

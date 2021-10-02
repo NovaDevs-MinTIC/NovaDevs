@@ -25,8 +25,8 @@ function Sidebar(){
              activeClassName="active"><FaIcons.FaThLarge/> Registro de Productos</NavLink>
         </li>
         <li>
-            <NavLink to="/paginaPrueba" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1"
-             activeClassName="active"><FaIcons.FaShoppingBag/>Prueba</NavLink>
+            <NavLink to="/registroProducto" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1"
+             activeClassName="active"><FaIcons.FaShoppingBag/> Gestión de Productos</NavLink>
         </li>
         <li>
             <NavLink to="/gestionUsuarios" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1"

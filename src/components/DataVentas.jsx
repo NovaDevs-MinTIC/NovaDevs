@@ -76,17 +76,17 @@ const TablaVentas = ({listaVentas}) =>{
         <table className="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col-sm">ID Venta</th>
-                    <th scope="col-sm">Descripción de venta</th>
-                    <th scope="col-sm">Cantidad</th>
-                    <th scope="col-sm">Fecha de venta</th>
-                    <th scope="col-sm">ID Cliente</th>
-                    <th scope="col-sm">Nombre del cliente</th>
-                    <th scope="col-sm">ID Vendedor</th>
-                    <th scope="col-sm">Nombre del vendedor</th>                                
-                    <th scope="col-sm">Valor Venta</th> 
-                    <th scope="col-sm">Estado</th>
-                    <th scope="col-sm">Acciones</th>
+                    <th scope="col">ID Venta</th>
+                    <th scope="col">Descripción de venta</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Fecha de venta</th>
+                    <th scope="col">ID Cliente</th>
+                    <th scope="col">Nombre del cliente</th>
+                    <th scope="col">ID Vendedor</th>
+                    <th scope="col">Nombre del vendedor</th>                                
+                    <th scope="col">Valor Venta</th> 
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>

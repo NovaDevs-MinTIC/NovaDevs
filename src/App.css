@@ -67,8 +67,16 @@ h3{
 }
 
 .contenedorVentas{
+  float: center;
   width: 150vh;
-  height: 30%;
+  height: 95vh;
+  margin-left: 55px;
+  
+}
+.contenedor-tabla-venta{
+  width: 200vh;
+  height: 65vh;
+
 }
 
 /*----------------CSS BUSCAR Y ACTUALIZAR VENTAS-----------------*/

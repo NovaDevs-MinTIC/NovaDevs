@@ -3,7 +3,9 @@ import * as FaIcons from 'react-icons/fa'
 import Logo from 'media/Logo_1.png'
 function Sidebar(){
     return(
-        <div className="sidebar container-sm">  
+      
+        <div className="sidebar container-sm"> 
+          <div className="container"> 
             <ul>
                 <img src={Logo} alt="" className="Logo_1"/>
 
@@ -44,6 +46,7 @@ function Sidebar(){
                     activeClassName="active"><FaIcons.FaSignOutAlt/> Cerrar Sesión</NavLink>
                 </li>
             </ul>
+        </div>
         </div>
     )
 }

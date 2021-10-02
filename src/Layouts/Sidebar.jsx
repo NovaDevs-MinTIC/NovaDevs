@@ -1,11 +1,11 @@
 import { NavLink } from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa'
-import Logo from 'media/logo.png'
+import Logo from 'media/Logo_1.png'
 function Sidebar(){
     return(
         <div className="sidebar">  
     <ul>
-    <img src={Logo} alt="" className="logo"/>
+    <img src={Logo} alt="" className="Logo_1"/>
     <hr></hr>
 
         <li>

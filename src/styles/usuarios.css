@@ -1,0 +1,31 @@
+
+.titulogestion{
+  margin-left: 240px;
+  margin-top: 10px;
+}
+
+
+.row-usuarios{
+
+  margin-left: 135px;
+  padding-left: 20px;
+  padding-top: 100px;
+  margin-bottom: 50px;
+  margin-top: 10px;
+
+}
+
+ 
+.tabla{
+  width: 100%;
+  max-width: 100%;
+  background-color: transparent;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-left: 150px;
+}
+
+.boton{
+  margin-left: 250px;
+  margin-top: 50px;
+}

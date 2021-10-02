@@ -25,16 +25,17 @@ import RegistroProducto from 'pages/RegistroProducto';
 function App() {
   return (
     <Router>
-      <Route path="/" exact={true} component={Login}></Route>
-      <div className="flex w-100">
-      <Sidebar></Sidebar>
-      <div className="content">
-        <Route path="/Ventas" exact={true} component={Ventas}></Route>
-        <Route path="/BuscarActualizarVentas" exact={true} component={BuscarActualizarVentas}></Route>
-        <Route path="/registroProductoNuevo" exact={true} component={RegistroProducto}></Route>
-      </div>
-
-      </div>
+      <Switch>
+        <Route path="/" exact={true} component={Login}></Route>
+        <div className="flex w-100">
+          <Sidebar />
+          <div className="content">
+            <Route path="/Ventas" exact={true} component={Ventas}></Route>
+            <Route path="/BuscarActualizarVentas" exact={true} component={BuscarActualizarVentas}></Route>
+            <Route path="/registroProductoNuevo" exact={true} component={RegistroProducto}></Route>
+          </div>
+        </div>
+      </Switch>
     </Router>
   );
 }

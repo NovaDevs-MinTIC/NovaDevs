@@ -42,7 +42,7 @@ const Login = () => {
                             </div>
                         </div>
                         <div className="row justify-content-center">
-                            <button type="button" className="btn btn-primary m-3"><i className="fas fa-sign-in-alt"></i> Iniciar Sesión</button>
+                            <button type="button" className="btn btn-primary m-3"><i className="fas fa-sign-in-alt"></i> Iniciar Sesión <link rel="" href="/Ventas" /></button>
                         </div>
                     </div>
                 </div>

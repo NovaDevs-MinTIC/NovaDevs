@@ -5,6 +5,8 @@ import Sidebar from 'Layouts/Sidebar';
 import 'styles/App.scss'
 import BuscarActualizarVentas from 'pages/BuscarActualizarVentas';
 import RegistroProducto from 'pages/RegistroProducto';
+import Usuarios from 'pages/gestionUsuarios'
+
 
 // function App() {
 //   return (
@@ -33,6 +35,7 @@ function App() {
             <Route path="/Ventas" exact={true} component={Ventas}></Route>
             <Route path="/BuscarActualizarVentas" exact={true} component={BuscarActualizarVentas}></Route>
             <Route path="/registroProductoNuevo" exact={true} component={RegistroProducto}></Route>
+            <Route path="/gestionUsuarios" exact={true} component={Usuarios}></Route>
           </div>
         </div>
       </Switch>

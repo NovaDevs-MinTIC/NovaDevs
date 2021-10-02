@@ -49,7 +49,7 @@ function Sidebar(){
                 </ul>
             </div>
         </div>
-        </div>
+        
     )
 }
 export default Sidebar

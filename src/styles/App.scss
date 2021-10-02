@@ -115,27 +115,30 @@ margin: 10px;
   
   }
   ////LOGO DEL SIDEBAR
-  .logo{
-    width: 100px;
-    height: 90px;
-    text-align: center;
-    margin-left: 14vh;
-    margin-right: 10vh;
-    margin-top: 10vh;
-  }
+  
   #logout{
-    //margin-top: 15vh;
+  
     float: right;
   }
   hr{
     height: 20px;
-  margin: 10px;
+    margin: 10px;
     background-color: white;
   }
   #hr-final{
-    margin-top: 50%;
+    margin-top: 30%;
   }
 
   .titulo-admin-producto{
     float: right;
   }
+  .container-ventas{
+    width: 70%;
+    height: 80vh;
+    background-color: #999;
+    /* Esto equilibria lo del aside */
+    position: relative;
+    top: 0;
+    left: 30%;
+  }
+ 

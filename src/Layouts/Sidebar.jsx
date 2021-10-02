@@ -34,7 +34,7 @@ function Sidebar(){
         </li>
         <hr id="hr-final"></hr>
         <li>
-            <NavLink id="logout" to="/logout" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1"
+            <NavLink id="logout" to="/" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1"
              activeClassName="active"><FaIcons.FaSignOutAlt/> Cerrar Sesión</NavLink>
         </li>
      

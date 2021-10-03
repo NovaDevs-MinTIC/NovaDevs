@@ -1,0 +1,19 @@
+.container-home{
+    margin-left:40%;
+    float:inline-end;
+    width: 100vh;
+    height: 80vh;
+    text-align: center;
+}
+.container-home h2{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 70px;
+ 
+}
+.home-logo{
+    margin-top: 100px;
+   
+}
+.logo-home{
+    width: 300px;
+}

@@ -9,7 +9,7 @@ function Sidebar(){
     <hr></hr>
 
         <li>
-            <NavLink to="/" exact className="mr-2 rounded py-1 w-100 d-inline-block px-1 text-white " 
+            <NavLink to="/Home" exact className="mr-2 rounded py-1 w-100 d-inline-block px-1 text-white " 
             activeClassName="active"><FaIcons.FaHome/> Inicio</NavLink>
         </li>
         <li>

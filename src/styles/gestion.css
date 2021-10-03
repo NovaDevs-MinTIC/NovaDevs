@@ -1,0 +1,82 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  h2{
+    text-align: center;
+    margin: 20px;
+  }
+  
+  h3{
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .form-footer{
+    display: flex;
+    justify-content: center;
+  }
+  
+  /*CSS GESTION PRODUCTOS*/
+  
+  .h1__titgestionProducto{
+    font-size:x-large;
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 1vh;
+  }
+  
+  .input-group-prepend{
+    border: 1px;
+    border-style: solid;
+    border-color: #CECECE;
+    padding-top: 6px;
+    padding-left: 2px;
+    padding-right: 2px;
+    background-color: #CECECE;
+  }
+  
+  .btn{
+    transition: none;
+    background-color: #CECECE;
+  }
+  
+  .btn:hover{
+    cursor: pointer;
+  }
+  
+  .table > thead{
+    background-color: #5A5A5A;
+    color: white;
+  }
+  
+  .iconos{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+  
+  .far, .fas{
+    cursor: pointer;
+    padding: 4px;
+    margin-left: 2px;
+  }
+  
+  .contenedorVentas{
+    float: center;
+    width: 150vh;
+    height: 95vh;
+    margin-left: 55px;
+    
+  }
+  .contenedor-tabla-venta{
+    width: 200vh;
+    height: 65vh;
+  
+  }
+  
+  /*CSS GESTION PRODUCTO*/

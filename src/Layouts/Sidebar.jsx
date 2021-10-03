@@ -39,6 +39,12 @@ function Sidebar(){
                         activeClassName="active"><FaIcons.FaUserCog/> Gestión de Usuarios</NavLink>
                     </li>
 
+                    <li>
+                        <NavLink to="/gestionUsuarios" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1"
+                        activeClassName="active"><FaIcons.FaUserCog/>Perfil</NavLink>
+                    </li>
+
+
                     <hr id="hr-final"></hr>
                     
                     <li>

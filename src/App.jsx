@@ -6,7 +6,7 @@ import 'styles/App.scss'
 import BuscarActualizarVentas from 'pages/BuscarActualizarVentas';
 import RegistroProducto from 'pages/RegistroProducto';
 import Usuarios from 'pages/gestionUsuarios'
-
+import gestionProducto from 'pages/gestionProducto'
 
 // function App() {
 //   return (
@@ -36,6 +36,7 @@ function App() {
             <Route path="/BuscarActualizarVentas" exact={true} component={BuscarActualizarVentas}></Route>
             <Route path="/registroProductoNuevo" exact={true} component={RegistroProducto}></Route>
             <Route path="/gestionUsuarios" exact={true} component={Usuarios}></Route>
+            <Route path="/gestionProducto" exact={true} component={gestionProducto}></Route>
           </div>
         </div>
       </Switch>

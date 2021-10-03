@@ -30,7 +30,7 @@ function Sidebar(){
                     </li>
 
                     <li>
-                        <NavLink to="/registroProducto" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1"
+                        <NavLink to="/gestionProducto" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1"
                         activeClassName="active"><FaIcons.FaShoppingBag/> Gestión de Productos</NavLink>
                     </li>
 

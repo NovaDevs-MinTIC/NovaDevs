@@ -4,7 +4,7 @@ import 'App.css'
 const Ventas = () => {
     return (
         <div>
-            <h2>REGISTRO DE VENTAS</h2>
+            <h2 className="margin-20">REGISTRO DE VENTAS</h2>
             <div className="container-fluid">
                 <div className="row align-items-center  justify-content-center">
                     <div className="col-md-2">
@@ -22,7 +22,7 @@ const Ventas = () => {
                             <label className="form-label">Fecha Venta</label>
                         </div>   
                         <div className="row align-items-center  justify-content-center">
-                            <div className="col-md-11">
+                            <div className="col-md-12">
                                 <input type="date" className="form-control" required/>
                             </div>
                         </div>
@@ -71,7 +71,7 @@ const Ventas = () => {
                 </div>                
             </div>
 
-            <h3>Agregar Producto</h3>
+            <h3 className="margin-20">Agregar Producto</h3>
             <div className="container">
                 <div className="row align-items-center  justify-content-center">
                     <div className="col-md-8">
@@ -99,13 +99,13 @@ const Ventas = () => {
                                 <input type="number" className="form-control" required/>
                             </div>
                             <div className="col-md-3">
-                                <button type="button" class="btn btn-primary"><i className="fas fa-plus"></i> Agregar</button>
+                                <button type="button" class="btn btn-secondary"><i className="fas fa-plus"></i> Agregar</button>
                             </div>
                         </div>   
                     </div>
                 </div>
             </div>
-            <h3>Descripción de Venta</h3>
+            <h3 className="margin-20">Descripción de Venta</h3>
             <div className="container">
                 <div className="col-md-11">
                     <table class="table table-hover">
@@ -145,18 +145,18 @@ const Ventas = () => {
                 </div>
             </div>
             {/* FILA PARA VISUALIZAR EL VALOR TOTAL Y CONFIRMAR LA VENTA */}
-            <div className="container-fluid form-footer">
-                <div className="row align-items-center">
-                    <div className="col-md-4">
+            <div className="container-fluid  justify-content-end col-md-8 form-footer">
+                <div className="row align-items-center justify-content-end ">
+                    <div className="col-md-7">
                         <span>
-                            Valor total
+                            VALOR TOTAL
                         </span>
                     </div>
                     <div className="col-md-4">
                         3456998231
                     </div>
                     <div className="col-md-4">
-                        <button type="button" class="btn btn-primary">Confirmar</button>
+                        <button type="button" class="btn btn-secondary">Confirmar</button>
                     </div>
                 </div>
                 

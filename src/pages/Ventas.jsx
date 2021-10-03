@@ -99,7 +99,7 @@ const Ventas = () => {
                                 <input type="number" className="form-control" required/>
                             </div>
                             <div className="col-md-3">
-                                <button type="button" class="btn btn-secondary"><i className="fas fa-plus"></i> Agregar</button>
+                                <button type="button" class="btn btn-primary"><i className="fas fa-plus"></i> Agregar</button>
                             </div>
                         </div>   
                     </div>
@@ -156,7 +156,7 @@ const Ventas = () => {
                         3456998231
                     </div>
                     <div className="col-md-4">
-                        <button type="button" class="btn btn-secondary">Confirmar</button>
+                        <button type="button" class="btn btn-primary">Confirmar</button>
                     </div>
                 </div>
                 

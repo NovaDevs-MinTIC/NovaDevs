@@ -18,6 +18,10 @@
   background-color: pink;
 }
 
+.tamaño-logo{
+  height: 6px;
+  width: 6px;
+}
 /*----------------CSS BUSCAR Y ACTUALIZAR VENTAS-----------------*/
 
 .h1__titBuscarActulizarVentas{

@@ -11,6 +11,7 @@ const Login = () => {
                         <div className="row">
                             <img src={Logo} alt="" className="rounded mx-auto d-block"/>
                         </div>
+                        <h3 class="text-center">Iniciar Sesión</h3>
                         {/* FORMULARIO DE INGRESO */}
                         <div className="row justify-content-center">
                             <label className="form-label">Usuario</label>
@@ -46,6 +47,17 @@ const Login = () => {
                                 <button type="button" className="btn btn-primary m-3">
                                     <i className="fas fa-sign-in-alt"></i> Iniciar Sesión
                                 </button>
+                            </Link>
+                        </div>
+                        <div className='row flex align-items-center justify-content-center col-md-12'>
+                            <span className='mx-4'>------------------------</span>
+                            <h4 className='text-center'>O</h4>
+                            <span className='mx-4'>------------------------</span>
+                        </div>
+                        <div className="row justify-content-center align-items-center">
+                            <i class="fab fa-google"></i>
+                            <Link to="/Ventas">
+                                <span className='mx-4'>Continúa con Google</span>
                             </Link>
                         </div>
                     </div>

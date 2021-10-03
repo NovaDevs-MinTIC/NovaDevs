@@ -5,7 +5,9 @@ import DataVentas from 'components/DataVentas'
 
 const BuscarActualizarVentas = () => {
     return (
-        <div className="container-lg container-fluid">
+        <div className="contenedorVentas">
+            
+        <div className="container">
 
             {/*Título*/}
             <div className="container">
@@ -34,6 +36,7 @@ const BuscarActualizarVentas = () => {
             <div className="container mt-3 mb-3 d-flex flex-row-reverse">
                 <button type="button" className="btn">Regresar</button>
             </div>
+        </div>
         </div>
     )
 }

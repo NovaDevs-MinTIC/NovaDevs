@@ -26,7 +26,7 @@ h3{
   font-size:x-large;
   font-weight: bolder;
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 1vh;
 }
 
 .input-group-prepend{
@@ -64,6 +64,19 @@ h3{
   cursor: pointer;
   padding: 4px;
   margin-left: 2px;
+}
+
+.contenedorVentas{
+  float: center;
+  width: 150vh;
+  height: 95vh;
+  margin-left: 55px;
+  
+}
+.contenedor-tabla-venta{
+  width: 200vh;
+  height: 65vh;
+
 }
 
 /*----------------CSS BUSCAR Y ACTUALIZAR VENTAS-----------------*/

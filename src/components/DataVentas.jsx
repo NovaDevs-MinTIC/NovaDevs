@@ -73,6 +73,7 @@ const DataVentas = () => {
 const TablaVentas = ({listaVentas}) =>{
     
     return (
+        <div className="contenedor-tabla-venta">
         <table className="table table-hover">
             <thead>
                 <tr>
@@ -114,6 +115,7 @@ const TablaVentas = ({listaVentas}) =>{
                 })}    
             </tbody>
         </table>
+        </div>
     )
 }
 

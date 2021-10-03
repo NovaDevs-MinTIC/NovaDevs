@@ -12,7 +12,7 @@ const gestionProducto = () => {
             {/*Título*/}
             <div className="container">
                 <h1 className="h1__titgestionProducto mt-2">
-                    Gestion de Productos
+                    Gestión de Productos
                 </h1>
             </div>
 

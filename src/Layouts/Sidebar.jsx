@@ -8,12 +8,14 @@ function Sidebar(){
             <div className="container">
                 <ul>
                     <img src={Logo} alt="" className="Logo_1"/>
-
                     <li>
                         <NavLink to="/" exact className="mr-2 rounded py-1 w-100 d-inline-block px-1 text-white " 
                         activeClassName="active"><FaIcons.FaHome/> Inicio</NavLink>
                     </li>
-
+                    <li>
+                        <NavLink to="/perfil" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1"
+                        activeClassName="active"><FaIcons.FaUser/> Perfil</NavLink>
+                    </li>
                     <li>
                         <NavLink to="/Ventas" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1" 
                         activeClassName="active"><FaIcons.FaShoppingCart/> Registro de Ventas</NavLink>
@@ -38,7 +40,6 @@ function Sidebar(){
                         <NavLink to="/gestionUsuarios" exact className="mr-2 text-white rounded py-1 w-100 d-inline-block px-1"
                         activeClassName="active"><FaIcons.FaUserCog/> Gestión de Usuarios</NavLink>
                     </li>
-
                     <hr id="hr-final"></hr>
                     
                     <li>

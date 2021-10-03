@@ -56,7 +56,7 @@ const Login = () => {
                         </div>
                         <div className="row justify-content-center align-items-center">
                             <i class="fab fa-google"></i>
-                            <Link to="/Ventas">
+                            <Link to="#">
                                 <span className='mx-4'>Continúa con Google</span>
                             </Link>
                         </div>

@@ -82,3 +82,7 @@
 }
 
 /*----------------CSS BUSCAR Y ACTUALIZAR VENTAS-----------------*/
+
+.alinear-centro{
+  align-self: center;
+}

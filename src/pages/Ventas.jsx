@@ -145,21 +145,18 @@ const Ventas = () => {
                 </div>
             </div>
             {/* FILA PARA VISUALIZAR EL VALOR TOTAL Y CONFIRMAR LA VENTA */}
-            <div className="container-fluid  justify-content-end col-md-8 form-footer">
-                <div className="row align-items-center justify-content-end ">
-                    <div className="col-md-7">
-                        <span>
-                            VALOR TOTAL
-                        </span>
-                    </div>
-                    <div className="col-md-4">
+            <div className="container-fluid d-flex justify-content-between col-md-8 form-footer">
+                <div className="col-md-7 d-flex justify-content-around alinear-centro">
+                    <label>
+                        VALOR TOTAL
+                    </label>
+                    <span>
                         3456998231
-                    </div>
-                    <div className="col-md-4">
-                        <button type="button" class="btn btn-primary">Confirmar</button>
-                    </div>
+                    </span>
                 </div>
-                
+                <div>
+                    <button type="button" class="btn btn-primary">Confirmar</button>
+                </div>
             </div>
         </div>
     )

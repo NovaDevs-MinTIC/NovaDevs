@@ -55,7 +55,7 @@ li{
   height:100px;
   text-align: center;
   margin-left: 30%;
-  margin-right: 10%;
+  margin-right: 40%;
   margin-top: 5%;
 }
 #logout{
@@ -132,4 +132,17 @@ margin: 10px;
   .titulo-admin-producto{
     float: right;
   }
- 
+.contenedorProducto{
+    margin-top:5vh;
+    float: center;
+    width: 150vh;
+    height: 95vh;
+    margin-left: 55px;
+}
+.h1__titgestionProducto{
+  margin-top: 22px;
+  margin-bottom: 32px;
+  font-size: 30px;
+  text-align: center;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}

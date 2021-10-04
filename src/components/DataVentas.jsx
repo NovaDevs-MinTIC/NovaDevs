@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import React, {useState,useEffect} from 'react'
 
 const VentaBackend = [
@@ -93,7 +94,7 @@ const TablaVentas = ({listaVentas}) =>{
                 <tbody>
                     {listaVentas.map((venta) =>{
                         return(
-                            <tr key={venta._id}>
+                            <tr key={nanoid()}>
                                 <th scope="row">{venta.idVenta}</th>
                                 <td>{venta.descripcionVenta}</td>
                                 <td>{venta.cantidad}</td>

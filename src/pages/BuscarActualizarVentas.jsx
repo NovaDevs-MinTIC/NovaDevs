@@ -27,7 +27,7 @@ const BuscarActualizarVentas = () => {
 
             {/*Contenedor de la tabla de Buscar y actualizar venta*/}
             <div className="container">
-                <div className="table-responsive">
+                <div className="tabla">
                     <DataVentas />
                 </div>
             </div>

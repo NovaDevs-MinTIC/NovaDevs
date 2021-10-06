@@ -2,12 +2,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'styles/App.scss'
 import 'styles/Home.css'
 import Login from 'pages/login';
-import Home from 'pages/Home'
+import Home from 'pages/Home';
 import Ventas from 'pages/Ventas';
 import BuscarActualizarVentas from 'pages/BuscarActualizarVentas';
 import RegistroProducto from 'pages/RegistroProducto';
-import GestionProducto from 'pages/gestionProducto'
-import Usuarios from 'pages/gestionUsuarios'
+import GestionProducto from 'pages/gestionProducto';
+import Usuarios from 'pages/gestionUsuarios';
 import PrivateLayout from 'Layouts/PrivateLayout';
 import LoginLayout from 'Layouts/LoginLayout';
 
@@ -16,7 +16,7 @@ function App() {
     <div className='App'>
         <Router>
           <Switch>
-            <Route path={['/ventas', '/BuscarActualizarVentas', '/RegistroProducto', '/gestionProducto', '/gestionUsuarios']}>
+            <Route path={['/home', '/ventas', '/BuscarActualizarVentas', '/RegistroProducto', '/gestionProducto', '/gestionUsuarios']}>
               <PrivateLayout>
                   <Switch>
                     <Route path='/Home'>

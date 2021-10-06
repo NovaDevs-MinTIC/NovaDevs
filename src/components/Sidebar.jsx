@@ -5,22 +5,21 @@ import useActiveRoute from 'hooks/useActiveRoute'
 
 const Sidebar = () => {
     return (
-        <nav className="hidden lg:flex lg:w-72 border border-gray-300 h-full flex-col bg-gray-200 p-4 sidebar">
-            <Link to="/">
-                <ImagenLogo />
-            </Link>
+        <nav className="hidden lg:flex lg:w-80 h-full flex-col bg-color-#0A1931 p-4 sidebar">
+              <Link to="/">
+                  <ImagenLogo />
+              </Link>
 
             <div className="my-4">
-                <Ruta icono="fas fa-home" ruta="/home" nombre="Inicio" />
+                <Ruta icono="fas fa-home" ruta="/Home" nombre="Inicio" />
                 <Ruta icono="fas fa-cart-plus" ruta="/ventas" nombre="Registro de Ventas" />
                 <Ruta icono="fas fa-calendar" ruta="/BuscarActualizarVentas" nombre="Gestion de Ventas" />
-                <Ruta icono="fas fa-th-large" ruta="/registroProductoNuevo" nombre="Registro de Productos" />
+                <Ruta icono="fas fa-th-large" ruta="/RegistroProducto" nombre="Registro de Productos" />
                 <Ruta icono="fas fa-shopping-bag" ruta="/gestionProducto" nombre="Gestion de Productos" />
                 <Ruta icono="fas fa-user-cog" ruta="/gestionUsuarios" nombre="Gestion de Usuarios" />
             </div>
             <div>
-                <i class="fas fa-sign-out-alt"></i>
-                <button>Cerrar Sesión</button>
+              <Ruta icono="fas fa-sign-out-alt" ruta="/" nombre="Cerrar Sesión" />
             </div>
         </nav>
     )

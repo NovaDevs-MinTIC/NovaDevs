@@ -3,163 +3,144 @@ import 'App.css'
 
 const Ventas = () => {
     return (
-        <div>
-            <h2 className="margin-20">REGISTRO DE VENTAS</h2>
-            <div className="container-fluid">
-                <div className="row align-items-center  justify-content-center">
-                    <div className="col-md-2">
-                        <div className="row align-items-center  justify-content-center">
-                            <label className="form-label">ID Venta</label>
-                        </div>   
-                        <div className="row align-items-center  justify-content-center">
-                            <div className="col-md-11">
-                                <input type="number" className="form-control" required/>    
-                            </div>
+        <div className='flex h-full w-full'>
+            <div className='flex h-full w-full flex-col items-center justify-start p-8'>
+                <div className='flex flex-col w-full mt-2'>
+                    <h2 className='text-3xl font-extrabold text-gray-900 text-center'>
+                    REGISTRO DE VENTAS
+                    </h2>
+                </div>
+                <form className='mt-4 space-y-6'>
+                    <div className="grid grid-cols-6">
+                        <div >	
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">ID Venta</label>
+                            <input
+                            placeholder='ID Venta'
+                            type="text"
+                            className='border-2 border-novablue mx-2 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            />
+                        </div>
+                        <div>	
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Fecha Venta</label>
+                            <input
+                            type="date"
+                            className='border-2 border-novablue mx-2 px-2 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            />
+                        </div>
+                        <div>	
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Cliente</label>
+                            <input
+                            type="text"
+                            placeholder='Cliente'
+                            className='border-2 border-novablue mx-1 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            />
+                        </div>
+                        <div>	
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">ID Cliente</label>
+                            <input
+                            type="number"
+                            placeholder='ID Cliente'
+                            className='border-2 border-novablue mx-2 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            />
+                        </div>
+                        <div>	
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Vendedor</label>
+                            <input
+                            type="text"
+                            placeholder='Cliente'
+                            className='border-2 border-novablue mx-2 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            />
+                        </div>
+                        <div>	
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">ID Vendedor</label>
+                            <input
+                            type="number"
+                            placeholder='ID Vendedor'
+                            className='border-2 border-novablue mx-2 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            />
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div className="row align-items-center  justify-content-center">
-                            <label className="form-label">Fecha Venta</label>
-                        </div>   
-                        <div className="row align-items-center  justify-content-center">
-                            <div className="col-md-12">
-                                <input type="date" className="form-control" required/>
-                            </div>
+                </form>
+                <h3 className="text-2xl font-extrabold text-gray-900 text-center mt-4 mb-2">Agregar Producto</h3>
+                <div className="flex flex-wrap items-end justify-center">
+                    <div className="flex flex-wrap justify-center">
+                        <div>	
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">ID Producto</label>
+                            <input
+                            placeholder='ID Venta'
+                            type="text"
+                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            />
+                        </div>
+                        <div>	
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Descripción</label>
+                            <input
+                            type="text"
+                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            />
+                        </div>
+                        <div>	
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Cantidad</label>
+                            <input
+                            type="number"
+                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            />
                         </div>
                     </div>
-                    <div className="col-md-2">
-                        <div className="row align-items-center  justify-content-center">
-                            <label className="form-label">Cliente</label>
-                        </div>   
-                        <div className="row align-items-center  justify-content-center">
-                            <div className="col-md11">
-                                <input type="text" className="form-control" required/>
-                            </div>
+                    <div>
+                        <button
+                        type='submit'
+                        className='group relative w-auto flex justify-center py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+                        >
+                        <div className='flex items-center justify-start'>
+                            <i className="fas fa-plus"></i>
+                            <span className='mx-2'>Agregar</span>
                         </div>
-                    </div>
-
-                    <div className="col-md-2">
-                        <div className="row align-items-center  justify-content-center">
-                            <label className="form-label">ID Cliente</label>
-                        </div>   
-                        <div className="row align-items-center  justify-content-center">
-                            <div className="col-md-11">
-                            <input type="number" className="form-control" required/>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-2">
-                        <div className="row align-items-center  justify-content-center">
-                            <label className="form-label">Vendedor</label>
-                        </div>   
-                        <div className="row align-items-center  justify-content-center">
-                            <div className="col-md-11">
-                                <input type="text" className="form-control" required/>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-2">
-                        <div className="row align-items-center  justify-content-center">
-                            <label className="form-label">ID Vendedor</label>
-                        </div>   
-                        <div className="row align-items-center  justify-content-center">
-                            <div className="col-md-11">
-                                <input type="number" className="form-control" required/>
-                            </div>
-                        </div>
-                    </div>
-                </div>                
-            </div>
-
-            <h3 className="margin-20">Agregar Producto</h3>
-            <div className="container">
-                <div className="row align-items-center  justify-content-center">
-                    <div className="col-md-8">
-                        <div className="row align-items-center  justify-content-left">
-                            <div className="col-md-3">
-                                <label className="form-label">ID Producto</label>
-                            </div>
-                            <div className="col-md-3">
-                                <label className="form-label">Descripción</label>
-                            </div>
-                            <div className="col-md-3">
-                                <label className="form-label">Cantidad</label>
-                            </div>
-                        </div>   
-                    </div>
-                    <div className="col-md-8">
-                        <div className="row align-items-center  justify-content-center">
-                            <div className="col-md-3">
-                                <input type="number" className="form-control" required/>
-                            </div>
-                            <div className="col-md-3">
-                                <input type="text" className="form-control" required/>
-                            </div>
-                            <div className="col-md-3">
-                                <input type="number" className="form-control" required/>
-                            </div>
-                            <div className="col-md-3">
-                                <button type="button" class="btn btn-primary"><i className="fas fa-plus"></i> Agregar</button>
-                            </div>
-                        </div>   
+                        </button>
                     </div>
                 </div>
-            </div>
-            <h3 className="margin-20">Descripción de Venta</h3>
-            <div className="container">
-                <div className="col-md-11">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID Producto</th>
-                                <th scope="col">Descripción</th>
-                                <th scope="col">Cantidad</th>
-                                <th scope="col">Valor Unitario</th>
-                                <th scope="col">Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>00123</td>
-                                <td>Adidas Stan Smith</td>
-                                <td>12</td>
-                                <td>229900</td>
-                                <td>2435321</td>
-                            </tr>
-                            <tr>
-                                <td>00123</td>
-                                <td>Adidas Stan Smith</td>
-                                <td>12</td>
-                                <td>229900</td>
-                                <td>2435321</td>
-                            </tr>
-                            <tr>
-                                <td>00123</td>
-                                <td>Adidas Stan Smith</td>
-                                <td>12</td>
-                                <td>229900</td>
-                                <td>2435321</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            {/* FILA PARA VISUALIZAR EL VALOR TOTAL Y CONFIRMAR LA VENTA */}
-            <div className="container-fluid  justify-content-end col-md-8 form-footer">
-                <div className="row align-items-center justify-content-end ">
-                    <div className="col-md-7">
-                        <span>
-                            VALOR TOTAL
-                        </span>
+                <table class="tabla mt-4">
+                    <thead>
+                        <tr>
+                            <th className="text-center">ID Producto</th>
+                            <th className="text-center">Descripción</th>
+                            <th className="text-center">Cantidad</th>
+                            <th className="text-center">Valor Unitario</th>
+                            <th className="text-center">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>00123</td>
+                            <td>Adidas Stan Smith</td>
+                            <td>12</td>
+                            <td>229900</td>
+                            <td>2435321</td>
+                        </tr>
+                        <tr>
+                            <td>00123</td>
+                            <td>Adidas Stan Smith</td>
+                            <td>12</td>
+                            <td>229900</td>
+                            <td>2435321</td>
+                        </tr>
+                        <tr>
+                            <td>00123</td>
+                            <td>Adidas Stan Smith</td>
+                            <td>12</td>
+                            <td>229900</td>
+                            <td>2435321</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div className="w-full justify-end flex flex-wrap">
+                    <div>
+                        <span className="mx-8 px-4 font-extrabold uppercase text-xl">VALOR TOTAL</span>
                     </div>
-                    <div className="col-md-4">
-                        3456998231
-                    </div>
-                    <div className="col-md-4">
-                        <button type="button" class="btn btn-primary">Confirmar</button>
+                    <div>
+                        <span className="mx-8 px-4 text-lg">$ 3456998231</span>
                     </div>
                 </div>
-                
             </div>
         </div>
     )

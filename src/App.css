@@ -12,6 +12,10 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.bg-novablue{
+  background-color: #099494;
+}
+
 .margin-20{
   text-align: center;
   margin: 20px;

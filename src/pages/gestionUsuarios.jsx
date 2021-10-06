@@ -13,11 +13,11 @@ const  Usuarios = () => {
           <div className='flex flex-row items-center justify-center w-full mt-20'>
             <input
               placeholder='Buscar por nombre'
-              className='border-2 border-gray-700 mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-indigo-500'
+              className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
             />
             <input
               placeholder='Buscar por email'
-              className='border-2 border-gray-700 mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-indigo-500'
+              className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
             />
           </div>
 
@@ -25,10 +25,11 @@ const  Usuarios = () => {
             <table className="tabla">
               <thead>
                 <tr>
-                <th>Nombre</th>
-                <th>Correo electrónico</th>
-                <th>Rol</th>
-                <th>Estado</th>
+                  <th>Nombre</th>
+                  <th>Correo electrónico</th>
+                  <th>Rol</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>

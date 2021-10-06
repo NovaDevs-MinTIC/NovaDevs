@@ -32,8 +32,8 @@ const Ruta = ({ icono, ruta, nombre }) => {
       <Link to={ruta}>
         <button
           className={`p-1 my-4  bg-${
-            isActive ? 'indigo' : 'gray'
-          }-700 hover:bg-indigo-900 flex w-full items-center text-white rounded-md`}
+            isActive ? 'novablue' : 'gray'
+          }-700 hover:bg-novablue flex w-full items-center text-white rounded-md`}
         >
           <i className={`${icono} w-10`} />
           {nombre}

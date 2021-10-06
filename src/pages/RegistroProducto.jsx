@@ -61,7 +61,7 @@ const RegistroProductos=()=>{
           <div>
             <button
               type='submit'
-              className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+              className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
             >
               <div className='flex items-center justify-start'>
                 <span className='mx-4'>Registrar</span>

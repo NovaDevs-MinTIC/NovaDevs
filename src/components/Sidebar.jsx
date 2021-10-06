@@ -18,6 +18,7 @@ const Sidebar = () => {
                 <Ruta icono="fas fa-shopping-bag" ruta="/gestionProducto" nombre="Gestion de Productos" />
                 <Ruta icono="fas fa-user-cog" ruta="/gestionUsuarios" nombre="Gestion de Usuarios" />
             </div>
+            <hr className="mt-4"/>
             <div>
               <Ruta icono="fas fa-sign-out-alt" ruta="/" nombre="Cerrar Sesión" />
             </div>
@@ -30,7 +31,7 @@ const Ruta = ({ icono, ruta, nombre }) => {
     return (
       <Link to={ruta}>
         <button
-          className={`p-1 my-2  bg-${
+          className={`p-1 my-4  bg-${
             isActive ? 'indigo' : 'gray'
           }-700 hover:bg-indigo-900 flex w-full items-center text-white rounded-md`}
         >

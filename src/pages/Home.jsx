@@ -6,7 +6,7 @@ const Home = () => {
     return (
             <div className="container-home">
                 <ImagenLogoNegro></ImagenLogoNegro>
-                <hr className="linea-bienvenido"></hr>
+                <hr className="border border-gray-400"></hr>
                 <h2 ClassName="bienvenido">Bienvenido</h2>
             </div>        
       );

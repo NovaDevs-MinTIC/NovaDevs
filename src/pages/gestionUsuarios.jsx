@@ -4,58 +4,42 @@ import '../styles/usuarios.css';
 
 const  Usuarios = () => {
     return(
-        <div className="App">
-          <h2 className="titulogestion">
-            Gestión de Usuarios
-            </h2>  
-            <div className="row-usuarios">
-              <form className="row">
-              <div className= "col-md-4">
-                <input
-                  placeholder="Ingrese Email"
-                  className="form-control"
-                  type="email"
-                ></input>
-               </div>
-              <div className= "col-md-4">
-                <input
-                placeholder="Ingrese Nombre"
-                className="form-control"
-                ></input>
-              </div>
-              <div className= "col-md-3">
-                <button  className="btn btn-primary" type="submit" >Buscar</button>
-              </div>   
-            </form>
-            </div>
+        <div className='flex h-full w-full flex-col items-center justify-start p-8'>
+          <div className='flex flex-col w-full mt-12'>
+            <h2 className='text-3xl font-extrabold text-gray-900 text-center'>
+              Gestión de Usuarios
+            </h2>
+          </div>
+          <div className='flex flex-row items-center justify-center w-full mt-20'>
+            <input
+              placeholder='Buscar por nombre'
+              className='border-2 border-gray-700 mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-indigo-500'
+            />
+            <input
+              placeholder='Buscar por email'
+              className='border-2 border-gray-700 mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-indigo-500'
+            />
+          </div>
 
-            <form>
-            <div className=" tabla container-xl">
-              <div className="table-responsive">
-                <table className="table table-hover">
-                  <thead>
-                    <tr>
-                    <th>Correo Electrónico</th>
-                    <th>Nombre</th>
-                    <th>Rol</th>
-                    <th>Estado</th>
-                    </tr>
-                 </thead>
-                 <tbody>
-                   <Tabla correo="luisforero12@gmail.com" nombre="Luis Forero"/>
-                   <Tabla correo="carodiaz17@gmail.com" nombre="Carolina Díaz"/>
-                   <Tabla correo="shr_1982@gmail.com" nombre="Alberto Vélez "/>
-                   <Tabla correo="saranghe@gmail.com" nombre="Cielo López"/>
-                  </tbody>
-
-                 </table>
-                    <div className="boton">
-                   <button className="btn btn-success" type="submit">Guardar Cambios</button>
-                 </div> 
-                 </div>
-                 </div> 
-                 </form>
-                 </div>
+          <div className='hidden md:flex w-full mt-12'>
+            <table className="tabla">
+              <thead>
+                <tr>
+                <th>Nombre</th>
+                <th>Correo electrónico</th>
+                <th>Rol</th>
+                <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <Tabla correo="luisforero12@gmail.com" nombre="Luis Forero"/>
+                <Tabla correo="carodiaz17@gmail.com" nombre="Carolina Díaz"/>
+                <Tabla correo="shr_1982@gmail.com" nombre="Alberto Vélez "/>
+                <Tabla correo="saranghe@gmail.com" nombre="Cielo López"/>
+              </tbody>
+            </table>
+          </div>
+        </div>
           )
 }
 export default Usuarios;

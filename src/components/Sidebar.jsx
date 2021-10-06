@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from 'media/logo.png'
+import ImagenLogo from './ImagenLogo'
 import { Link } from 'react-router-dom'
 import useActiveRoute from 'hooks/useActiveRoute'
 
@@ -7,7 +7,7 @@ const Sidebar = () => {
     return (
         <nav className="hidden lg:flex lg:w-72 border border-gray-300 h-full flex-col bg-gray-200 p-4 sidebar">
             <Link to="/">
-                <Logo />
+                <ImagenLogo />
             </Link>
 
             <div className="my-4">

@@ -1,7 +1,6 @@
 import Tabla from '../components/tablaUsuarios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../styles/usuarios.css';
-import React, {Fragment, useState} from "react"; 
 
 const  Usuarios = () => {
     return(

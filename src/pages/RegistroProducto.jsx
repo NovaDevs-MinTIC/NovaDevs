@@ -5,7 +5,7 @@ const RegistroProductos=()=>{
     return(
       <div>
         <div className='max-w-md w-screen space-y-8'>
-          <h2 className='text-center'>Registro de producto</h2>
+          <h2 className="text-3xl uppercase font-extrabold text-gray-900 text-center mt-4 mb-2">Registro de producto</h2>
           <form className='mt-8 space-y-3'>
             <div className='rounded-md shadow-sm -space-y-px'>
               <div>
@@ -15,7 +15,7 @@ const RegistroProductos=()=>{
                           type='number'
                           autoComplete='number'
                           required
-                          className='appearance-none rounded-md relative block w-full mb-2 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                          className='appearance-none rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                           placeholder='ID Producto'
                         />
               </div>
@@ -26,7 +26,7 @@ const RegistroProductos=()=>{
                         type='text'
                         autoComplete='text'
                         required
-                        className='appearance-none rounded-md relative block w-full mb-2 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                        className='appearance-none rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                         placeholder='Descripción'
                       />
               </div>
@@ -37,7 +37,7 @@ const RegistroProductos=()=>{
                         type='number'
                         autoComplete='number'
                         required
-                        className='appearance-none rounded-md relative block w-full mb-2 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                        className='appearance-none rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                         placeholder='Valor unitario'
                       />
               </div>
@@ -46,7 +46,7 @@ const RegistroProductos=()=>{
                 <select 
                   name='estado-roducto'
                   required
-                  className='rounded-md relative block w-full mb-2 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                  className='rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                 >
                   <option  disabled selected>Estado del producto</option>
                   <option value="1">Disponible</option>

@@ -4,24 +4,24 @@ import '../styles/usuarios.css';
 
 const  Usuarios = () => {
     return(
-        <div className='flex h-full w-full flex-col items-center justify-start p-8'>
-          {/* Título */}
-          <div className='flex flex-col w-full mt-12'>
-            <h2 className='text-3xl font-extrabold text-gray-900 text-center'>
-              Gestión de Usuarios
-            </h2>
-          </div>
-          {/* Buscadores */}
-          <div className='flex flex-row items-center justify-center w-full mt-20'>
-            <input
-              placeholder='Buscar por nombre'
-              className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
-            />
-            <input
-              placeholder='Buscar por email'
-              className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
-            />
-          </div>
+        <div className='w-full h-full'>
+          {/*Título*/}
+          <div className='flex items-center justify-center w-full h-1/6'>
+                <h2 className='text-4xl font-extrabold text-gray-900'>
+                GESTIÓN DE USUARIOS
+                </h2>
+            </div>
+            {/*Barras de búsqueda para la tabla */}
+            <div className='flex items-center justify-center w-full h-auto'>
+                <input
+                placeholder='Búsqueda por Nombre'
+                className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
+                />
+                <input
+                placeholder='Búsqueda por e-mail'
+                className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
+                />
+            </div>
           {/* Tabla */}
           <div className='hidden md:flex w-full mt-12'>
             <table className="tabla">

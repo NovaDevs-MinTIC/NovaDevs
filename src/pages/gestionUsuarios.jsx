@@ -5,11 +5,13 @@ import '../styles/usuarios.css';
 const  Usuarios = () => {
     return(
         <div className='flex h-full w-full flex-col items-center justify-start p-8'>
+          {/* Título */}
           <div className='flex flex-col w-full mt-12'>
             <h2 className='text-3xl font-extrabold text-gray-900 text-center'>
               Gestión de Usuarios
             </h2>
           </div>
+          {/* Buscadores */}
           <div className='flex flex-row items-center justify-center w-full mt-20'>
             <input
               placeholder='Buscar por nombre'
@@ -20,7 +22,7 @@ const  Usuarios = () => {
               className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
             />
           </div>
-
+          {/* Tabla */}
           <div className='hidden md:flex w-full mt-12'>
             <table className="tabla">
               <thead>

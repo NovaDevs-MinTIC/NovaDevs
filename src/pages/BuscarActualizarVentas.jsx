@@ -1,5 +1,6 @@
 import React from 'react'
-import DataVentas from 'components/DataVentas'
+// import DataVentas from 'components/DataVentas'
+import { Link } from 'react-router-dom'
 
 
 const BuscarActualizarVentas = () => {
@@ -51,15 +52,23 @@ const BuscarActualizarVentas = () => {
 
 
             {/*Contenedor de la tabla de Buscar y actualizar venta*/}
-            <div className="container">
+            {/* <div className="container">
                 <div className="tabla">
                     <DataVentas />
                 </div>
-            </div>
+            </div> */}
             
             {/*Botón Para regresar*/}
-            <div className="container mt-3 mb-3 d-flex flex-row-reverse">
-                <button type="button" className="btn">Regresar</button>
+            <div className='flex justify-end mx-2'>
+                <Link to="/Ventas">
+                        <button
+                        className='py-2 px-4 justify-end border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+                        >
+                        <div className='flex items-center justify-start'>
+                            <span className='mx-4'>Regresar</span>
+                        </div>
+                        </button>
+                </Link>
             </div>
         </div>
     )

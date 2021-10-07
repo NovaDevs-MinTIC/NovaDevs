@@ -5,7 +5,7 @@ export const obtenerVehiculos = async (setProducto, setEjecutarConsulta) => {
   await axios
     .request(options)
     .then(function (response) {
-      setVehiculos(response.data);
+      setProducto(response.data);
     })
     .catch(function (error) {
       console.error(error);

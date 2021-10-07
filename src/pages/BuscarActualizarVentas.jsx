@@ -47,10 +47,6 @@ const BuscarActualizarVentas = () => {
                     </tbody>
                 </table>
             </div>
-
-
-
-
             {/*Contenedor de la tabla de Buscar y actualizar venta*/}
             {/* <div className="container">
                 <div className="tabla">

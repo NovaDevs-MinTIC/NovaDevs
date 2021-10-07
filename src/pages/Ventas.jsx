@@ -11,20 +11,20 @@ const Ventas = () => {
                     </h2>
                 </div>
                 <form className='mt-4 space-y-6'>
-                    <div className="grid grid-cols-6">
+                    <div className="w-full flex flex-wrap">
                         <div >	
                             <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">ID Venta</label>
                             <input
                             placeholder='ID Venta'
                             type="text"
-                            className='border-2 border-novablue mx-2 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                             />
                         </div>
                         <div>	
                             <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Fecha Venta</label>
                             <input
                             type="date"
-                            className='border-2 border-novablue mx-2 px-2 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                             />
                         </div>
                         <div>	
@@ -32,7 +32,7 @@ const Ventas = () => {
                             <input
                             type="text"
                             placeholder='Cliente'
-                            className='border-2 border-novablue mx-1 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                             />
                         </div>
                         <div>	
@@ -40,7 +40,7 @@ const Ventas = () => {
                             <input
                             type="number"
                             placeholder='ID Cliente'
-                            className='border-2 border-novablue mx-2 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                             />
                         </div>
                         <div>	
@@ -48,17 +48,17 @@ const Ventas = () => {
                             <input
                             type="text"
                             placeholder='Cliente'
-                            className='border-2 border-novablue mx-2 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                             />
                         </div>
-                        <div>	
+                        {/* <div>	
                             <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">ID Vendedor</label>
                             <input
                             type="number"
                             placeholder='ID Vendedor'
-                            className='border-2 border-novablue mx-2 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                             />
-                        </div>
+                        </div> */}
                     </div>
                 </form>
                 <h3 className="text-2xl font-extrabold text-gray-900 text-center mt-4 mb-2">Agregar Producto</h3>

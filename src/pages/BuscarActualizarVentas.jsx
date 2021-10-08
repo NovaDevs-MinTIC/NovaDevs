@@ -27,7 +27,7 @@ const BuscarActualizarVentas = () => {
             </div>
 
             {/* NUEVA TABLA DE VENTAS */}
-            <div className="w-full h-4/6">
+            <div className="w-full">
                 <div className="w-full overflow-x-scroll">
                     <table class="tabla mt-4">
                         <thead>

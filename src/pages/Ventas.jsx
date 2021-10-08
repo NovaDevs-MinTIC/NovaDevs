@@ -155,6 +155,7 @@ const Ventas = () => {
                     </div>
                 </div>
             {/* </div> */}
+            <ToastContainer position="bottom-center" autoClose={1500} />
         </div>
     );
 };
@@ -207,8 +208,8 @@ const FormularioAgregarArticulo = () => {
     const [valorUnitario, setValorUnitario] = useState();
 
     const agregarArticulo = ()=> {
-        console.log('id',idProducto,'descripcion',descripcion,'cantidad',cantidad,'valor unitario', valorUnitario)
-        toast(descripcion, 'Agregado')
+        console.log('id',idProducto,'descripcion',descripcion,'cantidad',cantidad,'valor unitario', valorUnitario);
+        toast.success('Mensaje');
     }
     return (
         <div className="h-auto w-full my-2">
@@ -268,10 +269,7 @@ const FormularioAgregarArticulo = () => {
                             </div>
                             </button>
                         </div>
-                    </div>
-                    <ToastContainer
-                        position="bottom-center"
-                        autoClose={2000} />
+                    </div>   
                 </div>
     )
 }

@@ -17,7 +17,7 @@ const RegistroProductos=()=>{
               <div>
                   <label>Identificador de producto</label>
                   <input
-                          name='idproducto'
+                          name='idProducto'
                           type='number'
                           required
                           className='appearance-none rounded-md relative w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
@@ -27,7 +27,7 @@ const RegistroProductos=()=>{
               <div>
                 <label classsName="mx-2">Descripción</label>
                 <textarea
-                        name='Descripción'
+                        name='descripcion'
                         type='text'
                         autoComplete='text'
                         required
@@ -38,7 +38,7 @@ const RegistroProductos=()=>{
               <div>
                 <label classsName="mx-2">$ Valor Unitario</label>
                 <input
-                        name='valor-unitario'
+                        name='valorU'
                         type='number'
                         autoComplete='number'
                         required
@@ -49,7 +49,7 @@ const RegistroProductos=()=>{
               <div>
                 <label classsName="mx-2">Estado del producto</label>
                 <select 
-                  name='estado-roducto'
+                  name='estadoProducto'
                   required
                   className='rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                 >

@@ -210,6 +210,7 @@ const TablaArticulos = ({listaArticulos}) => {
                         <th className="text-center">Cantidad</th>
                         <th className="text-center">Valor Unitario</th>
                         <th className="text-center">Subtotal</th>
+                        <th className="text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -221,6 +222,12 @@ const TablaArticulos = ({listaArticulos}) => {
                                 <td className='text-center'>{articulo.cantidad}</td>
                                 <td className='text-center'>$ {articulo.valorUnitario}</td>
                                 <td className='text-center'>$ {articulo.subtotal}</td>
+                                <td className='text-center'>
+                                    <div className='flex justify-around'>
+                                        <div className='hover:bg-yellow-500'><i className='fas fa-edit'></i></div>
+                                        <div className='hover:bg-red-500'><i className='fas fa-trash'></i></div>
+                                    </div>
+                                </td>
                             </tr>
                         )
                     })}

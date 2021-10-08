@@ -1,6 +1,7 @@
 
 
 const Tabla = ({correo, nombre}) => {
+
     return(
       <tr>
           <td>{nombre}</td>

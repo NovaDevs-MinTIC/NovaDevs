@@ -1,9 +1,9 @@
 import React from 'react'
-import DataProducto from 'components/DataProducto'
 import { Link } from 'react-router-dom'
-
+import axios from 'axios'
 
 const gestionProducto = () => {
+
     return (
         <div className="w-full h-full">
             {/*Título*/}
@@ -26,22 +26,7 @@ const gestionProducto = () => {
 
             {/* TABLA DE PRODUCTOS*/}
             <div className='hidden md:flex w-full mt-12'>
-                    <table class="tabla">
-                        <thead>
-                            <tr>
-                                <th className="text-center">ID Producto</th>
-                                <th className="text-center">Descripción</th>
-                                <th className="text-center">Valor Unitario</th>
-                                <th className="text-center">Estado</th>
-                                <th className="text-center">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <DataProducto idproducto="010010" descripcion="Adidas Stan Smith" valorUnitario="229900"/>
-                            <DataProducto idproducto="010010" descripcion="Adidas Stan Smith" valorUnitario="229900"/>
-                            <DataProducto idproducto="010010" descripcion="Adidas Stan Smith" valorUnitario="229900"/>
-                        </tbody>
-                    </table>
+                <TablaProductos  />
             </div>
             {/*Botón Para regresar*/}
             <div className='flex justify-end mx-2'>
@@ -56,6 +41,46 @@ const gestionProducto = () => {
                 </Link>
             </div>
         </div>
+    )
+}
+
+const TablaProductos = ({infoBackend}) =>{
+    return(
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th className="text-center">ID Producto</th>
+                    <th className="text-center">Descripción</th>
+                    <th className="text-center">Valor Unitario</th>
+                    <th className="text-center">Estado</th>
+                    <th className="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td className="text-center">651651</td>
+                    <td className="text-center">tennis</td>
+                    <td className="text-center">6515161</td>
+                    <td className="text-center">
+                        <select className="rounded-lg m-2 w-auto">
+                            <option disabled>Estado</option>
+                            <option>Disponible</option>
+                            <option>No Disponible</option>
+                        </select>
+                    </td>
+                    <td className='text-center'>
+                        <div className="flex justify-around">
+                        <div className="hover:bg-yellow-500"> 
+                            <i className="fas fa-edit"></i>
+                        </div>
+                        <div className="hover:bg-red-600">
+                            <i className="fas fa-trash"></i>
+                        </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     )
 }
 

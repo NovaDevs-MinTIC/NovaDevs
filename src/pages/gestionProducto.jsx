@@ -1,18 +1,45 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { useState, useEffect } from 'react'
 
-const gestionProducto = () => {
+const GestionProducto = () => {
+    const [mostrarTabla, setMostrarTabla] = useState(true);
+    //Renderizacion condicional
 
     return (
         <div className="w-full h-full">
-            {/*Título*/}
-            <div className='flex items-center justify-center w-full h-1/6'>
-                <h2 className='text-4xl font-extrabold text-gray-900'>
-                GESTIÓN DE PRODUCTOS
-                </h2>
+            {/* Renderización condicional*/}
+            
+            {mostrarTabla ? (
+                <RenderProductos />
+            ) : (
+                <RegistroProductos />
+            )}
+
+            {/*Botón Para regresar*/}
+            <div className='flex justify-end mx-2'>
+                <button
+                onClick={()=>{
+                    setMostrarTabla(!mostrarTabla);
+                }}
+                className='py-2 px-3 justify-end border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+                >
+                <div className='flex items-center justify-start'>
+                    <span className='mx-4'>Regresar</span>
+                </div>
+                </button>
             </div>
-            {/*Barras de búsqueda para la tabla */}
+        </div>
+    )
+}
+
+const RenderProductos = () => {
+    return (
+        <div className='flex items-center justify-center w-full h-1/6'>
+            <h2 className='text-4xl font-extrabold text-gray-900'>
+                GESTIÓN DE PRODUCTOS
+            </h2>
+
             <div className='flex items-center justify-center w-full h-auto'>
                 <input
                 placeholder='Búsqueda por Nombre'
@@ -23,26 +50,13 @@ const gestionProducto = () => {
                 className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
                 />
             </div>
-
-            {/* TABLA DE PRODUCTOS*/}
             <div className='hidden md:flex w-full mt-12'>
-                <TablaProductos  />
-            </div>
-            {/*Botón Para regresar*/}
-            <div className='flex justify-end mx-2'>
-                <Link to="/RegistroProducto">
-                        <button
-                        className='py-2 px-3 justify-end border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
-                        >
-                        <div className='flex items-center justify-start'>
-                            <span className='mx-4'>Regresar</span>
-                        </div>
-                        </button>
-                </Link>
+                <TablaProductos />
             </div>
         </div>
     )
 }
+
 
 const TablaProductos = ({infoBackend}) =>{
     return(
@@ -84,4 +98,79 @@ const TablaProductos = ({infoBackend}) =>{
     )
 }
 
-export default gestionProducto
+const RegistroProductos = () => {
+
+    return(
+      <div className='h-full w-full'>
+        {/* TITULO */}
+        <div className='flex items-center justify-center w-full h-1/6'>
+            <h2 className='text-4xl font-extrabold text-gray-900'>
+            REGISTRO DE PRODUCTOS
+            </h2>
+        </div>
+
+        {/* FORMULARIO DE REGISTRO DE PRODUCTO */}
+        <div className="w-full h-1/2 flex flex-wrap justify-center items-center">
+          <form>
+              <div>
+                  <label>Identificador de producto</label>
+                  <input
+                          name='idproducto'
+                          type='number'
+                          required
+                          className='appearance-none rounded-md relative w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                          placeholder='ID Producto'
+                        />
+              </div>
+              <div>
+                <label classsName="mx-2">Descripción</label>
+                <textarea
+                        name='descripcion'
+                        type='text'
+                        autoComplete='text'
+                        required
+                        className='appearance-none rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                        placeholder='Descripción'
+                      />
+              </div>
+              <div>
+                <label classsName="mx-2">$ Valor Unitario</label>
+                <input
+                        name='valorU'
+                        type='number'
+                        autoComplete='number'
+                        required
+                        className='appearance-none rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                        placeholder='Valor unitario'
+                      />
+              </div>
+              <div>
+                <label classsName="mx-2">Estado del producto</label>
+                <select 
+                  name='estadoP'
+                  required
+                  className='rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                >
+                  <option  disabled selected>Estado del producto</option>
+                  <option value="1">Disponible</option>
+                  <option value="2">No disponible</option>
+                </select>
+              </div>
+          </form>
+        </div>
+        <div className="flex justify-center mt-6">
+            <button
+            type='submit'
+            className='group relative w-auto flex py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+            >
+            <div className='flex items-center'>
+                <i className="fas fa-plus"></i>
+                <span className='mx-2'>Registrar</span>
+            </div>
+            </button>
+        </div>
+      </div>        
+    )
+}
+
+export default GestionProducto

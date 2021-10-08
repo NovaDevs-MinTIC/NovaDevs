@@ -27,41 +27,6 @@ const Ventas = () => {
             valorUnitario : 229900,
             subtotal : 4498500
         },
-        {
-            idProducto : 10013,
-            descripcion : "Adidas Stan Smith",
-            cantidad : 15,
-            valorUnitario : 229900,
-            subtotal : 4498500
-        },
-        {
-            idProducto : 10013,
-            descripcion : "Adidas Stan Smith",
-            cantidad : 15,
-            valorUnitario : 229900,
-            subtotal : 4498500
-        },
-        {
-            idProducto : 10013,
-            descripcion : "Adidas Stan Smith",
-            cantidad : 15,
-            valorUnitario : 229900,
-            subtotal : 4498500
-        },
-        {
-            idProducto : 10013,
-            descripcion : "Adidas Stan Smith",
-            cantidad : 15,
-            valorUnitario : 229900,
-            subtotal : 4498500
-        },
-        {
-            idProducto : 10013,
-            descripcion : "Adidas Stan Smith",
-            cantidad : 15,
-            valorUnitario : 229900,
-            subtotal : 4498500
-        },
     ]
 
     const [articulosVenta, setArticulosVenta] = useState([]);
@@ -133,7 +98,7 @@ const Ventas = () => {
                     </div>
                 </form>
                 {/* FORMULARIO PARA AGREGAR PRODUCTO */}
-                <FormularioAgregarArticulo />
+                <FormularioAgregarArticulo listaArticulos={articulosVenta} fcnAgregarArticulo={setArticulosVenta}/>
                 {/* TABLA PARA VISUALIZAR PRODUCTOS AGREGADOS */}
                 <TablaArticulos listaArticulos={articulosVenta}/>
                 {/* PIE DE VENTA */}
@@ -201,7 +166,7 @@ const TablaArticulos = ({listaArticulos}) => {
     );
 };
 
-const FormularioAgregarArticulo = () => {
+const FormularioAgregarArticulo = ({fcnAgregarArticulo, listaArticulos}) => {
     const [idProducto, setIdProducto] = useState();
     const [descripcion, setDescripcion] = useState();
     const [cantidad, setCantidad] = useState();
@@ -210,6 +175,11 @@ const FormularioAgregarArticulo = () => {
     const agregarArticulo = ()=> {
         console.log('id',idProducto,'descripcion',descripcion,'cantidad',cantidad,'valor unitario', valorUnitario);
         toast.success('Mensaje');
+        fcnAgregarArticulo([...listaArticulos, {idProducto:idProducto, descripcion:descripcion,  cantidad: cantidad, valorUnitario: valorUnitario} ])
+        setIdProducto('')
+        setDescripcion('')
+        setCantidad('')
+        setValorUnitario('')
     }
     return (
         <div className="h-auto w-full my-2">

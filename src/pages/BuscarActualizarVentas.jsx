@@ -28,7 +28,6 @@ const BuscarActualizarVentas = () => {
                     Buscar
                 </button>
             </div>
-
             {/*Contenedor de la tabla de Buscar y actualizar venta*/}
             <div>
                 <DataVentas />

@@ -1,18 +1,6 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import { obtenerProductos } from 'utils/api'
-import { nanoid } from 'nanoid'
 
 const DataProducto = ({idproducto, descripcion, valorUnitario}) => {
-
-    const [producto, setProducto] = useState([]);
-    const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
-
-    useEffect(() => {
-        console.log('consulta', ejecutarConsulta)
-    }, [ejecutarConsulta])
-
-
     return(
         <tr>
             <td className="text-center">{idproducto}</td>

@@ -9,12 +9,13 @@ const GestionProducto = () => {
     return (
         <div className="w-full h-full">
             {/* Renderización condicional*/}
-            
-            {mostrarTabla ? (
-                <RenderProductos />
-            ) : (
-                <RegistroProductos />
-            )}
+            <div>
+                {mostrarTabla ? (
+                    <RenderProductos />
+                ) : (
+                    <RegistroProductos />
+                )}
+            </div>
 
             {/*Botón Para regresar*/}
             <div className='flex justify-end mx-2'>
@@ -35,11 +36,12 @@ const GestionProducto = () => {
 
 const RenderProductos = () => {
     return (
-        <div className='flex items-center justify-center w-full h-1/6'>
-            <h2 className='text-4xl font-extrabold text-gray-900'>
-                GESTIÓN DE PRODUCTOS
-            </h2>
-
+        <div className='mt-4'>
+            <div className='flex items-center justify-center w-full h-1/6'>
+                <h2 className='text-4xl font-extrabold text-gray-900'>
+                    GESTIÓN DE PRODUCTOS
+                </h2>
+            </div>
             <div className='flex items-center justify-center w-full h-auto'>
                 <input
                 placeholder='Búsqueda por Nombre'

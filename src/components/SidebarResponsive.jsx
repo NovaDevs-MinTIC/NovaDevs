@@ -19,7 +19,6 @@ const SidebarResponsive= () => {
                     <NavbarRoute nombre="Inicio" ruta="/Home" />
                     <NavbarRoute nombre="Registro de Ventas" ruta="/Ventas" />
                     <NavbarRoute nombre="Gestion de Ventas" ruta="/BuscarActualizarVentas" />
-                    <NavbarRoute nombre="Registro de Productos" ruta="/registroProductoNuevo" />
                     <NavbarRoute nombre="Gestion de Productos" ruta="/gestionProducto" />
                     <NavbarRoute nombre="Gestion de Usuarios" ruta="/gestionUsuarios" />
                 </ul>

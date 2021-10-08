@@ -1,7 +1,14 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import 'App.css'
 
 const Ventas = () => {
+
+    const [idProducto,setIdProducto] = useState('');
+
+    useEffect(() => {
+        console.log('Hola, soy un useEffect')
+    })
+
     return (
         <div className='h-full w-auto'>
             {/* <div className='flex h-full w-full flex-col items-center justify-start p-8'> */}
@@ -70,8 +77,10 @@ const Ventas = () => {
                         <div className="flex flex-wrap justify-center">
                             <div>	
                                 <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">ID Producto</label>
-                                <input
-                                placeholder='ID Venta'
+                                <input onChange={(e) => {
+                                    setIdProducto(e.target.value);
+                                }}
+                                placeholder='ID Producto'
                                 type="text"
                                 className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
                                 />
@@ -106,7 +115,7 @@ const Ventas = () => {
                 </div>
                 {/* TABLA PARA VISUALIZAR PRODUCTOS AGREGADOS */}
                 <div className="w-full h-2/5">
-                    <table class="tabla mt-4">
+                    <table className="tabla mt-4">
                         <thead>
                             <tr>
                                 <th className="text-center">ID Producto</th>

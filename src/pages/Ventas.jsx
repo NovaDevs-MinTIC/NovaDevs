@@ -147,6 +147,7 @@ const Ventas = () => {
                                 <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Descripción</label>
                                 <input
                                 type="text"
+                                placeholder='Nombre del artículo'
                                 className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
                                 />
                             </div>
@@ -154,6 +155,15 @@ const Ventas = () => {
                                 <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Cantidad</label>
                                 <input
                                 type="number"
+                                placeholder='Cantidad'
+                                className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
+                                />
+                            </div>
+                            <div>	
+                                <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Valor Unitario</label>
+                                <input
+                                type="number"
+                                placeholder='Valor unitario'
                                 className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
                                 />
                             </div>
@@ -221,7 +231,7 @@ const TablaArticulos = ({listaArticulos}) => {
                                 <td className='text-center'>{articulo.descripcion}</td>
                                 <td className='text-center'>{articulo.cantidad}</td>
                                 <td className='text-center'>$ {articulo.valorUnitario}</td>
-                                <td className='text-center'>$ {articulo.subtotal}</td>
+                                <td className='text-center'>$ {articulo.cantidad * articulo.valorUnitario}</td>
                                 <td className='text-center'>
                                     <div className='flex justify-around'>
                                         <div className='hover:bg-yellow-500'><i className='fas fa-edit'></i></div>

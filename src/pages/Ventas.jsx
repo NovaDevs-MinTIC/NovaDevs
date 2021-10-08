@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import 'App.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Ventas = () => {
 
@@ -206,6 +208,7 @@ const FormularioAgregarArticulo = () => {
 
     const agregarArticulo = ()=> {
         console.log('id',idProducto,'descripcion',descripcion,'cantidad',cantidad,'valor unitario', valorUnitario)
+        toast(descripcion, 'Agregado')
     }
     return (
         <div className="h-auto w-full my-2">
@@ -266,6 +269,9 @@ const FormularioAgregarArticulo = () => {
                             </button>
                         </div>
                     </div>
+                    <ToastContainer
+                        position="bottom-center"
+                        autoClose={2000} />
                 </div>
     )
 }

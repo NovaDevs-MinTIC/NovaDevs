@@ -14,7 +14,6 @@ const Sidebar = () => {
                 <Ruta icono="fas fa-home" ruta="/Home" nombre="Inicio" />
                 <Ruta icono="fas fa-cart-plus" ruta="/ventas" nombre="Registro de Ventas" />
                 <Ruta icono="fas fa-calendar" ruta="/BuscarActualizarVentas" nombre="Gestion de Ventas" />
-                <Ruta icono="fas fa-th-large" ruta="/RegistroProducto" nombre="Registro de Productos" />
                 <Ruta icono="fas fa-shopping-bag" ruta="/gestionProducto" nombre="Gestion de Productos" />
                 <Ruta icono="fas fa-user-cog" ruta="/gestionUsuarios" nombre="Gestion de Usuarios" />
             </div>
@@ -32,8 +31,8 @@ const Ruta = ({ icono, ruta, nombre }) => {
       <Link to={ruta}>
         <button
           className={`p-1 my-4  bg-${
-            isActive ? 'novablue' : 'gray'
-          }-700 hover:bg-novablue flex w-full items-center text-white rounded-md`}
+            isActive ? 'novablue' : 'gray-700'
+          } hover:bg-novablue flex w-full items-center text-white rounded-md`}
         >
           <i className={`${icono} w-10`} />
           {nombre}

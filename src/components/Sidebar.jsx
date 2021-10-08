@@ -20,7 +20,7 @@ const Sidebar = () => {
             </div>
             <hr className="mt-4"/>
             <div>
-              <Ruta icono="fas fa-sign-out-alt" ruta="/" nombre="Cerrar Sesión" />
+              <Ruta icono="fas fa-sign-out-alt" ruta='/' nombre="Cerrar Sesión" />
             </div>
         </nav>
     )
@@ -32,8 +32,8 @@ const Ruta = ({ icono, ruta, nombre }) => {
       <Link to={ruta}>
         <button
           className={`p-1 my-4  bg-${
-            isActive ? 'novablue' : 'gray'
-          }-700 hover:bg-novablue flex w-full items-center text-white rounded-md`}
+            isActive ? 'novablue' : 'gray-700'
+          } hover:bg-novablue flex w-full items-center text-white rounded-md`}
         >
           <i className={`${icono} w-10`} />
           {nombre}

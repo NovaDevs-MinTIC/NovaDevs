@@ -131,56 +131,7 @@ const Ventas = () => {
                     </div>
                 </form>
                 {/* FORMULARIO PARA AGREGAR PRODUCTO */}
-                <div className="h-auto w-full my-2">
-                    <h3 className="text-2xl font-extrabold text-gray-900 text-center">Agregar Producto</h3>
-                    <div className="flex flex-wrap items-end justify-center">
-                        <div className="flex flex-wrap justify-center">
-                            <div>	
-                                <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">ID Producto</label>
-                                <input 
-                                placeholder='ID Producto'
-                                type="text"
-                                className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
-                                />
-                            </div>
-                            <div>	
-                                <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Descripción</label>
-                                <input
-                                type="text"
-                                placeholder='Nombre del artículo'
-                                className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
-                                />
-                            </div>
-                            <div>	
-                                <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Cantidad</label>
-                                <input
-                                type="number"
-                                placeholder='Cantidad'
-                                className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
-                                />
-                            </div>
-                            <div>	
-                                <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Valor Unitario</label>
-                                <input
-                                type="number"
-                                placeholder='Valor unitario'
-                                className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
-                                />
-                            </div>
-                        </div>
-                        <div>
-                            <button
-                            type='submit'
-                            className='group relative w-auto flex py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
-                            >
-                            <div className='flex items-center justify-start'>
-                                <i className="fas fa-plus"></i>
-                                <span className='mx-2'>Agregar</span>
-                            </div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <FormularioAgregarArticulo />
                 {/* TABLA PARA VISUALIZAR PRODUCTOS AGREGADOS */}
                 <TablaArticulos listaArticulos={articulosVenta}/>
                 {/* PIE DE VENTA */}
@@ -246,5 +197,77 @@ const TablaArticulos = ({listaArticulos}) => {
         </div>
     );
 };
+
+const FormularioAgregarArticulo = () => {
+    const [idProducto, setIdProducto] = useState();
+    const [descripcion, setDescripcion] = useState();
+    const [cantidad, setCantidad] = useState();
+    const [valorUnitario, setValorUnitario] = useState();
+
+    const agregarArticulo = ()=> {
+        console.log('id',idProducto,'descripcion',descripcion,'cantidad',cantidad,'valor unitario', valorUnitario)
+    }
+    return (
+        <div className="h-auto w-full my-2">
+                    <h3 className="text-2xl font-extrabold text-gray-900 text-center">Agregar Producto</h3>
+                    <div className="flex flex-wrap items-end justify-center">
+                        <div className="flex flex-wrap justify-center">
+                            <div>	
+                                <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">ID Producto</label>
+                                <input 
+                                type="text"
+                                placeholder='ID Producto'
+                                value={idProducto}
+                                onChange={(e)=>{setIdProducto(e.target.value)}}
+                                className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
+                                />
+                            </div>
+                            <div>	
+                                <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Descripción</label>
+                                <input
+                                type="text"
+                                placeholder='Nombre del artículo'
+                                value={descripcion}
+                                onChange={(e)=>{setDescripcion(e.target.value)}}
+                                className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
+                                />
+                            </div>
+                            <div>	
+                                <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Cantidad</label>
+                                <input
+                                type="number"
+                                placeholder='Cantidad'
+                                value={cantidad}
+                                onChange={(e)=>{setCantidad(e.target.value)}}
+                                className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
+                                />
+                            </div>
+                            <div>	
+                                <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Valor Unitario</label>
+                                <input
+                                type="number"
+                                placeholder='Valor unitario'
+                                value={valorUnitario}
+                                onChange={(e)=>{setValorUnitario(e.target.value)}}
+                                className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <button
+                            type='submit'
+                            className='group relative w-auto flex py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+                            onClick={()=>{agregarArticulo()}}
+                            >
+                            <div className='flex items-center justify-start'>
+                                <i className="fas fa-plus"></i>
+                                <span className='mx-2'>Agregar</span>
+                            </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+    )
+}
 
 export default Ventas

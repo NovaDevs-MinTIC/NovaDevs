@@ -3,11 +3,71 @@ import 'App.css'
 
 const Ventas = () => {
 
-    const [idProducto,setIdProducto] = useState('');
+    const articulosVentaBackend = [
+        {
+            idProducto : 10013,
+            descripcion : "Adidas Stan Smith",
+            cantidad : 15,
+            valorUnitario : 229900,
+            subtotal : 4498500
+        },
+        {
+            idProducto : 10013,
+            descripcion : "Adidas Stan Smith",
+            cantidad : 15,
+            valorUnitario : 229900,
+            subtotal : 4498500
+        },
+        {
+            idProducto : 10013,
+            descripcion : "Adidas Stan Smith",
+            cantidad : 15,
+            valorUnitario : 229900,
+            subtotal : 4498500
+        },
+        {
+            idProducto : 10013,
+            descripcion : "Adidas Stan Smith",
+            cantidad : 15,
+            valorUnitario : 229900,
+            subtotal : 4498500
+        },
+        {
+            idProducto : 10013,
+            descripcion : "Adidas Stan Smith",
+            cantidad : 15,
+            valorUnitario : 229900,
+            subtotal : 4498500
+        },
+        {
+            idProducto : 10013,
+            descripcion : "Adidas Stan Smith",
+            cantidad : 15,
+            valorUnitario : 229900,
+            subtotal : 4498500
+        },
+        {
+            idProducto : 10013,
+            descripcion : "Adidas Stan Smith",
+            cantidad : 15,
+            valorUnitario : 229900,
+            subtotal : 4498500
+        },
+        {
+            idProducto : 10013,
+            descripcion : "Adidas Stan Smith",
+            cantidad : 15,
+            valorUnitario : 229900,
+            subtotal : 4498500
+        },
+    ]
 
-    useEffect(() => {
-        console.log('Hola, soy un useEffect')
-    })
+    const [articulosVenta, setArticulosVenta] = useState([]);
+
+    useEffect( () => {
+        // Obtener lista de articulos
+        setArticulosVenta(articulosVentaBackend);
+    }, []);
 
     return (
         <div className='h-full w-auto'>
@@ -77,9 +137,7 @@ const Ventas = () => {
                         <div className="flex flex-wrap justify-center">
                             <div>	
                                 <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">ID Producto</label>
-                                <input onChange={(e) => {
-                                    setIdProducto(e.target.value);
-                                }}
+                                <input 
                                 placeholder='ID Producto'
                                 type="text"
                                 className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
@@ -114,42 +172,8 @@ const Ventas = () => {
                     </div>
                 </div>
                 {/* TABLA PARA VISUALIZAR PRODUCTOS AGREGADOS */}
-                <div className="w-full h-2/5">
-                    <table className="tabla mt-4">
-                        <thead>
-                            <tr>
-                                <th className="text-center">ID Producto</th>
-                                <th className="text-center">Descripción</th>
-                                <th className="text-center">Cantidad</th>
-                                <th className="text-center">Valor Unitario</th>
-                                <th className="text-center">Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>00123</td>
-                                <td>Adidas Stan Smith</td>
-                                <td>12</td>
-                                <td>229900</td>
-                                <td>2435321</td>
-                            </tr>
-                            <tr>
-                                <td>00123</td>
-                                <td>Adidas Stan Smith</td>
-                                <td>12</td>
-                                <td>229900</td>
-                                <td>2435321</td>
-                            </tr>
-                            <tr>
-                                <td>00123</td>
-                                <td>Adidas Stan Smith</td>
-                                <td>12</td>
-                                <td>229900</td>
-                                <td>2435321</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <TablaArticulos listaArticulos={articulosVenta}/>
+                {/* PIE DE VENTA */}
                 <div className="w-full  h-auto">
                     <div className="w-full justify-end flex flex-wrap">
                         <div>
@@ -169,7 +193,41 @@ const Ventas = () => {
                 </div>
             {/* </div> */}
         </div>
-    )
-}
+    );
+};
+
+const TablaArticulos = ({listaArticulos}) => {
+    useEffect(() => {
+        console.log('Este es el listado de los articulos para vender en el componente de tabla', listaArticulos)
+    }, [listaArticulos])
+    return(
+        <div className="w-full h-2/5 overflow-y-scroll overflow-x-hidden">
+            <table className="tabla mt-4 mr-4">
+                <thead>
+                    <tr>
+                        <th className="text-center">ID Producto</th>
+                        <th className="text-center">Descripción</th>
+                        <th className="text-center">Cantidad</th>
+                        <th className="text-center">Valor Unitario</th>
+                        <th className="text-center">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {listaArticulos.map((articulo) =>{
+                        return(
+                            <tr>
+                                <td className='text-center'>{articulo.idProducto}</td>
+                                <td className='text-center'>{articulo.descripcion}</td>
+                                <td className='text-center'>{articulo.cantidad}</td>
+                                <td className='text-center'>$ {articulo.valorUnitario}</td>
+                                <td className='text-center'>$ {articulo.subtotal}</td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+        </div>
+    );
+};
 
 export default Ventas

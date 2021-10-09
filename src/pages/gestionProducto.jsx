@@ -128,7 +128,7 @@ const RegistroProductos = () => {
 
         {/* FORMULARIO DE REGISTRO DE PRODUCTO */}
         <div className="w-full h-1/2 flex flex-wrap justify-center items-center px-3">
-          <form ref={form} onSubmit={submitForm} >
+          <form>
               <div>
                   <label htmlFor='idProducto'>Identificador de producto</label>
                   <input

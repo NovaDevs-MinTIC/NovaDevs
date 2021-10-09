@@ -33,8 +33,10 @@ const GestionProducto = () => {
 }
 
 const RenderProductos = () => {
+    //comentario
     return (
         <>
+            
             <div className='flex items-center justify-center w-full h-1/6'>
                 <h2 className='text-4xl font-extrabold text-gray-900'>
                     Gestión de Productos

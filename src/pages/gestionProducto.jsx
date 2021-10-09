@@ -1,6 +1,9 @@
 import React from 'react'
 import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useRef } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const GestionProducto = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
@@ -113,9 +116,7 @@ const TablaProductos = ({infoBackend}) =>{
         </table>
     )
 }
-
 const RegistroProductos = () => {
-
     return(
       <div className='h-4/5 w-full'>
         {/* TITULO */}
@@ -127,9 +128,9 @@ const RegistroProductos = () => {
 
         {/* FORMULARIO DE REGISTRO DE PRODUCTO */}
         <div className="w-full h-1/2 flex flex-wrap justify-center items-center px-3">
-          <form>
+          <form ref={form} onSubmit={submitForm} >
               <div>
-                  <label>Identificador de producto</label>
+                  <label htmlFor='idProducto'>Identificador de producto</label>
                   <input
                           name='idproducto'
                           type='number'
@@ -139,7 +140,7 @@ const RegistroProductos = () => {
                         />
               </div>
               <div>
-                <label classsName="mx-2">Descripción</label>
+                <label  htmlFor='idProducto' classsName="mx-2">Descripción</label>
                 <textarea
                         name='descripcion'
                         type='text'

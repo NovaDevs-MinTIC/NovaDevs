@@ -29,7 +29,7 @@ const BuscarActualizarVentas = () => {
                 </button>
             </div>
             {/*Contenedor de la tabla de Buscar y actualizar venta*/}
-            <div>
+            <div className="overflow-y-auto">
                 <DataVentas />
             </div>
 

@@ -1,3 +1,10 @@
+/* TAILWIND */
+
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 *{
   margin: 0;
   padding: 0;
@@ -5,17 +12,8 @@
   font-family: 'Roboto', sans-serif;
 }
 
-.margin-20{
-  text-align: center;
-  margin: 20px;
-}
-
-.form-footer{
-  display: flex;
-}
-
-.pinky{
-  background-color: pink;
+.bg-novablue{
+  background-color: #099494;
 }
 
 .tamaño-logo{
@@ -50,22 +48,15 @@
   cursor: pointer;
 }
 
-.table > thead{
-  background-color: #5A5A5A;
-  color: white;
-}
-
 .iconos{
   display: flex;
   justify-content: space-between;
-  margin-left: 6px;
-  margin-right: 6px;
+
 }
 
 .far, .fas{
   cursor: pointer;
   padding: 4px;
-  margin-left: 2px;
 }
 
 .contenedorVentas{
@@ -73,8 +64,8 @@
   width: 150vh;
   height: 95vh;
   margin-left: 55px;
-  
 }
+
 .contenedor-tabla-venta{
   width: 200vh;
   height: 65vh;

@@ -1,4 +1,5 @@
 import React, {useState,useEffect} from 'react'
+import { nanoid } from 'nanoid';
 
 const VentaBackend = [
     {
@@ -73,30 +74,29 @@ const DataVentas = () => {
 const TablaVentas = ({listaVentas}) =>{
     
     return (
-        <div className="contenedor-tabla-venta">
-        <table className="table table-hover">
+        <table className="tabla table-auto">
             <thead>
                 <tr>
-                    <th scope="col-sm">ID Venta</th>
-                    <th scope="col-sm">Descripción de venta</th>
-                    <th scope="col-sm">Cantidad</th>
-                    <th scope="col-sm">Fecha de venta</th>
-                    <th scope="col-sm">ID Cliente</th>
-                    <th scope="col-sm">Nombre del cliente</th>
-                    <th scope="col-sm">ID Vendedor</th>
-                    <th scope="col-sm">Nombre del vendedor</th>                                
-                    <th scope="col-sm">Valor Venta</th> 
-                    <th scope="col-sm">Estado</th>
-                    <th scope="col-sm">Acciones</th>
+                    <th className="w-1/12">ID Venta</th>
+                    <th className="w-1/12">Descripción de venta</th>
+                    <th>Fecha de venta</th>
+                    <th>ID Cliente</th>
+                    <th>Nombre del cliente</th>
+                    <th>ID Vendedor</th>
+                    <th>Nombre del vendedor</th>                                
+                    <th>Valor Venta</th> 
+                    <th className='w-1/12'>Estado</th>
+                    <th className='w-1/12'>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 {listaVentas.map((venta) =>{
                     return(
-                        <tr>
+                        <tr key={nanoid()}>
                             <th scope="row">{venta.idVenta}</th>
-                            <td>{venta.descripcionVenta}</td>
-                            <td>{venta.cantidad}</td>
+                            <td className="text-center">
+                                <i className="rounded bg-novablue border-solid border-2 border-novablue far fa-eye"></i>
+                            </td>
                             <td>{venta.fechaVenta}</td>
                             <td>{venta.idCliente}</td>
                             <td>{venta.nombreCliente}</td>
@@ -105,17 +105,18 @@ const TablaVentas = ({listaVentas}) =>{
                             <td>{venta.valorVenta}</td>
                             <td className={venta.alerta}>{venta.estado}</td>
 
-                            <td className="iconos">
-                                <button className="btn far fa-edit bg-info"></button>
+                            <td className="text-center">
+                                <div className="flex justify-around">
+                                    <button className="rounded border-solid border-2 border-novablue far fa-edit bg-info"></button>
 
-                                <button className="btn far fa-trash-alt bg-danger ml-1"></button>
+                                    <button className="rounded border-solid border-2 border-red-600 far fa-trash-alt bg-danger"></button>
+                                </div>
                             </td>
                         </tr>
                     )
                 })}    
             </tbody>
         </table>
-        </div>
     )
 }
 

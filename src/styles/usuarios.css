@@ -1,31 +1,27 @@
-
-.titulogestion{
-  margin-left: 240px;
-  margin-top: 10px;
-}
-
-
-.row-usuarios{
-
-  margin-left: 135px;
-  padding-left: 20px;
-  padding-top: 100px;
-  margin-bottom: 50px;
-  margin-top: 10px;
-
-}
-
- 
-.tabla{
+.tabla {
   width: 100%;
-  max-width: 100%;
-  background-color: transparent;
-  border-collapse: collapse;
-  border-spacing: 0;
-  margin-left: 150px;
+  margin: 10px;
+  overflow-y: scroll;
 }
 
-.boton{
-  margin-left: 250px;
-  margin-top: 50px;
+.tabla td,
+.tabla th {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.tabla th {
+  background-color: #099494;
+  color: white;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+}
+
+.tabla tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.tabla tr:hover {
+  background-color: #ddd;
 }

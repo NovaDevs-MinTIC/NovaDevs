@@ -1,13 +1,42 @@
 import React from 'react'
 import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useRef } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const GestionProducto = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
+    const [textoBoton,setTextoBoton]=useState('Registrar producto');
     //Renderizacion condicional
+    useEffect(() => {
+        if (mostrarTabla) {
+          setTextoBoton('Registrar Producto');
+         
+        } else {
+          setTextoBoton('Ver productos');
+         
+        }
+      }, [mostrarTabla]);
+
+
 
     return (
         <div className="w-full h-full">
+
+             {/*Botón Para regresar*/}
+             <div className='flex justify-end mx-2'>
+                <button
+                onClick={()=>{
+                    setMostrarTabla(!mostrarTabla);
+                }}
+                className=' py-2 px-3 justify-end border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mx-10 my-4'
+                >{textoBoton}
+                <div className='flex items-center justify-start'>
+                    <span className='mx-4'></span>
+                </div>
+                </button>
+            </div>
             {/* Renderización condicional*/}
             {mostrarTabla ? (
                 <RenderProductos />
@@ -15,19 +44,7 @@ const GestionProducto = () => {
                 <RegistroProductos />
             )}
 
-            {/*Botón Para regresar*/}
-            <div className='flex justify-end mx-2'>
-                <button
-                onClick={()=>{
-                    setMostrarTabla(!mostrarTabla);
-                }}
-                className='py-2 px-3 justify-end border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
-                >
-                <div className='flex items-center justify-start'>
-                    <span className='mx-4'>Regresar</span>
-                </div>
-                </button>
-            </div>
+           
         </div>
     )
 }
@@ -38,7 +55,7 @@ const RenderProductos = () => {
         <>
             
             <div className='flex items-center justify-center w-full h-1/6'>
-                <h2 className='text-4xl font-extrabold text-gray-900'>
+                <h2 className='text-3xl font-extrabold text-gray-900'>
                     Gestión de Productos
                 </h2>
             </div>
@@ -67,8 +84,8 @@ const TablaProductos = ({infoBackend}) =>{
                 <tr>
                     <th className="text-center">ID Producto</th>
                     <th className="text-center">Descripción</th>
-                    <th className="text-center">Valor Unitario</th>
-                    <th className="text-center">Estado</th>
+                    <th className="text-center w-1/10">Valor Unitario</th>
+                    <th className="text-center w-1/10" >Estado</th>
                     <th className="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -99,23 +116,21 @@ const TablaProductos = ({infoBackend}) =>{
         </table>
     )
 }
-
 const RegistroProductos = () => {
-
     return(
-      <div className='h-full w-full'>
+      <div className='h-4/5 w-full'>
         {/* TITULO */}
-        <div className='flex items-center justify-center w-full h-1/6'>
-            <h2 className='text-4xl font-extrabold text-gray-900'>
+        <div className='flex items-center justify-center w-full h-1/9'>
+            <h2 className='text-3xl font-extrabold text-gray-900'>
             Registro de Productos
             </h2>
         </div>
 
         {/* FORMULARIO DE REGISTRO DE PRODUCTO */}
-        <div className="w-full h-1/2 flex flex-wrap justify-center items-center">
+        <div className="w-full h-1/2 flex flex-wrap justify-center items-center px-3">
           <form>
               <div>
-                  <label>Identificador de producto</label>
+                  <label htmlFor='idProducto'>Identificador de producto</label>
                   <input
                           name='idproducto'
                           type='number'
@@ -125,7 +140,7 @@ const RegistroProductos = () => {
                         />
               </div>
               <div>
-                <label classsName="mx-2">Descripción</label>
+                <label  htmlFor='idProducto' classsName="mx-2">Descripción</label>
                 <textarea
                         name='descripcion'
                         type='text'
@@ -160,7 +175,7 @@ const RegistroProductos = () => {
               </div>
           </form>
         </div>
-        <div className="flex justify-center mt-6">
+        <div className="flex justify-center mt-20">
             <button
             type='submit'
             className='group relative w-auto flex py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'

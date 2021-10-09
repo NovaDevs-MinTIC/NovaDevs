@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import 'App.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -49,47 +49,53 @@ const Ventas = () => {
                 <form>
                     <div className="w-full h-auto flex flex-wrap justify-center items-center">
                         <div >	
-                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">ID Venta</label>
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='id-venta'>ID Venta</label>
                             <input
+                            name = 'id-venta'
                             placeholder='ID Venta'
                             type="text"
                             className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                             />
                         </div>
                         <div>	
-                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Fecha Venta</label>
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor = 'fecha-venta'>Fecha Venta</label>
                             <input
+                            name = 'fecha-venta' 
                             type="date"
                             className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                             />
                         </div>
                         <div>	
-                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Cliente</label>
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='cliente'>Cliente</label>
                             <input
+                            name = 'cliente'
                             type="text"
                             placeholder='Cliente'
                             className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                             />
                         </div>
                         <div>	
-                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">ID Cliente</label>
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='id-cliente'>ID Cliente</label>
                             <input
+                            name = 'id-cliente'
                             type="number"
                             placeholder='ID Cliente'
                             className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                             />
                         </div>
                         <div>	
-                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Vendedor</label>
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmkFor='vendedor'>Vendedor</label>
                             <input
+                            name = 'vendedor'
                             type="text"
                             placeholder='Cliente'
                             className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                             />
                         </div>
                         {/* <div>	
-                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">ID Vendedor</label>
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor = 'id-vendedor'>ID Vendedor</label>
                             <input
+                            name = 'id-vendedor
                             type="number"
                             placeholder='ID Vendedor'
                             className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'

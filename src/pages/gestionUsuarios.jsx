@@ -8,7 +8,7 @@ const  Usuarios = () => {
           {/*Título*/}
           <div className='flex items-center justify-center w-full h-1/6'>
                 <h2 className='text-4xl font-extrabold text-gray-900'>
-                GESTIÓN DE USUARIOS
+                Gestión de Usuarios
                 </h2>
             </div>
             {/*Barras de búsqueda para la tabla */}

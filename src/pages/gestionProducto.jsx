@@ -9,13 +9,11 @@ const GestionProducto = () => {
     return (
         <div className="w-full h-full">
             {/* Renderización condicional*/}
-            <div>
-                {mostrarTabla ? (
-                    <RenderProductos />
-                ) : (
-                    <RegistroProductos />
-                )}
-            </div>
+            {mostrarTabla ? (
+                <RenderProductos />
+            ) : (
+                <RegistroProductos />
+            )}
 
             {/*Botón Para regresar*/}
             <div className='flex justify-end mx-2'>
@@ -36,10 +34,10 @@ const GestionProducto = () => {
 
 const RenderProductos = () => {
     return (
-        <div className='mt-4'>
+        <>
             <div className='flex items-center justify-center w-full h-1/6'>
                 <h2 className='text-4xl font-extrabold text-gray-900'>
-                    GESTIÓN DE PRODUCTOS
+                    Gestión de Productos
                 </h2>
             </div>
             <div className='flex items-center justify-center w-full h-auto'>
@@ -55,7 +53,7 @@ const RenderProductos = () => {
             <div className='hidden md:flex w-full mt-12'>
                 <TablaProductos />
             </div>
-        </div>
+        </>
     )
 }
 
@@ -107,7 +105,7 @@ const RegistroProductos = () => {
         {/* TITULO */}
         <div className='flex items-center justify-center w-full h-1/6'>
             <h2 className='text-4xl font-extrabold text-gray-900'>
-            REGISTRO DE PRODUCTOS
+            Registro de Productos
             </h2>
         </div>
 

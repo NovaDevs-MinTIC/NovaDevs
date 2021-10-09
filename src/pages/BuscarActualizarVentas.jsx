@@ -10,7 +10,7 @@ const BuscarActualizarVentas = () => {
             {/*Título*/}
             <div className='flex items-center justify-center w-full h-1/6'>
                 <h2 className='text-4xl font-extrabold text-gray-900'>
-                ESTADO DE VENTA
+                Estado de Venta
                 </h2>
             </div>
 

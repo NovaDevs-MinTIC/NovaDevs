@@ -4,10 +4,36 @@ import { useState, useEffect } from 'react'
 
 const GestionProducto = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
+    const [textoBoton,setTextoBoton]=useState('Registrar producto');
     //Renderizacion condicional
+    useEffect(() => {
+        if (mostrarTabla) {
+          setTextoBoton('Registrar Producto');
+         
+        } else {
+          setTextoBoton('Ver productos');
+         
+        }
+      }, [mostrarTabla]);
+
+
 
     return (
         <div className="w-full h-full">
+
+             {/*Botón Para regresar*/}
+             <div className='flex justify-end mx-2'>
+                <button
+                onClick={()=>{
+                    setMostrarTabla(!mostrarTabla);
+                }}
+                className=' py-2 px-3 justify-end border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mx-10 my-4'
+                >{textoBoton}
+                <div className='flex items-center justify-start'>
+                    <span className='mx-4'></span>
+                </div>
+                </button>
+            </div>
             {/* Renderización condicional*/}
             {mostrarTabla ? (
                 <RenderProductos />
@@ -15,19 +41,7 @@ const GestionProducto = () => {
                 <RegistroProductos />
             )}
 
-            {/*Botón Para regresar*/}
-            <div className='flex justify-end mx-2'>
-                <button
-                onClick={()=>{
-                    setMostrarTabla(!mostrarTabla);
-                }}
-                className='py-2 px-3 justify-end border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
-                >
-                <div className='flex items-center justify-start'>
-                    <span className='mx-4'>Regresar</span>
-                </div>
-                </button>
-            </div>
+           
         </div>
     )
 }

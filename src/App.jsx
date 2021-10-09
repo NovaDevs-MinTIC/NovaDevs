@@ -5,7 +5,7 @@ import Login from 'pages/login';
 import Home from 'pages/Home';
 import Ventas from 'pages/Ventas';
 import BuscarActualizarVentas from 'pages/BuscarActualizarVentas';
-import GestionProducto from 'pages/GestionProducto';
+import GestionProducto from 'pages/gestionProducto';
 import Usuarios from 'pages/gestionUsuarios';
 import PrivateLayout from 'Layouts/PrivateLayout';
 import LoginLayout from 'Layouts/LoginLayout';
@@ -15,7 +15,7 @@ function App() {
     <div className='App'>
         <Router>
           <Switch>
-            <Route path={['/home', '/ventas', '/BuscarActualizarVentas', '/GestionProducto', '/gestionUsuarios']}>
+            <Route path={['/home', '/ventas', '/BuscarActualizarVentas', '/gestionProducto', '/gestionUsuarios']}>
               <PrivateLayout>
                   <Switch>
                     <Route path='/Home'>
@@ -27,7 +27,7 @@ function App() {
                     <Route path='/BuscarActualizarVentas'>
                       <BuscarActualizarVentas />
                     </Route>
-                    <Route path='/GestionProducto'>
+                    <Route path='/gestionProducto'>
                       <GestionProducto />
                     </Route>
                     <Route path='/gestionUsuarios'>

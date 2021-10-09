@@ -1,13 +1,15 @@
 import React from 'react'
+import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios'
 import { useState, useEffect,useRef } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import {obtenerProductos} from 'utils/api'
 
 const GestionProducto = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
+    const [productos, setProductos] = useState([]);
     const [textoBoton,setTextoBoton]=useState('Registrar producto');
+    const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
     //Renderizacion condicional
     useEffect(() => {
         if (mostrarTabla) {
@@ -19,7 +21,12 @@ const GestionProducto = () => {
         }
       }, [mostrarTabla]);
 
-
+    useEffect(() => {
+        console.log('consulta', ejecutarConsulta);
+        if (ejecutarConsulta) {
+            obtenerProductos(setProductos, setEjecutarConsulta);
+          }
+    }, [ejecutarConsulta])
 
     return (
         <div className="w-full h-full">
@@ -70,14 +77,15 @@ const RenderProductos = () => {
                 />
             </div>
             <div className='hidden md:flex w-full mt-12'>
-                <TablaProductos />
+                <TablaProductos
+                setMostrarTabla= {setMostrarTabla} />
             </div>
         </>
     )
 }
 
 
-const TablaProductos = ({infoBackend}) =>{
+const TablaProductos = ({infoBackend, setMostrarTabla}) =>{
     return(
         <table class="tabla">
             <thead>
@@ -116,7 +124,7 @@ const TablaProductos = ({infoBackend}) =>{
         </table>
     )
 }
-const RegistroProductos = () => {
+const RegistroProductos = ({setMostrarTabla, Productos, setProductos}) => {
     return(
       <div className='h-4/5 w-full'>
         {/* TITULO */}
@@ -128,20 +136,66 @@ const RegistroProductos = () => {
 
         {/* FORMULARIO DE REGISTRO DE PRODUCTO */}
         <div className="w-full h-1/2 flex flex-wrap justify-center items-center px-3">
-          <form>
-              <div>
-                  <label htmlFor='idProducto'>Identificador de producto</label>
-                  <input
-                          name='idproducto'
+          <FormularioCreacionProductos 
+          setMostrarTabla= {setMostrarTabla}
+          listaProductos = {Productos}
+          setProductos = {setProductos}/>
+        </div>
+    </div>        
+    )
+}
+
+const FormularioCreacionProductos = ({setMostrarTabla, listaProductos, setProductos }) => {
+    const form = useRef(null)
+
+    const submitForm = async (e) => {
+        e.preventDefault();
+        const fd = new FormData(form.current);
+
+        const nuevoProducto = {};
+        fd.forEach((value,key) => {
+            nuevoProducto[key] = value;
+        });
+        console.log('datos del form enviados', nuevoProducto)
+
+        const options = {
+            method : 'POST',
+            url : 'http://localhost:5000/productos/nuevo/',
+            headers: { 'Content-Type': 'application/json' },
+            data: { idProducto: nuevoProducto.idProducto, descripcion: nuevoProducto.descripcion, valorU: nuevoProducto.valorU, estadoP : nuevoProducto.estadoP  },
+    
+        };
+    
+        await axios
+          .request(options)
+          .then(function (response) {
+            console.log(response.data);
+            toast.success('Producto agregado con éxito');
+          })
+          .catch(function (error) {
+            console.error(error);
+            toast.error('Error creando un producto');
+          });
+          setMostrarTabla(true);
+    };
+
+
+    
+
+    return(
+        <>
+            <form ref={form} onSubmit={submitForm}> 
+                
+                    <label htmlFor='idProducto'>Identificador de producto</label>
+                    <input
+                          name='idProducto'
                           type='number'
                           required
                           className='appearance-none rounded-md relative w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                           placeholder='ID Producto'
                         />
-              </div>
-              <div>
-                <label  htmlFor='idProducto' classsName="mx-2">Descripción</label>
-                <textarea
+                    <label  htmlFor='descripcion' classsName="mx-2">Descripción</label>
+                    <textarea
                         name='descripcion'
                         type='text'
                         autoComplete='text'
@@ -149,44 +203,36 @@ const RegistroProductos = () => {
                         className='appearance-none rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                         placeholder='Descripción'
                       />
-              </div>
-              <div>
-                <label classsName="mx-2">$ Valor Unitario</label>
-                <input
+                    <label classsName="mx-2" htmlFor='valorU'>$ Valor Unitario</label>
+                    <input
                         name='valorU'
                         type='number'
                         autoComplete='number'
                         required
                         className='appearance-none rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                         placeholder='Valor unitario'
-                      />
-              </div>
-              <div>
-                <label classsName="mx-2">Estado del producto</label>
-                <select 
-                  name='estadoP'
-                  required
-                  className='rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                >
-                  <option  disabled selected>Estado del producto</option>
-                  <option value="1">Disponible</option>
-                  <option value="2">No disponible</option>
-                </select>
-              </div>
-          </form>
-        </div>
-        <div className="flex justify-center mt-20">
-            <button
-            type='submit'
-            className='group relative w-auto flex py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
-            >
-            <div className='flex items-center'>
-                <i className="fas fa-plus"></i>
-                <span className='mx-2'>Registrar</span>
-            </div>
-            </button>
-        </div>
-      </div>        
+                    />
+                    <label classsName="mx-2" htmlFor='estadoP'>Estado del producto</label>
+                    <select 
+                        name='estadoP'
+                        required
+                        className='rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                    >
+                        <option  disabled selected>Estado del producto</option>
+                        <option value="1">Disponible</option>
+                        <option value="2">No disponible</option>
+                    </select>
+                    <button
+                        type='submit'
+                        className='group relative w-auto flex py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+                    >
+                        <div className='flex items-center'>
+                            <i className="fas fa-plus"></i>
+                            Registrar
+                        </div>
+                    </button>
+            </form>
+        </>
     )
 }
 

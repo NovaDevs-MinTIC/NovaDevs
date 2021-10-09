@@ -52,7 +52,7 @@ const RenderProductos = () => {
         <>
             
             <div className='flex items-center justify-center w-full h-1/6'>
-                <h2 className='text-4xl font-extrabold text-gray-900'>
+                <h2 className='text-3xl font-extrabold text-gray-900'>
                     Gestión de Productos
                 </h2>
             </div>
@@ -81,8 +81,8 @@ const TablaProductos = ({infoBackend}) =>{
                 <tr>
                     <th className="text-center">ID Producto</th>
                     <th className="text-center">Descripción</th>
-                    <th className="text-center">Valor Unitario</th>
-                    <th className="text-center">Estado</th>
+                    <th className="text-center w-1/10">Valor Unitario</th>
+                    <th className="text-center w-1/10" >Estado</th>
                     <th className="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -117,16 +117,16 @@ const TablaProductos = ({infoBackend}) =>{
 const RegistroProductos = () => {
 
     return(
-      <div className='h-full w-full'>
+      <div className='h-4/5 w-full'>
         {/* TITULO */}
-        <div className='flex items-center justify-center w-full h-1/6'>
-            <h2 className='text-4xl font-extrabold text-gray-900'>
+        <div className='flex items-center justify-center w-full h-1/9'>
+            <h2 className='text-3xl font-extrabold text-gray-900'>
             Registro de Productos
             </h2>
         </div>
 
         {/* FORMULARIO DE REGISTRO DE PRODUCTO */}
-        <div className="w-full h-1/2 flex flex-wrap justify-center items-center">
+        <div className="w-full h-1/2 flex flex-wrap justify-center items-center px-3">
           <form>
               <div>
                   <label>Identificador de producto</label>
@@ -174,7 +174,7 @@ const RegistroProductos = () => {
               </div>
           </form>
         </div>
-        <div className="flex justify-center mt-6">
+        <div className="flex justify-center mt-20">
             <button
             type='submit'
             className='group relative w-auto flex py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'

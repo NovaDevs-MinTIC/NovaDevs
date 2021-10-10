@@ -31,18 +31,6 @@ const GestionProducto = () => {
     }, [ejecutarConsulta]);
 
     useEffect(() => {
-        const obtenerProductos = async () => {
-            const options = {method : 'GET', url:'http://localhost:5000/productos/'};
-            await axios
-            .request(options)
-            .then(function (response) {
-                setProductos(response.data);
-            })
-            .catch(function(error){
-                console.error(error)
-            })
-        }
-        //obtener lista de productos desde el backend
         if (mostrarTabla) {
             obtenerProductos();
         }
@@ -125,33 +113,18 @@ const TablaProductos = ({listaProductos, setEjecutarConsulta,  setMostrarTabla})
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            {productosFiltrados.map((producto) => {
-                                return(
-                                    <FilaProducto
-                                    key={nanoid()}
-                                    producto={producto}
-                                    setEjecutarConsulta={setEjecutarConsulta}
-                                    />
-                                )
-                            })}
-                        </tr>
+                        {productosFiltrados.map((producto) => {
+                            return(
+                                <FilaProducto
+                                key={nanoid()}
+                                producto={producto}
+                                setEjecutarConsulta={setEjecutarConsulta}
+                                />
+                            )
+                        })}
                     </tbody>
                 </table>
-            </div>   
-            <div>
-                {productosFiltrados.map((el) => {
-                    return(
-                        <div>
-                            <span>{el._id.slice(20)}</span>
-                            <span>{el.descripcion}</span>
-                            <span>{el.valorU}</span>
-                            <span>{el.estadoP}</span>
-                        </div>
-                    )
-                })}
-            </div> 
-                        
+            </div>      
         </>
     )
 }
@@ -244,7 +217,7 @@ const TablaProductos = ({listaProductos, setEjecutarConsulta,  setMostrarTabla})
                 </>
             ) : (
                 <>
-                    <td>{producto._id.slice(5)}</td>
+                    <td>{producto.idProducto}</td>
                     <td>{producto.descripcion}</td>
                     <td>{producto.valorU}</td>
                     <td>{producto.estadoP}</td>
@@ -401,8 +374,8 @@ const FormularioCreacionProductos = ({setMostrarTabla, listaProductos, setProduc
                         className='rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                     >
                         <option  disabled selected>Estado del producto</option>
-                        <option value="1">Disponible</option>
-                        <option value="2">No disponible</option>
+                        <option value="Disponible">Disponible</option>
+                        <option value="No disponible">No disponible</option>
                     </select>
                     <button
                         type='submit'

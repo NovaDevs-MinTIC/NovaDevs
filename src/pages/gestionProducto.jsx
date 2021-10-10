@@ -379,7 +379,7 @@ const FormularioCreacionProductos = ({setMostrarTabla, listaProductos, setProduc
                     </select>
                     <button
                         type='submit'
-                        className='group relative w-auto flex py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+                        className='group relative w-auto flex py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mx-40'
                     >
                         <div className='flex items-center'>
                             <i className="fas fa-plus"></i>

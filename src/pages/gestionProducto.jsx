@@ -32,7 +32,7 @@ const GestionProducto = () => {
 
     useEffect(() => {
         if (mostrarTabla) {
-            obtenerProductos();
+            setEjecutarConsulta(true);
         }
       }, [mostrarTabla]);
 
@@ -69,7 +69,7 @@ const GestionProducto = () => {
 }
 
 
-const TablaProductos = ({listaProductos, setEjecutarConsulta,  setMostrarTabla}) =>{
+const TablaProductos = ({listaProductos, setEjecutarConsulta}) =>{
     const [busqueda, setBusqueda] = useState('');
     const [productosFiltrados, setProductosFiltrados] = useState(listaProductos);
 
@@ -129,14 +129,14 @@ const TablaProductos = ({listaProductos, setEjecutarConsulta,  setMostrarTabla})
     )
 }
 
- const FilaProducto = ({producto, setEjecutarConsulta}) => {
+const FilaProducto = ({producto, setEjecutarConsulta}) => {
         const [edit,setEdit] = useState(false);
         const [openDialog,setOpenDialog] = useState(false);
         const [infoNuevoProducto, setInfoNuevoProducto] = useState({
-            _id : producto._id,
+            idProducto : producto.idProducto,
             descripcion : producto.descripcion,
             valorU : producto.valorU,
-            estadoP : producto.estadoP,
+            estadoP : producto.estadoP
         });
 
         const actualizarProducto = async () => {
@@ -145,7 +145,7 @@ const TablaProductos = ({listaProductos, setEjecutarConsulta,  setMostrarTabla})
           method: 'PATCH',
           url: `http://localhost:5000/productos/${producto._id}/`,
           headers: { 'Content-Type': 'application/json' },
-          data: { ...infoNuevoProducto },
+          data: { ...infoNuevoProducto }
         };
     
         await axios
@@ -165,7 +165,7 @@ const TablaProductos = ({listaProductos, setEjecutarConsulta,  setMostrarTabla})
         const eliminarProducto = async () => {
         const options = {
             method: 'DELETE',
-            url: 'http://localhost:5000/productos/eliminar/',
+            url: `http://localhost:5000/productos/${producto._id}/`,
             headers: { 'Content-Type': 'application/json' },
             data: { id: producto._id },
         };
@@ -189,7 +189,7 @@ const TablaProductos = ({listaProductos, setEjecutarConsulta,  setMostrarTabla})
         <tr>
             {edit ? (
                 <>
-                    <td>{infoNuevoProducto._id}</td>
+                    <td>{infoNuevoProducto.idProducto}</td>
                     <td>
                         <input 
                             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const obtenerProductos = async (setProductos, setEjecutarConsulta) => {
+export const obtenerProductos = async (setProductos, setEjecutarConsulta = () =>{}) => {
   const options = {method : 'GET', url:'http://localhost:5000/productos/'};
   await axios
   .request(options)
@@ -10,4 +10,5 @@ export const obtenerProductos = async (setProductos, setEjecutarConsulta) => {
   .catch(function(error){
       console.error(error)
   })
+  setEjecutarConsulta(false);
 }

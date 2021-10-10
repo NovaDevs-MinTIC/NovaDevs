@@ -1,75 +1,250 @@
-import Tabla from '../components/tablaUsuarios';
+import { useState, useEffect } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import { Dialog, Tooltip } from '@material-ui/core';
+import axios from 'axios'
+import {obtenerUsuarios} from 'utils/api'
+import { nanoid } from 'nanoid';
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../styles/usuarios.css';
 
 
 
 const  Usuarios = () => {
+  const [usuarios, setUsuarios] =useState([]);
+  const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
+
+  useEffect(() => {
+    console.log('consulta', ejecutarConsulta);
+    if (ejecutarConsulta) {
+        obtenerUsuarios(setUsuarios, setEjecutarConsulta);
+      }
+}, [ejecutarConsulta]);
+
     return(
         <div className='w-full h-full'>
-          {/*Título*/}
-          <div className='flex items-center justify-center w-full h-1/6'>
-                <h2 className='text-4xl font-extrabold text-gray-900'>
-                Gestión de Usuarios
-                </h2>
-            </div>
-            {/*Barras de búsqueda para la tabla */}
-            <div className='flex items-center justify-center w-full h-auto'>
-                <input
-                placeholder='Búsqueda por Nombre'
-                className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
-                />
-                <input
-                placeholder='Búsqueda por e-mail'
-                className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
-                />
-                <button className=' bg-novablue rounded border-novablue border-2 p-1 focus:outline-none focus:border-gray-500 text-white'>
-                  Buscar
-                </button>
-            </div>
-          {/* Tabla */}
-          <div className='hidden md:flex w-full mt-12'>
-            <table className="tabla">
-              <thead className="text-center">
-                <tr>
-                  <th>Nombre</th>
-                  <th>Correo electrónico</th>
-                  <th>Rol</th>
-                  <th>Estado</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-              <tr className="text-center">
-               <td >Luis Forero</td>
-               <td>luisforero@gmail.com</td>
-               <td className="text-center">
-               <select className="rounded-lg m-2 w-auto">
-               <option disabled>Rol</option>
-               <option>Vendedor</option>
-               <option>Administrador</option>
-               </select>
-              </td>
-              <td className="text-center">
-              <select className="rounded-lg m-2 w-auto">
-              <option disabled>Estado</option>
-              <option>Pendiente</option>
-              <option>Aceptado</option>
-              <option>Rechazado</option>
-              </select>  
-             </td>
-            <td className='text-center'>
-            <div className="flex justify-around">
-            <button className="rounded border-solid border-2 border-novablue far fa-edit bg-info"></button>
-            <button className="rounded border-solid border-2 border-red-600 far fa-trash-alt bg-danger"></button>
-            </div>
-            </td>
-            </tr>
-           </tbody>
-          </table>
+          <TablaUsuarios listaUsuarios={usuarios} setEjecutarConsulta = {setEjecutarConsulta} />
+          <ToastContainer position='bottom-center' autoClose={3000} />
         </div>
-      </div>
           )
+}
+
+const FilaUsuario = ({usuario, setEjecutarConsulta}) => {
+  const [edit, setEdit] = useState(false);
+  const [openDialog,setOpenDialog] = useState(false);
+  const [infoNuevoUsuario, setInfoNuevoUsuario] = useState({
+    nombre : usuario.nombre,
+    correo : usuario.correo,
+    rol : usuario.rol,
+    estado : usuario.estado
+});
+
+const actualizarUsuario = async () => {
+  //enviar la info al backend
+  const options = {
+    method: 'PATCH',
+    url: `http://localhost:5000/usuarios/${usuario._id}/`,
+    headers: { 'Content-Type': 'application/json' },
+    data: { ...infoNuevoUsuario }
+  };
+
+  await axios
+    .request(options)
+    .then(function (response) {
+      console.log(response.data);
+      toast.success('Usuario modificado con éxito');
+      setEdit(false);
+      setEjecutarConsulta(true);
+    })
+    .catch(function (error) {
+      toast.error('Error modificando el usuario');
+      console.error(error);
+    });
+};
+
+const eliminarUsuario = async () => {
+  const options = {
+      method: 'DELETE',
+      url: `http://localhost:5000/usuarios/${usuario._id}/`,
+      headers: { 'Content-Type': 'application/json' },
+      data: { id: usuario._id },
+  };
+
+  await axios
+      .request(options)
+      .then(function (response) {
+      console.log(response.data);
+      toast.success('Usuario eliminado con éxito');
+      setEjecutarConsulta(true);
+      })
+      .catch(function (error) {
+      console.error(error);
+      toast.error('Error eliminando el usuario');
+      });
+  setOpenDialog(false);
+  };
+
+  return(
+    <tr>
+      {edit ? (
+                <>
+                    <td className='text-center'>{usuario.nombre}</td>
+                    <td className='text-center'>{usuario.correo}</td>
+                    <td className='text-center'>
+                      <select 
+                        className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                        value={infoNuevoUsuario.rol}
+                        onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, rol: e.target.value })}
+                        defaultValue='0'
+                        >
+                          <option disabled value="0">Seleccione una opción</option>
+                          <option value="Vendedor">Vendedor</option>
+                          <option value="Administrador">Administrador</option>
+                        </select>
+                    </td>
+                    <td className='text-center'>
+                      <select 
+                          className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                          type='select'
+                          value={infoNuevoUsuario.estado}
+                          onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, estado: e.target.value })}
+                          defaultValue='0'
+                      >
+                        <option disabled value="0">Seleccione una opción</option>
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="Aceptado">Aceptado</option>
+                        <option value="Rechazado">Rechazado</option>
+                      </select>
+                    </td>
+                </>
+            ) : (
+                <>
+                    <td className='text-center'>{usuario.nombre}</td>
+                    <td className='text-center'>{usuario.correo}</td>
+                    <td className='text-center'>{usuario.rol}</td>
+                    <td className='text-center'>{usuario.estado}</td>
+                </>
+            )}
+            <td>
+                <div className='flex w-full justify-around'>
+                {edit ? (
+                    <>
+                    <Tooltip title='Confirmar Edición' arrow>
+                        <i
+                        onClick={() => actualizarUsuario()}
+                        className='fas fa-check text-green-700 hover:text-green-500'
+                        />
+                    </Tooltip>
+                    <Tooltip title='Cancelar edición' arrow>
+                        <i
+                        onClick={() => setEdit(!edit)}
+                        className='fas fa-ban text-yellow-700 hover:text-yellow-500'
+                        />
+                    </Tooltip>
+                    </>
+                ) : (
+                    <>
+                    <Tooltip title='Editar Usuario' arrow>
+                        <i
+                        onClick={() => setEdit(!edit)}
+                        className='fas fa-pencil-alt text-yellow-700 hover:text-yellow-500'
+                        />
+                    </Tooltip>
+                    <Tooltip title='Eliminar Usuario' arrow>
+                        <i
+                        onClick={() => setOpenDialog(true)}
+                        className='fas fa-trash text-red-700 hover:text-red-500'
+                        />
+                    </Tooltip>
+                    </>
+                )}
+                </div>
+                <Dialog open={openDialog}>
+                <div className='p-8 flex flex-col'>
+                    <h1 className='text-gray-900 text-2xl font-bold'>
+                    ¿Está seguro de querer eliminar el usuario?
+                    </h1>
+                    <div className='flex w-full items-center justify-center my-4'>
+                    <button
+                        onClick={() => eliminarUsuario()}
+                        className='mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md'
+                    >
+                        Sí
+                    </button>
+                    <button
+                        onClick={() => setOpenDialog(false)}
+                        className='mx-2 px-4 py-2 bg-red-500 text-white hover:bg-red-700 rounded-md shadow-md'
+                    >
+                        No
+                    </button>
+                    </div>
+                </div>
+                </Dialog>
+            </td>
+    </tr>
+  )
+
+
+
+}
+
+const TablaUsuarios = ({listaUsuarios, setEjecutarConsulta}) =>{
+  const [buscar, setBuscar] = useState('');
+  const [usuariosFiltrados, setUsuariosFiltrados] = useState(listaUsuarios);
+
+  useEffect(() => {
+    setUsuariosFiltrados(
+      listaUsuarios.filter((elemento) => {
+        return JSON.stringify(elemento).toLowerCase().includes(buscar.toLowerCase());
+      })
+    );
+  }, [buscar, listaUsuarios]);
+
+
+return(
+  <>
+    <div className='flex items-center justify-center w-full h-1/6'>
+      <h2 className='text-4xl font-extrabold text-gray-900'>
+      Gestión de Usuarios
+      </h2>
+    </div>
+    <div className='flex items-center justify-center w-full h-auto'>
+      <input 
+      type="text"
+      value = {buscar}
+      placeholder='Buscar'
+      className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
+      onChange={(e) => {setBuscar(e.target.value)}}
+       />
+    </div>
+    <div className='hidden md:flex w-full mt-12'>
+      <table className="tabla">
+          <thead>
+              <tr>
+                  <th className="text-center">Nombre</th>
+                  <th className="text-center">Correo</th>
+                  <th className="text-center w-1/10">Rol</th>
+                  <th className="text-center w-1/10" >Estado</th>
+                  <th className="text-center">Acciones</th>
+              </tr>
+          </thead>
+          <tbody>
+              {usuariosFiltrados.map((usuario) => {
+                  return(
+                      <FilaUsuario
+                      key={nanoid()}
+                      usuario={usuario}
+                      setEjecutarConsulta={setEjecutarConsulta}
+                      />
+                  )
+              })}
+          </tbody>
+      </table>
+    </div>
+
+  </>
+  
+
+)
 }
 export default Usuarios;
 

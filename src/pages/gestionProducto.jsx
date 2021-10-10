@@ -189,8 +189,8 @@ const FilaProducto = ({producto, setEjecutarConsulta}) => {
         <tr>
             {edit ? (
                 <>
-                    <td>{infoNuevoProducto.idProducto}</td>
-                    <td>
+                    <td className='text-center'>{infoNuevoProducto.idProducto}</td>
+                    <td className='text-center'>
                         <input 
                             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
                             type='text'
@@ -198,21 +198,26 @@ const FilaProducto = ({producto, setEjecutarConsulta}) => {
                             onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, descripcion: e.target.value })}
                         />
                     </td>
-                    <td>
-                    <input 
-                        className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-                        type='number'
-                        value={infoNuevoProducto.valorU}
-                        onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, valorU: e.target.value })}
+                    <td className='text-center'> 
+                        <input 
+                            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                            type='number'
+                            value={infoNuevoProducto.valorU}
+                            onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, valorU: e.target.value })}
                         />
                     </td>
-                    <td>
-                    <input 
-                        className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-                        type='select'
-                        value={infoNuevoProducto.estadoP}
-                        onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, estadoP: e.target.value })}
-                    />
+                    <td className='text-center'>
+                        <select 
+                            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                            type='select'
+                            value={infoNuevoProducto.estadoP}
+                            onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, estadoP: e.target.value })}
+                            defaultValue='0'
+                        >
+                            <option disabled value="0">Seleccionar una opción</option>
+                            <option value="Disponible">Disponible</option>
+                            <option value="No Disponible">No Disponible</option>
+                        </select>
                     </td>
                 </>
             ) : (

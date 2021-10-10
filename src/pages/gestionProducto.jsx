@@ -62,7 +62,7 @@ const GestionProducto = () => {
                 setProductos = {setProductos}
                 />
             )}
-
+            <ToastContainer position='bottom-center' autoClose={3000} />
            
         </div>
     )
@@ -209,7 +209,7 @@ const FilaProducto = ({producto, setEjecutarConsulta}) => {
                     <td>
                     <input 
                         className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-                        type='text'
+                        type='select'
                         value={infoNuevoProducto.estadoP}
                         onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, estadoP: e.target.value })}
                     />
@@ -217,10 +217,10 @@ const FilaProducto = ({producto, setEjecutarConsulta}) => {
                 </>
             ) : (
                 <>
-                    <td>{producto.idProducto}</td>
-                    <td>{producto.descripcion}</td>
-                    <td>{producto.valorU}</td>
-                    <td>{producto.estadoP}</td>
+                    <td className='text-center'>{producto.idProducto}</td>
+                    <td className='text-center'>{producto.descripcion}</td>
+                    <td className='text-center'>{producto.valorU}</td>
+                    <td className='text-center'>{producto.estadoP}</td>
                 </>
             )}
             <td>

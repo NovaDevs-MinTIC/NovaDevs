@@ -2,8 +2,10 @@ import React from 'react'
 import ImagenLogo from './ImagenLogo'
 import { Link } from 'react-router-dom'
 import useActiveRoute from 'hooks/useActiveRoute'
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Sidebar = () => {
+  const { logout } = useAuth0();
     return (
         <nav className="hidden lg:flex lg:w-80 h-full flex-col bg-color-#0A1931 p-4 sidebar">
               <Link to="/">
@@ -19,7 +21,13 @@ const Sidebar = () => {
             </div>
             <hr className="mt-4"/>
             <div>
-              <Ruta icono="fas fa-sign-out-alt" ruta="/" nombre="Cerrar Sesión" />
+              <button
+                className={`p-1 my-4  hover:bg-novablue flex w-full items-center text-white rounded-md`}
+                onClick={() => logout({ returnTo: window.location.origin })}
+              >
+                <i className='fas fa-sign-out-alt w-10' />
+                <span>Cerrar Sesión</span>
+              </button>
             </div>
         </nav>
     )

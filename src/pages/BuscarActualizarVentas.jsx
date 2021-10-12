@@ -84,20 +84,21 @@ const BuscarActualizarVentas = () => {
     }, []);
 
     return(
-        <div className='flex h-full w-full flex-col items-center justify-start p-8'>
-            <div className='flex items-center justify-center w-full h-1/6'>
-                <h2 className='text-4xl font-extrabold text-gray-900'>
+        <div className='flex h-full w-full flex-col'>
+            <div className='flex justify-end items-start'>
+                <button
+                    onClick={() => {
+                        setMostrarTabla(!mostrarTabla);
+                    }}
+                    className={'h-auto py-2 px-3 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mx-10 my-4'}
+                    >
+                    {textoBoton}
+                </button>
+            </div>
+            <div className='flex items-center w-full h-auto justify-center mb-4'>
+                <h2 className='text-4xl text-center font-extrabold text-gray-900'>
                     REGISTRO DE VENTAS
                 </h2>
-
-                <button
-                onClick={() => {
-                    setMostrarTabla(!mostrarTabla);
-                }}
-                className={' py-2 px-3 justify-end border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mx-10 my-4'}
-                >
-                {textoBoton}
-                </button>
             </div>
             {mostrarTabla ? (
                 <GestionVentas listaVentas = {obtenerVenta} setEjecutarConsulta={setEjecutarConsulta} />
@@ -311,8 +312,27 @@ const Ventas = () => {
     const [articulosVenta, setArticulosVenta] = useState([]);
 
     const articulosVentaBackend = [
-        {"articulo" : 1,
-        "articulo2" : 2}
+        {
+            idProducto : 10013,
+            descripcion : "Adidas Stan Smith",
+            cantidad : 15,
+            valorUnitario : 229900,
+            subtotal : 4498500
+        },
+        {
+            idProducto : 10013,
+            descripcion : "Adidas Stan Smith",
+            cantidad : 15,
+            valorUnitario : 229900,
+            subtotal : 4498500
+        },
+        {
+            idProducto : 10013,
+            descripcion : "Adidas Stan Smith",
+            cantidad : 15,
+            valorUnitario : 229900,
+            subtotal : 4498500
+        },
     ]
 
     useEffect( () => {
@@ -366,9 +386,9 @@ const Ventas = () => {
                         name='estadoP'
                         required
                         className='rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'>
-                        <option  disabled selected>Estado del producto</option>
-                        <option value="Disponible">Disponible</option>
-                        <option value="No disponible">No disponible</option>
+                            <option  disabled selected>Estado del producto</option>
+                            <option value="Disponible">Disponible</option>
+                            <option value="No disponible">No disponible</option>
                         </select>
                     </div>
                 </div>
@@ -495,7 +515,7 @@ const FormularioAgregarArticulo = ({fcnAgregarArticulo, listaArticulos}) => {
                         className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
                         />
                     </div>
-                    <div>	
+                    {/* <div>	
                         <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Valor Unitario</label>
                         <input
                         type="number"
@@ -504,7 +524,7 @@ const FormularioAgregarArticulo = ({fcnAgregarArticulo, listaArticulos}) => {
                         onChange={(e)=>{setValorUnitario(e.target.value)}}
                         className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
                         />
-                    </div>
+                    </div> */}
                 </div>
                 <div>
                     <button

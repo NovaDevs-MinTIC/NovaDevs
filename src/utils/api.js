@@ -34,7 +34,14 @@ export const quitarProductos = async (id, successCallback, errorCallback) => {
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
-export const obtenerUsuarios = async (setUsuarios, setEjecutarConsulta = () => {}) => {
+//Crud de usuarios: 
+
+export const obtenerUsuarios = async (successCallback, errorCallback) => {
+  const options = { method : 'GET', url:'http://localhost:5000/usuarios/' };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+}
+
+/* export const obtenerUsuarios = async (setUsuarios, setEjecutarConsulta = () => {}) => {
   const options = {method : 'GET', url:'http://localhost:5000/usuarios/'};
   await axios
   .request(options)
@@ -46,3 +53,4 @@ export const obtenerUsuarios = async (setUsuarios, setEjecutarConsulta = () => {
   });
   setEjecutarConsulta(false)
 };
+ */

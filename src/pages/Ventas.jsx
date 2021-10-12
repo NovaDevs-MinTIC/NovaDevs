@@ -92,15 +92,6 @@ const Ventas = () => {
                             className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                             />
                         </div>
-                        {/* <div>	
-                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor = 'id-vendedor'>ID Vendedor</label>
-                            <input
-                            name = 'id-vendedor
-                            type="number"
-                            placeholder='ID Vendedor'
-                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
-                            />
-                        </div> */}
                     </div>
                 </form>
                 {/* FORMULARIO PARA AGREGAR PRODUCTO */}

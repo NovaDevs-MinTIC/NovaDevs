@@ -9,10 +9,16 @@ import GestionProducto from 'pages/gestionProducto';
 import Usuarios from 'pages/gestionUsuarios';
 import PrivateLayout from 'Layouts/PrivateLayout';
 import LoginLayout from 'Layouts/LoginLayout';
+import { Auth0Provider } from "@auth0/auth0-react";
+
 
 function App() {
   return (
     <div className='App'>
+      <Auth0Provider
+      domain="novadevs.us.auth0.com"
+      clientId="aBmaNrxZ6TjfoMqTa5lUzhabnxXlEzmr"
+      redirectUri={window.location.origin}>
         <Router>
           <Switch>
             <Route path={['/home', '/ventas', '/BuscarActualizarVentas', '/gestionProducto', '/gestionUsuarios']}>
@@ -46,6 +52,7 @@ function App() {
             </Route>
           </Switch>
         </Router>
+      </Auth0Provider>
     </div>
   );
 }

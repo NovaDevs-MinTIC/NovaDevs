@@ -2,10 +2,9 @@ import React from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import { Dialog, Tooltip } from '@material-ui/core';
 import { nanoid } from 'nanoid';
-import axios from 'axios'
 import { useState, useEffect,useRef } from 'react'
 import 'react-toastify/dist/ReactToastify.css';
-import {obtenerProductos} from 'utils/api'
+import { obtenerProductos, crearProductos, editarProductos, quitarProductos } from 'utils/api'
 
 const GestionProducto = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
@@ -26,15 +25,19 @@ const GestionProducto = () => {
     useEffect(() => {
         console.log('consulta', ejecutarConsulta);
         if (ejecutarConsulta) {
-            obtenerProductos(setProductos, setEjecutarConsulta);
-          }
+            obtenerProductos(
+                (response) => {
+                    console.log('GET de gestion Producto: ', response);
+                    setProductos(response.data);
+                },
+                (error) => {
+                    console.error('Salió un error: ', error);
+                }
+            );
+            setEjecutarConsulta(false);
+        }
     }, [ejecutarConsulta]);
 
-    useEffect(() => {
-        if (mostrarTabla) {
-            setEjecutarConsulta(true);
-        }
-      }, [mostrarTabla]);
 
     return (
         <div className="w-full h-full">
@@ -58,6 +61,7 @@ const GestionProducto = () => {
             ) : (
                 <RegistroProductos 
                 setMostrarTabla = {setMostrarTabla}
+                setEjecutarConsulta = {setEjecutarConsulta}
                 listaProductos = {productos}
                 setProductos = {setProductos}
                 />
@@ -67,7 +71,6 @@ const GestionProducto = () => {
         </div>
     )
 }
-
 
 const TablaProductos = ({listaProductos, setEjecutarConsulta}) =>{
     const [busqueda, setBusqueda] = useState('');
@@ -96,10 +99,6 @@ const TablaProductos = ({listaProductos, setEjecutarConsulta}) =>{
                 placeholder='Buscar'
                 className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
                 />
-                {/* <input
-                placeholder='Búsqueda por ID'
-                className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
-                /> */}
             </div>
             <div className='hidden md:flex w-full mt-12'>
                 <table class="tabla">
@@ -140,47 +139,35 @@ const FilaProducto = ({producto, setEjecutarConsulta}) => {
         });
 
         const actualizarProducto = async () => {
-        //enviar la info al backend
-        const options = {
-          method: 'PATCH',
-          url: `http://localhost:5000/productos/${producto._id}/`,
-          headers: { 'Content-Type': 'application/json' },
-          data: { ...infoNuevoProducto }
-        };
-    
-        await axios
-          .request(options)
-          .then(function (response) {
-            console.log(response.data);
-            toast.success('Producto modificado con éxito');
-            setEdit(false);
-            setEjecutarConsulta(true);
-          })
-          .catch(function (error) {
-            toast.error('Error modificando el producto');
-            console.error(error);
-          });
-      };
+            await editarProductos(
+                producto._id,
+                { ...infoNuevoProducto },
+                (response)=>{
+                    console.log(response.data);
+                    toast.success('Producto modificado con éxito');
+                    setEdit(false);
+                    setEjecutarConsulta(true);
+                },
+                (error)=>{
+                    toast.error('Error modificando el producto');
+                    console.error(error);
+                }
+            )
+        }
 
         const eliminarProducto = async () => {
-        const options = {
-            method: 'DELETE',
-            url: `http://localhost:5000/productos/${producto._id}/`,
-            headers: { 'Content-Type': 'application/json' },
-            data: { id: producto._id },
-        };
-
-        await axios
-            .request(options)
-            .then(function (response) {
-            console.log(response.data);
-            toast.success('Producto eliminado con éxito');
-            setEjecutarConsulta(true);
-            })
-            .catch(function (error) {
-            console.error(error);
-            toast.error('Error eliminando el producto');
-            });
+            await quitarProductos(
+                producto._id,
+                (response)=>{
+                    console.log(response.data);
+                    toast.success('Producto eliminado con éxito');
+                    setEjecutarConsulta(true);
+                },
+                (error)=>{
+                    console.error(error);
+                    toast.error('Error eliminando el producto');
+                }
+            )
         setOpenDialog(false);
         }; 
     
@@ -232,18 +219,18 @@ const FilaProducto = ({producto, setEjecutarConsulta}) => {
                 <div className='flex w-full justify-around'>
                 {edit ? (
                     <>
-                    <Tooltip title='Confirmar Edición' arrow>
-                        <i
-                        onClick={() => actualizarProducto()}
-                        className='fas fa-check text-green-700 hover:text-green-500'
-                        />
-                    </Tooltip>
-                    <Tooltip title='Cancelar edición' arrow>
-                        <i
-                        onClick={() => setEdit(!edit)}
-                        className='fas fa-ban text-yellow-700 hover:text-yellow-500'
-                        />
-                    </Tooltip>
+                        <Tooltip title='Confirmar Edición' arrow>
+                            <i
+                            onClick={() => actualizarProducto()}
+                            className='fas fa-check text-green-700 hover:text-green-500'
+                            />
+                        </Tooltip>
+                        <Tooltip title='Cancelar edición' arrow>
+                            <i
+                            onClick={() => setEdit(!edit)}
+                            className='fas fa-ban text-yellow-700 hover:text-yellow-500'
+                            />
+                        </Tooltip>
                     </>
                 ) : (
                     <>
@@ -263,32 +250,32 @@ const FilaProducto = ({producto, setEjecutarConsulta}) => {
                 )}
                 </div>
                 <Dialog open={openDialog}>
-                <div className='p-8 flex flex-col'>
-                    <h1 className='text-gray-900 text-2xl font-bold'>
-                    ¿Está seguro de querer eliminar el producto?
-                    </h1>
-                    <div className='flex w-full items-center justify-center my-4'>
-                    <button
-                        onClick={() => eliminarProducto()}
-                        className='mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md'
-                    >
-                        Sí
-                    </button>
-                    <button
-                        onClick={() => setOpenDialog(false)}
-                        className='mx-2 px-4 py-2 bg-red-500 text-white hover:bg-red-700 rounded-md shadow-md'
-                    >
-                        No
-                    </button>
+                    <div className='p-8 flex flex-col'>
+                        <h1 className='text-gray-900 text-2xl font-bold'>
+                        ¿Está seguro de querer eliminar el producto?
+                        </h1>
+                        <div className='flex w-full items-center justify-center my-4'>
+                            <button
+                                onClick={() => eliminarProducto()}
+                                className='mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md'
+                            >
+                                Sí
+                            </button>
+                            <button
+                                onClick={() => setOpenDialog(false)}
+                                className='mx-2 px-4 py-2 bg-red-500 text-white hover:bg-red-700 rounded-md shadow-md'
+                            >
+                                No
+                            </button>
+                        </div>
                     </div>
-                </div>
                 </Dialog>
             </td>
         </tr>
     )
 };
 
-const RegistroProductos = ({setMostrarTabla, Productos, setProductos}) => {
+const RegistroProductos = ({setMostrarTabla, setProductos, setEjecutarConsulta}) => {
     return(
       <div className='h-4/5 w-full'>
         {/* TITULO */}
@@ -301,6 +288,7 @@ const RegistroProductos = ({setMostrarTabla, Productos, setProductos}) => {
         {/* FORMULARIO DE REGISTRO DE PRODUCTO */}
         <div className="w-full h-1/2 flex flex-wrap justify-center items-center px-3">
           <FormularioCreacionProductos 
+          setEjecutarConsulta = {setEjecutarConsulta}
           setMostrarTabla= {setMostrarTabla}
           setProductos = {setProductos}/>
         </div>
@@ -308,7 +296,7 @@ const RegistroProductos = ({setMostrarTabla, Productos, setProductos}) => {
     )
 }
 
-const FormularioCreacionProductos = ({setMostrarTabla, listaProductos, setProductos }) => {
+const FormularioCreacionProductos = ({setMostrarTabla, setEjecutarConsulta}) => {
     const form = useRef(null)
 
     const submitForm = async (e) => {
@@ -321,25 +309,23 @@ const FormularioCreacionProductos = ({setMostrarTabla, listaProductos, setProduc
         });
         console.log('datos del form enviados', nuevoProducto)
 
-        const options = {
-            method : 'POST',
-            url : 'http://localhost:5000/productos/',
-            headers: { 'Content-Type': 'application/json' },
-            data: { idProducto: nuevoProducto.idProducto, descripcion: nuevoProducto.descripcion, valorU: nuevoProducto.valorU, estadoP : nuevoProducto.estadoP  },
-    
-        };
-    
-        await axios
-          .request(options)
-          .then(function (response) {
-            console.log(response.data);
-            toast.success('Producto agregado con éxito');
-          })
-          .catch(function (error) {
-            console.error(error);
-            toast.error('Error creando un producto');
-          });
-          setMostrarTabla(true);
+        await crearProductos({ 
+            idProducto: nuevoProducto.idProducto, 
+            descripcion: nuevoProducto.descripcion, 
+            valorU: nuevoProducto.valorU, 
+            estadoP : nuevoProducto.estadoP  
+            },
+            (response) => {
+                console.log(response.data);
+                toast.success('Producto agregado con éxito');
+                setMostrarTabla(true)
+                setEjecutarConsulta(true)
+            },
+            (error) => {
+                console.error(error);
+                toast.error('Error creando un producto');
+            }
+        )
     };
 
     return(

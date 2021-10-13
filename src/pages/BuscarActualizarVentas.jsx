@@ -343,7 +343,8 @@ const Ventas = ({vendedores, productos}) => {
         fd.forEach((value,key)=>{
             formData[key] = value;
         })
-        console.log('form data', formData);
+
+        console.log('formData: ', formData); 
     }
 
     return (
@@ -354,7 +355,7 @@ const Ventas = ({vendedores, productos}) => {
                     <div>
                         <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='id-venta'>ID Venta</label>
                         <input
-                        name = 'id-venta'
+                        name = 'idVenta'
                         placeholder='ID Venta'
                         type="text"
                         className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
@@ -363,7 +364,7 @@ const Ventas = ({vendedores, productos}) => {
                     <div>
                         <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor = 'fecha-venta'>Fecha Venta</label>
                         <input
-                        name = 'fecha-venta' 
+                        name = 'fechaVenta' 
                         type="date"
                         className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                         />
@@ -395,7 +396,7 @@ const Ventas = ({vendedores, productos}) => {
                             <option  disabled selected>Seleccione un vendedor</option>
                             {vendedores.map((el)=>{
                                 return(
-                                    <option>{`${el.nombre} ${el.correo}`}</option>
+                                    <option key={nanoid()}>{`${el.nombre} ${el.correo}`}</option>
                                 )
                             })}
                         </select>
@@ -416,7 +417,7 @@ const Ventas = ({vendedores, productos}) => {
                                 <option  disabled selected>Seleccione un producto</option>
                                 {productos.map((el)=>{
                                     return(
-                                        <option>{`${el.idProducto} ${el.descripcion}`}</option>
+                                        <option key={nanoid()} >{`${el.idProducto} ${el.descripcion}`}</option>
                                     )
                                 })}
                                 </select>

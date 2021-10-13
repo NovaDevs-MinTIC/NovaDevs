@@ -10,6 +10,7 @@ import Usuarios from 'pages/gestionUsuarios';
 import PrivateLayout from 'Layouts/PrivateLayout';
 import LoginLayout from 'Layouts/LoginLayout';
 import { Auth0Provider } from "@auth0/auth0-react";
+import PrivateRoute from 'components/PrivateRoute';
 
 
 function App() {
@@ -22,25 +23,27 @@ function App() {
         <Router>
           <Switch>
             <Route path={['/home', '/ventas', '/BuscarActualizarVentas', '/gestionProducto', '/gestionUsuarios']}>
-              <PrivateLayout>
-                  <Switch>
-                    <Route path='/Home'>
-                      <Home />
-                    </Route>
-                    <Route path='/ventas'>
-                      <Ventas />
-                    </Route>
-                    <Route path='/BuscarActualizarVentas'>
-                      <BuscarActualizarVentas />
-                    </Route>
-                    <Route path='/gestionProducto'>
-                      <GestionProducto />
-                    </Route>
-                    <Route path='/gestionUsuarios'>
-                      <Usuarios />
-                    </Route>
-                  </Switch>
-              </PrivateLayout>
+              <PrivateRoute>
+                <PrivateLayout>
+                    <Switch>
+                      <Route path='/home'>
+                        <Home />
+                      </Route>
+                      <Route path='/ventas'>
+                        <Ventas />
+                      </Route>
+                      <Route path='/BuscarActualizarVentas'>
+                        <BuscarActualizarVentas />
+                      </Route>
+                      <Route path='/gestionProducto'>
+                        <GestionProducto />
+                      </Route>
+                      <Route path='/gestionUsuarios'>
+                        <Usuarios />
+                      </Route>
+                    </Switch>
+                </PrivateLayout>
+              </PrivateRoute>
             </Route>
 
             <Route path={['/']}>

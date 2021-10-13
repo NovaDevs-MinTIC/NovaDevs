@@ -14,7 +14,7 @@ const Sidebar = () => {
 
             <div className="my-4">
                 <Ruta icono="fas fa-home" ruta="/Home" nombre="Inicio" />
-                <Ruta icono="fas fa-cart-plus" ruta="/ventas" nombre="Registro de Ventas" />
+                {/* <Ruta icono="fas fa-cart-plus" ruta="/ventas" nombre="Registro de Ventas" /> */}
                 <Ruta icono="fas fa-calendar" ruta="/BuscarActualizarVentas" nombre="Gestión de Ventas" />
                 <Ruta icono="fas fa-shopping-bag" ruta="/gestionProducto" nombre="Gestión de Productos" />
                 <Ruta icono="fas fa-user-cog" ruta="/gestionUsuarios" nombre="Gestión de Usuarios" />

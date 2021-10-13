@@ -434,7 +434,6 @@ const Ventas = ({vendedores, productos}) => {
                         </div>
                         <div>
                             <button
-                            type='submit'
                             className='group relative w-auto flex py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
                             >
                             <div className='flex items-center justify-start'>
@@ -445,31 +444,32 @@ const Ventas = ({vendedores, productos}) => {
                         </div>
                     </div>   
                 </div>
+                <TablaArticulos listaArticulos={articulosVenta}/>
+                
+                {/* PIE DE VENTA */}
+                <div className="w-full  h-auto">
+                    <div className="w-full justify-end flex flex-wrap">
+                        <div>
+                            <span className="mx-8 px-4 font-extrabold uppercase text-xl">VALOR TOTAL</span>
+                        </div>
+                        <div>
+                            <span className="mx-8 px-4 text-lg">$ 3456998231</span>
+                        </div>
+                    </div>
+
+                    <div className='flex justify-end mx-4'>
+                        <button
+                        type='submit'
+                        className='py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+                        >
+                        <span className='mx-4'>Confimar</span>
+                        </button>
+                    </div>
+                </div>
+                <ToastContainer position="bottom-center" autoClose={1500} />
             </form>
             
             {/* TABLA PARA VISUALIZAR PRODUCTOS AGREGADOS */}
-            <TablaArticulos listaArticulos={articulosVenta}/>
-            
-            {/* PIE DE VENTA */}
-            <div className="w-full  h-auto">
-                <div className="w-full justify-end flex flex-wrap">
-                    <div>
-                        <span className="mx-8 px-4 font-extrabold uppercase text-xl">VALOR TOTAL</span>
-                    </div>
-                    <div>
-                        <span className="mx-8 px-4 text-lg">$ 3456998231</span>
-                    </div>
-                </div>
-
-                <div className='flex justify-end mx-4'>
-                    <button
-                    className='py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
-                    >
-                    <span className='mx-4'>Confimar</span>
-                    </button>
-                </div>
-            </div>
-            <ToastContainer position="bottom-center" autoClose={1500} />
         </div>
     );
 };

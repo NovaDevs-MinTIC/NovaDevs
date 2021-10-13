@@ -2,9 +2,9 @@ import React from 'react'
 import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import { Dialog, Tooltip } from '@material-ui/core';
-import { useState, useEffect} from 'react'
+import { useState, useEffect, useRef } from 'react'
 import 'react-toastify/dist/ReactToastify.css';
-import { obtenerUsuarios } from 'utils/api';
+import { obtenerUsuarios, obtenerProductos } from 'utils/api';
 
 const VentaBackend = [
     {
@@ -16,8 +16,7 @@ const VentaBackend = [
         idVendedor:651954194,
         nombreVendedor:"Jose tobar taberas",
         valorVenta:6545116541,
-        alerta:"bg-warning",
-        estado:"En proceso"
+        estado:"Entregado"
     },
     {
         idVenta:4545,
@@ -28,7 +27,6 @@ const VentaBackend = [
         idVendedor:651954194,
         nombreVendedor:"Jose tobar taberas",
         valorVenta:6545116541,
-        alerta:"bg-success",
         estado:"Entregado"
     },
     {
@@ -40,7 +38,6 @@ const VentaBackend = [
         idVendedor:651954194,
         nombreVendedor:"Jose tobar taberas",
         valorVenta:6545116541,
-        alerta:"bg-warning",
         estado:"En proceso"
     },
     {
@@ -52,27 +49,40 @@ const VentaBackend = [
         idVendedor:651954194,
         nombreVendedor:"Jose maria maria",
         valorVenta:6545116541,
-        alerta:"bg-danger",
         estado:"Cancelado"
     }
 ]
 
 const BuscarActualizarVentas = () => {
-    const [obtenerVenta, setObtenerVenta] = useState([]);
+    const [ventas, setVentas] = useState([]);
     const [vendedores, setVendedores] = useState([]);
+    const [productos, setProductos] = useState([]);
     const [mostrarTabla, setMostrarTabla] = useState(false);
     const [textoBoton, setTextoBoton] = useState('Crear Nuevo Vehículo');
-    const [colorBoton, setColorBoton] = useState('indigo');
+    const [titulo, setTitulo] = useState('Ventas');
     const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
 
+    
     useEffect(() => {
-        setObtenerVenta(VentaBackend)
+        if (mostrarTabla) {
+            setTextoBoton('Registrar nueva venta');
+            setTitulo('Ventas')
+            
+        } else {
+            setTextoBoton('Ver ventas');
+            setTitulo('Registro de Ventas')
+        }
+    }, [mostrarTabla]);
+    
+    useEffect(() => {
+        setVentas(VentaBackend)
     }, []);
 
     useEffect(() => {
         const fetchVendedores = async () =>{
             await obtenerUsuarios(
                 (response) => {
+                    console.log('respuesta a GET usuarios: ', response);
                     setVendedores(response.data);
                 },
                 (error) => {
@@ -80,7 +90,19 @@ const BuscarActualizarVentas = () => {
                 }
             )
         }
+        const fetchProductos = async () =>{
+            await obtenerProductos(
+                (response) => {
+                    console.log('respuesta a GET productos: ', response);
+                    setProductos(response.data);
+                },
+                (error) => {
+                    console.error(error);
+                }
+            )
+        }
         fetchVendedores();
+        fetchProductos();
     }, []);
 
     return(
@@ -97,13 +119,14 @@ const BuscarActualizarVentas = () => {
             </div>
             <div className='flex items-center w-full h-auto justify-center mb-4'>
                 <h2 className='text-4xl text-center font-extrabold text-gray-900'>
-                    REGISTRO DE VENTAS
+                    {titulo}
                 </h2>
             </div>
+
             {mostrarTabla ? (
-                <GestionVentas listaVentas = {obtenerVenta} setEjecutarConsulta={setEjecutarConsulta} />
+                <GestionVentas listaVentas = {ventas} setEjecutarConsulta={setEjecutarConsulta} />
                 ) : (
-                <Ventas />
+                <Ventas vendedores={vendedores} productos = {productos} />
             )}
             <ToastContainer position='bottom-center' autoClose={5000} />
         </div>
@@ -307,43 +330,26 @@ const FilaVentas = ({venta}) =>{
     )  
 }
 
-const Ventas = () => {
-
+const Ventas = ({vendedores, productos}) => {
+    
     const [articulosVenta, setArticulosVenta] = useState([]);
+    const form = useRef(null)
+    
+    const submitForm = async (e) => {
+        e.preventDefault();
+        const fd = new FormData(form.current);
 
-    const articulosVentaBackend = [
-        {
-            idProducto : 10013,
-            descripcion : "Adidas Stan Smith",
-            cantidad : 15,
-            valorUnitario : 229900,
-            subtotal : 4498500
-        },
-        {
-            idProducto : 10013,
-            descripcion : "Adidas Stan Smith",
-            cantidad : 15,
-            valorUnitario : 229900,
-            subtotal : 4498500
-        },
-        {
-            idProducto : 10013,
-            descripcion : "Adidas Stan Smith",
-            cantidad : 15,
-            valorUnitario : 229900,
-            subtotal : 4498500
-        },
-    ]
-
-    useEffect( () => {
-        // Obtener lista de articulos
-        setArticulosVenta(articulosVentaBackend);
-    }, []);
+        const formData = {};
+        fd.forEach((value,key)=>{
+            formData[key] = value;
+        })
+        console.log('form data', formData);
+    }
 
     return (
         <div className='h-full w-auto'>
             {/* FORMULARIO DE VENTA */}
-            <form>
+            <form ref={form} onSubmit={submitForm}>
                 <div className = "flex justify-around" >
                     <div>
                         <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='id-venta'>ID Venta</label>
@@ -383,19 +389,62 @@ const Ventas = () => {
                     <div>
                         <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmkFor='vendedor'>Vendedor</label>
                         <select 
-                        name='estadoP'
+                        name='vendedores'
                         required
-                        className='rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'>
-                            <option  disabled selected>Estado del producto</option>
-                            <option value="Disponible">Disponible</option>
-                            <option value="No disponible">No disponible</option>
+                        className='border-2 border-novablue mx-2 px-3 py-2 self-start rounded-md focus:outline-none focus:border-gray-500'>
+                            <option  disabled selected>Seleccione un vendedor</option>
+                            {vendedores.map((el)=>{
+                                return(
+                                    <option>{`${el.nombre} ${el.correo}`}</option>
+                                )
+                            })}
                         </select>
                     </div>
                 </div>
-            </form>
 
-            {/* FORMULARIO PARA AGREGAR PRODUCTO */}
-            <FormularioAgregarArticulo listaArticulos={articulosVenta} fcnAgregarArticulo={setArticulosVenta}/>
+                {/* FORMULARIO PARA AGREGAR PRODUCTO */}
+                <div className="h-auto w-full my-2">
+                    <h3 className="text-2xl font-extrabold text-gray-900 text-center">Agregar Producto</h3>
+                    <div className="flex flex-wrap items-end justify-center">
+                        <div className="flex flex-wrap justify-center">
+                            <div>	
+                                <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmkFor='vendedor'>Producto</label>
+                                <select 
+                                name='productos'
+                                required
+                                className='border-2 border-novablue mx-2 px-3 py-2 self-start rounded-md focus:outline-none focus:border-gray-500'>
+                                <option  disabled selected>Seleccione un producto</option>
+                                {productos.map((el)=>{
+                                    return(
+                                        <option>{`${el.idProducto} ${el.descripcion}`}</option>
+                                    )
+                                })}
+                                </select>
+                            </div>
+                            <div>	
+                                <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Cantidad</label>
+                                <input
+                                type="number"
+                                name= "cantidad"
+                                placeholder='Cantidad'
+                                className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <button
+                            type='submit'
+                            className='group relative w-auto flex py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+                            >
+                            <div className='flex items-center justify-start'>
+                                <i className="fas fa-plus"></i>
+                                <span className='mx-2'>Agregar</span>
+                            </div>
+                            </button>
+                        </div>
+                    </div>   
+                </div>
+            </form>
             
             {/* TABLA PARA VISUALIZAR PRODUCTOS AGREGADOS */}
             <TablaArticulos listaArticulos={articulosVenta}/>
@@ -464,83 +513,5 @@ const TablaArticulos = ({listaArticulos}) => {
         </div>
     );
 };
-
-const FormularioAgregarArticulo = ({fcnAgregarArticulo, listaArticulos}) => {
-    const [idProducto, setIdProducto] = useState();
-    const [descripcion, setDescripcion] = useState();
-    const [cantidad, setCantidad] = useState();
-    const [valorUnitario, setValorUnitario] = useState();
-
-    const agregarArticulo = ()=> {
-        console.log('id',idProducto,'descripcion',descripcion,'cantidad',cantidad,'valor unitario', valorUnitario);
-        toast.success('Mensaje');
-        fcnAgregarArticulo([...listaArticulos, {idProducto:idProducto, descripcion:descripcion,  cantidad: cantidad, valorUnitario: valorUnitario} ])
-        setIdProducto('')
-        setDescripcion('')
-        setCantidad('')
-        setValorUnitario('')
-    }
-    return (
-        <div className="h-auto w-full my-2">
-            <h3 className="text-2xl font-extrabold text-gray-900 text-center">Agregar Producto</h3>
-            <div className="flex flex-wrap items-end justify-center">
-                <div className="flex flex-wrap justify-center">
-                    <div>	
-                        <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">ID Producto</label>
-                        <input 
-                        type="text"
-                        placeholder='ID Producto'
-                        value={idProducto}
-                        onChange={(e)=>{setIdProducto(e.target.value)}}
-                        className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
-                        />
-                    </div>
-                    <div>	
-                        <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Descripción</label>
-                        <input
-                        type="text"
-                        placeholder='Nombre del artículo'
-                        value={descripcion}
-                        onChange={(e)=>{setDescripcion(e.target.value)}}
-                        className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
-                        />
-                    </div>
-                    <div>	
-                        <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Cantidad</label>
-                        <input
-                        type="number"
-                        placeholder='Cantidad'
-                        value={cantidad}
-                        onChange={(e)=>{setCantidad(e.target.value)}}
-                        className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
-                        />
-                    </div>
-                    {/* <div>	
-                        <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2">Valor Unitario</label>
-                        <input
-                        type="number"
-                        placeholder='Valor unitario'
-                        value={valorUnitario}
-                        onChange={(e)=>{setValorUnitario(e.target.value)}}
-                        className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
-                        />
-                    </div> */}
-                </div>
-                <div>
-                    <button
-                    type='submit'
-                    className='group relative w-auto flex py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
-                    onClick={()=>{agregarArticulo()}}
-                    >
-                    <div className='flex items-center justify-start'>
-                        <i className="fas fa-plus"></i>
-                        <span className='mx-2'>Agregar</span>
-                    </div>
-                    </button>
-                </div>
-            </div>   
-        </div>
-    )
-}
 
 export default BuscarActualizarVentas

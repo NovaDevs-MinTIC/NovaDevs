@@ -7,16 +7,22 @@ import { nanoid } from 'nanoid';
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../styles/usuarios.css';
 
-
-
 const  Usuarios = () => {
   const [usuarios, setUsuarios] =useState([]);
   const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
 
   useEffect(() => {
-    console.log('consulta', ejecutarConsulta);
     if (ejecutarConsulta) {
-        obtenerUsuarios(setUsuarios, setEjecutarConsulta);
+        obtenerUsuarios(
+          (response)=>{
+              console.log('GET de gestion Usuarios: ', response);
+              setUsuarios(response.data);
+          },
+          (error)=>{
+            console.error(error);
+          }
+        );
+        setEjecutarConsulta(false);
       }
 }, [ejecutarConsulta]);
 
@@ -86,100 +92,100 @@ const eliminarUsuario = async () => {
   return(
     <tr>
       {edit ? (
-                <>
-                    <td className='text-center'>{usuario.nombre}</td>
-                    <td className='text-center'>{usuario.correo}</td>
-                    <td className='text-center'>
-                      <select 
-                        className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-                        value={infoNuevoUsuario.rol}
-                        onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, rol: e.target.value })}
-                        defaultValue='0'
-                        >
-                          <option disabled value="0">Seleccione una opción</option>
-                          <option value="Vendedor">Vendedor</option>
-                          <option value="Administrador">Administrador</option>
-                        </select>
-                    </td>
-                    <td className='text-center'>
-                      <select 
-                          className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-                          type='select'
-                          value={infoNuevoUsuario.estado}
-                          onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, estado: e.target.value })}
-                          defaultValue='0'
-                      >
-                        <option disabled value="0">Seleccione una opción</option>
-                        <option value="Pendiente">Pendiente</option>
-                        <option value="Aceptado">Aceptado</option>
-                        <option value="Rechazado">Rechazado</option>
-                      </select>
-                    </td>
-                </>
-            ) : (
-                <>
-                    <td className='text-center'>{usuario.nombre}</td>
-                    <td className='text-center'>{usuario.correo}</td>
-                    <td className='text-center'>{usuario.rol}</td>
-                    <td className='text-center'>{usuario.estado}</td>
-                </>
-            )}
-            <td>
-                <div className='flex w-full justify-around'>
-                {edit ? (
-                    <>
-                    <Tooltip title='Confirmar Edición' arrow>
-                        <i
-                        onClick={() => actualizarUsuario()}
-                        className='fas fa-check text-green-700 hover:text-green-500'
-                        />
-                    </Tooltip>
-                    <Tooltip title='Cancelar edición' arrow>
-                        <i
-                        onClick={() => setEdit(!edit)}
-                        className='fas fa-ban text-yellow-700 hover:text-yellow-500'
-                        />
-                    </Tooltip>
-                    </>
-                ) : (
-                    <>
-                    <Tooltip title='Editar Usuario' arrow>
-                        <i
-                        onClick={() => setEdit(!edit)}
-                        className='fas fa-pencil-alt text-yellow-700 hover:text-yellow-500'
-                        />
-                    </Tooltip>
-                    <Tooltip title='Eliminar Usuario' arrow>
-                        <i
-                        onClick={() => setOpenDialog(true)}
-                        className='fas fa-trash text-red-700 hover:text-red-500'
-                        />
-                    </Tooltip>
-                    </>
-                )}
-                </div>
-                <Dialog open={openDialog}>
-                <div className='p-8 flex flex-col'>
-                    <h1 className='text-gray-900 text-2xl font-bold'>
-                    ¿Está seguro de querer eliminar el usuario?
-                    </h1>
-                    <div className='flex w-full items-center justify-center my-4'>
-                    <button
-                        onClick={() => eliminarUsuario()}
-                        className='mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md'
-                    >
-                        Sí
-                    </button>
-                    <button
-                        onClick={() => setOpenDialog(false)}
-                        className='mx-2 px-4 py-2 bg-red-500 text-white hover:bg-red-700 rounded-md shadow-md'
-                    >
-                        No
-                    </button>
-                    </div>
-                </div>
-                </Dialog>
-            </td>
+          <>
+              <td className='text-center'>{usuario.nombre}</td>
+              <td className='text-center'>{usuario.correo}</td>
+              <td className='text-center'>
+                <select 
+                  className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                  value={infoNuevoUsuario.rol}
+                  onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, rol: e.target.value })}
+                  defaultValue='0'
+                  >
+                    <option disabled value="0">Seleccione una opción</option>
+                    <option value="Vendedor">Vendedor</option>
+                    <option value="Administrador">Administrador</option>
+                  </select>
+              </td>
+              <td className='text-center'>
+                <select 
+                    className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                    type='select'
+                    value={infoNuevoUsuario.estado}
+                    onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, estado: e.target.value })}
+                    defaultValue='0'
+                >
+                  <option disabled value="0">Seleccione una opción</option>
+                  <option value="Pendiente">Pendiente</option>
+                  <option value="Aceptado">Aceptado</option>
+                  <option value="Rechazado">Rechazado</option>
+                </select>
+              </td>
+          </>
+      ) : (
+          <>
+              <td className='text-center'>{usuario.nombre}</td>
+              <td className='text-center'>{usuario.correo}</td>
+              <td className='text-center'>{usuario.rol}</td>
+              <td className='text-center'>{usuario.estado}</td>
+          </>
+      )}
+      <td>
+          <div className='flex w-full justify-around'>
+          {edit ? (
+          <>
+              <Tooltip title='Confirmar Edición' arrow>
+                  <i
+                  onClick={() => actualizarUsuario()}
+                  className='fas fa-check text-green-700 hover:text-green-500'
+                  />
+              </Tooltip>
+              <Tooltip title='Cancelar edición' arrow>
+                  <i
+                  onClick={() => setEdit(!edit)}
+                  className='fas fa-ban text-yellow-700 hover:text-yellow-500'
+                  />
+              </Tooltip>
+          </>
+          ) : (
+          <>
+              <Tooltip title='Editar Usuario' arrow>
+                  <i
+                  onClick={() => setEdit(!edit)}
+                  className='fas fa-pencil-alt text-yellow-700 hover:text-yellow-500'
+                  />
+              </Tooltip>
+              <Tooltip title='Eliminar Usuario' arrow>
+                  <i
+                  onClick={() => setOpenDialog(true)}
+                  className='fas fa-trash text-red-700 hover:text-red-500'
+                  />
+              </Tooltip>
+          </>
+          )}
+          </div>
+        <Dialog open={openDialog}>
+          <div className='p-8 flex flex-col'>
+              <h1 className='text-gray-900 text-2xl font-bold'>
+              ¿Está seguro de querer eliminar el usuario?
+              </h1>
+              <div className='flex w-full items-center justify-center my-4'>
+              <button
+                  onClick={() => eliminarUsuario()}
+                  className='mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md'
+              >
+                  Sí
+              </button>
+              <button
+                  onClick={() => setOpenDialog(false)}
+                  className='mx-2 px-4 py-2 bg-red-500 text-white hover:bg-red-700 rounded-md shadow-md'
+              >
+                  No
+              </button>
+              </div>
+          </div>
+        </Dialog>
+      </td>
     </tr>
   )
 

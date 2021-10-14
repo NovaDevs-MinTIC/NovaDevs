@@ -54,3 +54,15 @@ export const obtenerUsuarios = async (successCallback, errorCallback) => {
   setEjecutarConsulta(false)
 };
  */
+
+// CRUD DE VENTAS
+
+export const crearVenta = async (data, successCallback, errorCallback) => {
+  const options = {
+    method: 'POST',
+    url: 'http://localhost:5000/ventas',
+    headers: { 'Content-Type': 'application/json'},
+    data,
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};

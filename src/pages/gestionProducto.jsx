@@ -331,52 +331,51 @@ const FormularioCreacionProductos = ({setMostrarTabla, setEjecutarConsulta}) => 
     return(
         <>
             <form ref={form} onSubmit={submitForm}> 
-                
-                    <label htmlFor='idProducto'>Identificador de producto</label>
-                    <input
-                          name='idProducto'
-                          type='number'
-                          required
-                          className='appearance-none rounded-md relative w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                          placeholder='ID Producto'
-                        />
-                    <label  htmlFor='descripcion' classsName="mx-2">Descripción</label>
-                    <textarea
-                        name='descripcion'
-                        type='text'
-                        autoComplete='text'
-                        required
-                        className='appearance-none rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                        placeholder='Descripción'
-                      />
-                    <label classsName="mx-2" htmlFor='valorU'>$ Valor Unitario</label>
-                    <input
-                        name='valorU'
+                <label htmlFor='idProducto'>Identificador de producto</label>
+                <input
+                        name='idProducto'
                         type='number'
-                        autoComplete='number'
                         required
-                        className='appearance-none rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                        placeholder='Valor unitario'
+                        className='appearance-none rounded-md relative w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                        placeholder='ID Producto'
                     />
-                    <label classsName="mx-2" htmlFor='estadoP'>Estado del producto</label>
-                    <select 
-                        name='estadoP'
-                        required
-                        className='rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                    >
-                        <option  disabled selected>Estado del producto</option>
-                        <option value="Disponible">Disponible</option>
-                        <option value="No disponible">No disponible</option>
-                    </select>
-                    <button
-                        type='submit'
-                        className='group relative w-auto flex py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mx-40'
-                    >
-                        <div className='flex items-center'>
-                            <i className="fas fa-plus"></i>
-                            Registrar
-                        </div>
-                    </button>
+                <label  htmlFor='descripcion' classsName="mx-2">Descripción</label>
+                <textarea
+                    name='descripcion'
+                    type='text'
+                    autoComplete='text'
+                    required
+                    className='appearance-none rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                    placeholder='Descripción'
+                    />
+                <label classsName="mx-2" htmlFor='valorU'>$ Valor Unitario</label>
+                <input
+                    name='valorU'
+                    type='number'
+                    autoComplete='number'
+                    required
+                    className='appearance-none rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                    placeholder='Valor unitario'
+                />
+                <label classsName="mx-2" htmlFor='estadoP'>Estado del producto</label>
+                <select 
+                    name='estadoP'
+                    required
+                    className='rounded-md relative block w-full mb-2 px-3 py-2 border border-novablue placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                >
+                    <option  disabled selected>Estado del producto</option>
+                    <option value="Disponible">Disponible</option>
+                    <option value="No disponible">No disponible</option>
+                </select>
+                <button
+                    type='submit'
+                    className='group relative w-auto flex py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mx-40'
+                >
+                    <div className='flex items-center'>
+                        <i className="fas fa-plus"></i>
+                        Registrar
+                    </div>
+                </button>
             </form>
         </>
     )

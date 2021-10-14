@@ -489,21 +489,21 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
         console.log(productoAAgregar);
       }, [productoAAgregar]);
     
-      useEffect(() => {
-        console.log('filasTabla', filasTabla);
-        setProductosTabla(filasTabla);
-      }, [filasTabla, setProductosTabla]);
+    useEffect(() => {
+    console.log('filasTabla', filasTabla);
+    setProductosTabla(filasTabla);
+    }, [filasTabla, setProductosTabla]);
 
-      const agregarNuevoProducto = () => {
-        setFilasTabla([...filasTabla, productoAAgregar]);
-        setProductos(productos.filter((v) => v._id !== productoAAgregar._id));
-        setProductoAAgregar({});
-      };
+    const agregarNuevoProducto = () => {
+    setFilasTabla([...filasTabla, productoAAgregar]);
+    setProductos(productos.filter((v) => v._id !== productoAAgregar._id));
+    setProductoAAgregar({});
+    };
 
-      const eliminarProducto = (productoAEliminar) => {
-        setFilasTabla(filasTabla.filter((v) => v._id !== productoAEliminar._id));
-        setProductos([...productos, productoAEliminar]);
-      };
+    const eliminarProducto = (productoAEliminar) => {
+    setFilasTabla(filasTabla.filter((v) => v._id !== productoAEliminar._id));
+    setProductos([...productos, productoAEliminar]);
+    };
 
       
 
@@ -535,7 +535,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                             </select>
                         </div>
                     </div>
-                    <div>
+                    {/* <div>
                         <input 
                         type='number' 
                         name='cantidadProducto'
@@ -545,7 +545,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                             setCantidadProducto(e.target.value)
                         }}
                         />
-                    </div>
+                    </div> */}
                     <div>
                         <button
                         type='button'
@@ -560,7 +560,6 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                     </div>
                 </div>   
             </div>
-
 
             <table className="tabla mt-4 mr-4">
                 <thead>
@@ -581,14 +580,25 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                                 <td className='text-center'>{el.idProducto}</td>
                                 <td className='text-center'>{el.descripcion}</td>
                                 <td className='text-center ' >
-                                    {cantidadProducto}
-                                    {/* <label htmlFor={`valor_${index}`}>
-                                        <input type='number' name={`cantidad_${index}`} 
+                                    {/* {cantidadProducto} */}
+                                    <label htmlFor={`valor_${index}`}>
+                                        <input 
+                                        type='text' 
+                                        name={`cantidad_${index}`} 
+                                        onChange={(e)=>{
+                                            setCantidadProducto(e.target.value) 
+                                        }}
                                         className='border border-novablue mx-1 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'/>
-                                    </label> */}
+                                    </label>
                                 </td>
                                 <td className='text-center'>{el.valorU}</td>
-                                <td className='text-center'>{el.valorU * `cantidad_${index}`}</td>
+                                <td className='text-center'>
+                                    <label htmlFor={`valor_${index}`}>
+                                        <span name={`subtotal_${index}`}>
+                                            {cantidadProducto * el.valorU}
+                                        </span>
+                                    </label>
+                                </td>
                                 <td className='text-center'>
                                     <div className='flex justify-around'>
                                         <div className='hover:bg-red-500'><i 

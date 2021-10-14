@@ -370,6 +370,10 @@ const Ventas = () => {
       console.log('lista despues de cantidad', listaProductos);
   
       const datosVenta = {
+        idVenta: formData.idVenta,
+        fechaVenta: formData.fechaVenta,
+        cliente: formData.cliente,
+        idCliente: formData.idCliente,
         vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
         cantidad: formData.valor,
         productos: listaProductos,
@@ -422,7 +426,7 @@ const Ventas = () => {
                     <div>
                         <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='id-cliente'>ID Cliente</label>
                         <input
-                        name = 'id-cliente'
+                        name = 'idCliente'
                         type="number"
                         placeholder='ID Cliente'
                         className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
@@ -479,6 +483,7 @@ const Ventas = () => {
 const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
     const [productoAAgregar, setProductoAAgregar] = useState({});
     const [filasTabla, setFilasTabla] = useState([]);
+    const [cantidadProducto, setCantidadProducto] = useState('');
 
     useEffect(() => {
         console.log(productoAAgregar);
@@ -499,6 +504,8 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
         setFilasTabla(filasTabla.filter((v) => v._id !== productoAEliminar._id));
         setProductos([...productos, productoAEliminar]);
       };
+
+      
 
     return(
         <div className="w-full h-2/5 overflow-y-scroll overflow-x-hidden">
@@ -527,6 +534,17 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                             })}
                             </select>
                         </div>
+                    </div>
+                    <div>
+                        <input 
+                        type='number' 
+                        name='cantidadProducto'
+                        placeholder='Cantidad'
+                        className='border-2 border-novablue mx-1 px-2 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                        onChange={(e)=>{
+                            setCantidadProducto(e.target.value)
+                        }}
+                        />
                     </div>
                     <div>
                         <button
@@ -563,12 +581,14 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                                 <td className='text-center'>{el.idProducto}</td>
                                 <td className='text-center'>{el.descripcion}</td>
                                 <td className='text-center ' >
-                                    <label htmlFor={`valor_${index}`}>
-                                        <input type='number' name={`cantidad_${index}`} className='border border-novablue mx-1 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'/>
-                                    </label>
+                                    {cantidadProducto}
+                                    {/* <label htmlFor={`valor_${index}`}>
+                                        <input type='number' name={`cantidad_${index}`} 
+                                        className='border border-novablue mx-1 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'/>
+                                    </label> */}
                                 </td>
                                 <td className='text-center'>{el.valorU}</td>
-                                <td className='text-center'>Por modificar</td>
+                                <td className='text-center'>{el.valorU * `cantidad_${index}`}</td>
                                 <td className='text-center'>
                                     <div className='flex justify-around'>
                                         <div className='hover:bg-red-500'><i 

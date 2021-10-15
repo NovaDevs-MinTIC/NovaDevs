@@ -351,102 +351,94 @@ const Ventas = () => {
 
         const listaProductos = Object.keys(formData)
         .map((k) => {
-          if (k.includes('producto')) {
-            return productosTabla.filter((v) => v._id === formData[k])[0];
-          }
-          return null;
+            if (k.includes('producto')) {
+                return productosTabla.filter((v) => v._id === formData[k][0]);
+            }
+            return null;
         })
         .filter((v) => v);
-  
-      console.log('lista antes de cantidad', listaProductos);
-  
-      Object.keys(formData).forEach((k) => {
-        if (k.includes('cantidad')) {
-          const indice = parseInt(k.split('_')[1]);
-          listaProductos[indice]['cantidad'] = formData[k];
-        }
-      });
-  
-      console.log('lista despues de cantidad', listaProductos);
-  
-      const datosVenta = {
+    
+        console.log('lista Productos', listaProductos);
+    
+        const datosVenta = {
         idVenta: formData.idVenta,
         fechaVenta: formData.fechaVenta,
         cliente: formData.cliente,
         idCliente: formData.idCliente,
         vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
-        cantidad: formData.valor,
+        cantidad: formData.cantidad,
         productos: listaProductos,
-      };
-  
-      console.log('lista productos', listaProductos);
-  
-      await crearVenta(
-        datosVenta,
-        (response) => {
-          console.log(response);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
+/*         subtotal: formData.sub */
+        };
+    
+        await crearVenta(
+            datosVenta,
+            (response) => {
+            console.log(response);
+            },
+            (error) => {
+            console.error(error);
+            
+            }
+        );
     };
 
     return (
         <div className='h-full w-auto'>
-            {/* FORMULARIO DE VENTA */}
             <form ref={form} onSubmit={submitForm}>
-                <div className = "flex justify-around" >
-                    <div>
-                        <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='idVenta'>ID Venta</label>
-                        <input
-                        name = 'idVenta'
-                        placeholder='ID Venta'
-                        type="text"
-                        className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
-                        />
+                    <div className = "flex justify-around" >
+                        <div>
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='idVenta'>ID Venta</label>
+                            <input
+                            name = 'idVenta'
+                            placeholder='ID Venta'
+                            type="text"
+                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            />
+                        </div>
+                        <div>
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor = 'fecha-venta'>Fecha Venta</label>
+                            <input
+                            name = 'fechaVenta' 
+                            type="date"
+                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            />
+                        </div>
+                        <div>
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='cliente'>Cliente</label>
+                            <input
+                            name = 'cliente'
+                            type="text"
+                            placeholder='Cliente'
+                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            />
+                        </div>	
+                        <div>
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='id-cliente'>ID Cliente</label>
+                            <input
+                            name = 'idCliente'
+                            type="number"
+                            placeholder='ID Cliente'
+                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            />
+                        </div>
+                        <div>
+                            <label 
+                            className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" 
+                            htmlFor='vendedor'>Vendedor</label>
+                            <select 
+                            name='vendedores'
+                            required
+                            className='border-2 border-novablue mx-2 px-3 py-2 self-start rounded-md focus:outline-none focus:border-gray-500'>
+                                <option  disabled selected>Seleccione un vendedor</option>
+                                {vendedores.map((el)=>{
+                                    return(
+                                        <option key={nanoid()}>{`${el.nombre} ${el.correo}`}</option>
+                                    )
+                                })}
+                            </select>
+                        </div>
                     </div>
-                    <div>
-                        <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor = 'fecha-venta'>Fecha Venta</label>
-                        <input
-                        name = 'fechaVenta' 
-                        type="date"
-                        className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
-                        />
-                    </div>
-                    <div>
-                        <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='cliente'>Cliente</label>
-                        <input
-                        name = 'cliente'
-                        type="text"
-                        placeholder='Cliente'
-                        className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
-                        />
-                    </div>	
-                    <div>
-                        <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='id-cliente'>ID Cliente</label>
-                        <input
-                        name = 'idCliente'
-                        type="number"
-                        placeholder='ID Cliente'
-                        className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
-                        />
-                    </div>
-                    <div>
-                        <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmkFor='vendedor'>Vendedor</label>
-                        <select 
-                        name='vendedores'
-                        required
-                        className='border-2 border-novablue mx-2 px-3 py-2 self-start rounded-md focus:outline-none focus:border-gray-500'>
-                            <option  disabled selected>Seleccione un vendedor</option>
-                            {vendedores.map((el)=>{
-                                return(
-                                    <option key={nanoid()}>{`${el.nombre} ${el.correo}`}</option>
-                                )
-                            })}
-                        </select>
-                    </div>
-                </div>
                 <TablaArticulos 
                 productos={productos}
                 setProductos={setProductos}
@@ -474,8 +466,6 @@ const Ventas = () => {
                 </div>
                 <ToastContainer position="bottom-center" autoClose={1500} />
             </form>
-            
-            {/* TABLA PARA VISUALIZAR PRODUCTOS AGREGADOS */}
         </div>
     );
 };
@@ -487,25 +477,27 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
 
     useEffect(() => {
         console.log(productoAAgregar);
-      }, [productoAAgregar]);
+    }, [productoAAgregar]);
     
-      useEffect(() => {
+    useEffect(() => {
         console.log('filasTabla', filasTabla);
         setProductosTabla(filasTabla);
-      }, [filasTabla, setProductosTabla]);
+    }, [filasTabla, setProductosTabla]);
 
-      const agregarNuevoProducto = () => {
+    useEffect(()=>{
+
+    },[])
+
+    const agregarNuevoProducto = () => {
         setFilasTabla([...filasTabla, productoAAgregar]);
         setProductos(productos.filter((v) => v._id !== productoAAgregar._id));
         setProductoAAgregar({});
-      };
+    };
 
-      const eliminarProducto = (productoAEliminar) => {
+    const eliminarProducto = (productoAEliminar) => {
         setFilasTabla(filasTabla.filter((v) => v._id !== productoAEliminar._id));
         setProductos([...productos, productoAEliminar]);
-      };
-
-      
+    };
 
     return(
         <div className="w-full h-2/5 overflow-y-scroll overflow-x-hidden">
@@ -514,37 +506,33 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                 <div className="flex flex-wrap items-end justify-center">
                     <div className="flex flex-wrap justify-center">
                         <div>	
-                            <label className="block mx-3 text-2xl text-center tracking-wide text-gray-700 font-bold mb-2" htmkFor='productos'>Agregar Producto</label>
-                            <select 
-                            name='productos'
-                            className='border-2 border-novablue mx-2 px-3 py-2 self-start rounded-md focus:outline-none focus:border-gray-500'
-                            value={productoAAgregar._id ?? ''}
-                            onChange={(e) =>
-                                setProductoAAgregar(productos.filter((v) => v._id === e.target.value)[0])
-                              }
-                            >
-                            <option  disabled value=''>Seleccione un producto</option>
-                            {productos.map((el)=>{
-                                return(
-                                    <option 
-                                    key={nanoid()}
-                                    value={el._id} 
-                                    >{`${el.idProducto} ${el.descripcion} ${el.estadoP}`}</option>
-                                )
-                            })}
-                            </select>
+                            <label 
+                            htmlFor='producto'
+                            className="block mx-3 text-2xl text-center tracking-wide text-gray-700 font-bold mb-2">
+                                <span>
+                                    Agregar Producto
+                                </span>
+                                <select 
+                                className='border-2 border-novablue mx-2 px-3 py-2 self-start rounded-md focus:outline-none focus:border-gray-500'
+                                value={productoAAgregar._id ?? ''}
+                                onChange={(e) =>
+                                    setProductoAAgregar(productos.filter((v) => v._id === e.target.value)[0])
+                                }
+                                >
+                                <option  disabled value=''>
+                                    Seleccione un producto
+                                </option>
+                                {productos.map((el)=>{
+                                    return(
+                                        <option 
+                                        key={nanoid()}
+                                        value={el._id} 
+                                        >{`${el.idProducto} ${el.descripcion} ${el.estadoP}`}</option>
+                                        )
+                                    })}
+                                </select>
+                            </label>
                         </div>
-                    </div>
-                    <div>
-                        {/* <input 
-                        type='number' 
-                        name='cantidadProducto'
-                        placeholder='Cantidad'
-                        className='border-2 border-novablue mx-1 px-2 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
-                        onChange={(e)=>{
-                            setCantidadProducto(e.target.value)
-                        }}
-                        /> */}
                     </div>
                     <div>
                         <button
@@ -560,7 +548,6 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                     </div>
                 </div>   
             </div>
-
 
             <table className="tabla mt-4 mr-4">
                 <thead>
@@ -581,20 +568,27 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                                 <td className='text-center'>{el.idProducto}</td>
                                 <td className='text-center'>{el.descripcion}</td>
                                 <td className='text-center ' >
-                                    {/* {cantidadProducto} */}
                                     <label htmlFor={`valor_${index}`}>
-                                        <input type='number' name={`cantidad_${index}`} 
+                                        <input 
+                                        type='number' 
+                                        name={`cantidad_${index}`} 
+                                        value={el.cantidad}
                                         className='border border-novablue mx-1 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'/>
                                     </label>
                                 </td>
                                 <td className='text-center'>{el.valorU}</td>
-                                <td className='text-center'>{el.valorU * `cantidad_${index}`}</td>
+                                <td className='text-center'>
+                                    {"hola"}
+                                </td>
                                 <td className='text-center'>
                                     <div className='flex justify-around'>
                                         <div className='hover:bg-red-500'><i 
                                         onClick={() => eliminarProducto(el)}
                                         className='fas fa-trash'></i></div>
                                     </div>
+                                </td>
+                                <td>
+                                    <input hidden defaultValue={el._id} name={`el_${index}`} />
                                 </td>
                             </tr>
                         )

@@ -60,7 +60,7 @@ export const obtenerUsuarios = async (successCallback, errorCallback) => {
 export const crearVenta = async (data, successCallback, errorCallback) => {
   const options = {
     method: 'POST',
-    url: 'http://localhost:5000/ventas',
+    url: 'http://localhost:5000/ventas/',
     headers: { 'Content-Type': 'application/json'},
     data,
   };

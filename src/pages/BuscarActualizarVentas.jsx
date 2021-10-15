@@ -349,7 +349,7 @@ const Ventas = () => {
 
         console.log('formData: ', formData); 
 
-        const listaProductos = Object.keys(formData)
+        const ListaProductos = Object.keys(formData)
         .map((k) => {
             if (k.includes('producto')) {
                 return productosTabla.filter((v) => v._id === formData[k][0]);
@@ -358,24 +358,21 @@ const Ventas = () => {
         })
         .filter((v) => v);
     
-        console.log('lista Productos', listaProductos);
-    
-        const datosVenta = {
-            
-    /*         subtotal: formData.sub */
-        };
-    
-        await crearVenta({
-            //HAY QUE CAMBIAR ESTO
+        console.log('lista Productos', ListaProductos);
 
+        const DataVenta = {
+            //HAY QUE CAMBIAR ESTO
             idVenta: formData.idVenta,
             fechaVenta: formData.fechaVenta,
             cliente: formData.cliente,
             idCliente: formData.idCliente,
             vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
-            cantidad: formData.cantidad,
+            cantidad: formData.valor,
             productos: productosTabla,
-        },
+        }
+    
+        await crearVenta(
+            DataVenta,
             (response) => {
             console.log(response);
             },
@@ -479,7 +476,6 @@ const Ventas = () => {
 const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
     const [productoAAgregar, setProductoAAgregar] = useState({});
     const [filasTabla, setFilasTabla] = useState([]);
-    /* const [cantidadProducto, setCantidadProducto] = useState(''); */
 
     useEffect(() => {
         console.log("hola", productoAAgregar);
@@ -569,7 +565,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                             <tr key={nanoid()}> 
                                 <td className='text-center'>{el.idProducto}</td>
                                 <td className='text-center'>{el.descripcion}</td>
-                                <td className='text-center ' >
+                                <td className='text-center'>
                                     <label htmlFor={`valor_${index}`}>
                                         <input 
                                         type='number' 

@@ -357,7 +357,7 @@ const Ventas = () => {
             return null;
         })
         .filter((v) => v);
-  
+    
         console.log('lista Productos', listaProductos);
     
         const datosVenta = {
@@ -472,7 +472,7 @@ const Ventas = () => {
 const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
     const [productoAAgregar, setProductoAAgregar] = useState({});
     const [filasTabla, setFilasTabla] = useState([]);
-    /* const [cantidadProducto, setCantidadProducto] = useState(''); */
+    const [cantidadProducto, setCantidadProducto] = useState('');
 
     useEffect(() => {
         console.log(productoAAgregar);
@@ -482,6 +482,10 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
         console.log('filasTabla', filasTabla);
         setProductosTabla(filasTabla);
     }, [filasTabla, setProductosTabla]);
+
+    useEffect(()=>{
+
+    },[])
 
     const agregarNuevoProducto = () => {
         setFilasTabla([...filasTabla, productoAAgregar]);
@@ -573,12 +577,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                                 </td>
                                 <td className='text-center'>{el.valorU}</td>
                                 <td className='text-center'>
-                                    {/* <label htmlFor={`sub_${index}`}>
-                                        <span name={`subtotal_${index}`}>
-                                            {cantidadProducto * el.valorU}
-                                        </span>
-                                    </label> */}
-                                    hola
+                                    {"hola"}
                                 </td>
                                 <td className='text-center'>
                                     <div className='flex justify-around'>

@@ -361,18 +361,21 @@ const Ventas = () => {
         console.log('lista Productos', listaProductos);
     
         const datosVenta = {
-        idVenta: formData.idVenta,
-        fechaVenta: formData.fechaVenta,
-        cliente: formData.cliente,
-        idCliente: formData.idCliente,
-        vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
-        cantidad: formData.cantidad,
-        productos: listaProductos,
-/*         subtotal: formData.sub */
+            
+    /*         subtotal: formData.sub */
         };
     
-        await crearVenta(
-            datosVenta,
+        await crearVenta({
+            //HAY QUE CAMBIAR ESTO
+
+            idVenta: formData.idVenta,
+            fechaVenta: formData.fechaVenta,
+            cliente: formData.cliente,
+            idCliente: formData.idCliente,
+            vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
+            cantidad: formData.cantidad,
+            productos: productosTabla,
+        },
             (response) => {
             console.log(response);
             },
@@ -393,6 +396,7 @@ const Ventas = () => {
                             placeholder='ID Venta'
                             type="text"
                             className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            required
                             />
                         </div>
                         <div>
@@ -401,6 +405,7 @@ const Ventas = () => {
                             name = 'fechaVenta' 
                             type="date"
                             className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            required
                             />
                         </div>
                         <div>
@@ -410,6 +415,7 @@ const Ventas = () => {
                             type="text"
                             placeholder='Cliente'
                             className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            required
                             />
                         </div>	
                         <div>
@@ -419,6 +425,7 @@ const Ventas = () => {
                             type="number"
                             placeholder='ID Cliente'
                             className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            required
                             />
                         </div>
                         <div>
@@ -472,20 +479,16 @@ const Ventas = () => {
 const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
     const [productoAAgregar, setProductoAAgregar] = useState({});
     const [filasTabla, setFilasTabla] = useState([]);
-    const [cantidadProducto, setCantidadProducto] = useState('');
+    /* const [cantidadProducto, setCantidadProducto] = useState(''); */
 
     useEffect(() => {
-        console.log(productoAAgregar);
+        console.log("hola", productoAAgregar);
     }, [productoAAgregar]);
     
     useEffect(() => {
         console.log('filasTabla', filasTabla);
         setProductosTabla(filasTabla);
     }, [filasTabla, setProductosTabla]);
-
-    useEffect(()=>{
-
-    },[])
 
     const agregarNuevoProducto = () => {
         setFilasTabla([...filasTabla, productoAAgregar]);

@@ -369,7 +369,7 @@ const Ventas = () => {
   
       console.log('lista despues de cantidad', listaProductos);
   
-      const datosVenta = {
+        const datosVenta = {
         idVenta: formData.idVenta,
         fechaVenta: formData.fechaVenta,
         cliente: formData.cliente,
@@ -377,7 +377,8 @@ const Ventas = () => {
         vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
         cantidad: formData.valor,
         productos: listaProductos,
-      };
+        subtotal: formData.sub
+        };
   
       console.log('lista productos', listaProductos);
   
@@ -487,25 +488,23 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
 
     useEffect(() => {
         console.log(productoAAgregar);
-      }, [productoAAgregar]);
+    }, [productoAAgregar]);
     
     useEffect(() => {
-    console.log('filasTabla', filasTabla);
-    setProductosTabla(filasTabla);
+        console.log('filasTabla', filasTabla);
+        setProductosTabla(filasTabla);
     }, [filasTabla, setProductosTabla]);
 
     const agregarNuevoProducto = () => {
-    setFilasTabla([...filasTabla, productoAAgregar]);
-    setProductos(productos.filter((v) => v._id !== productoAAgregar._id));
-    setProductoAAgregar({});
+        setFilasTabla([...filasTabla, productoAAgregar]);
+        setProductos(productos.filter((v) => v._id !== productoAAgregar._id));
+        setProductoAAgregar({});
     };
 
     const eliminarProducto = (productoAEliminar) => {
-    setFilasTabla(filasTabla.filter((v) => v._id !== productoAEliminar._id));
-    setProductos([...productos, productoAEliminar]);
+        setFilasTabla(filasTabla.filter((v) => v._id !== productoAEliminar._id));
+        setProductos([...productos, productoAEliminar]);
     };
-
-      
 
     return(
         <div className="w-full h-2/5 overflow-y-scroll overflow-x-hidden">
@@ -593,7 +592,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                                 </td>
                                 <td className='text-center'>{el.valorU}</td>
                                 <td className='text-center'>
-                                    <label htmlFor={`valor_${index}`}>
+                                    <label htmlFor={`sub_${index}`}>
                                         <span name={`subtotal_${index}`}>
                                             {cantidadProducto * el.valorU}
                                         </span>

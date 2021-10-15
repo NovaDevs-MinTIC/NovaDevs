@@ -483,7 +483,7 @@ const Ventas = () => {
 const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
     const [productoAAgregar, setProductoAAgregar] = useState({});
     const [filasTabla, setFilasTabla] = useState([]);
-    const [cantidadProducto, setCantidadProducto] = useState('');
+    // const [cantidadProducto, setCantidadProducto] = useState('');
 
     useEffect(() => {
         console.log(productoAAgregar);
@@ -536,7 +536,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                         </div>
                     </div>
                     <div>
-                        <input 
+                        {/* <input 
                         type='number' 
                         name='cantidadProducto'
                         placeholder='Cantidad'
@@ -544,7 +544,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                         onChange={(e)=>{
                             setCantidadProducto(e.target.value)
                         }}
-                        />
+                        /> */}
                     </div>
                     <div>
                         <button
@@ -581,11 +581,11 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                                 <td className='text-center'>{el.idProducto}</td>
                                 <td className='text-center'>{el.descripcion}</td>
                                 <td className='text-center ' >
-                                    {cantidadProducto}
-                                    {/* <label htmlFor={`valor_${index}`}>
+                                    {/* {cantidadProducto} */}
+                                    <label htmlFor={`valor_${index}`}>
                                         <input type='number' name={`cantidad_${index}`} 
                                         className='border border-novablue mx-1 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'/>
-                                    </label> */}
+                                    </label>
                                 </td>
                                 <td className='text-center'>{el.valorU}</td>
                                 <td className='text-center'>{el.valorU * `cantidad_${index}`}</td>

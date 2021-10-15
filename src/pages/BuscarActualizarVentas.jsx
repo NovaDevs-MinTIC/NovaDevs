@@ -480,11 +480,7 @@ const Ventas = () => {
 const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
     const [productoAAgregar, setProductoAAgregar] = useState({});
     const [filasTabla, setFilasTabla] = useState([]);
-<<<<<<< HEAD
-    // const [cantidadProducto, setCantidadProducto] = useState('');
-=======
     /* const [cantidadProducto, setCantidadProducto] = useState(''); */
->>>>>>> 7dd795eca1065b4ab8c1f97e10be66e183aed037
 
     useEffect(() => {
         console.log("hola", productoAAgregar);

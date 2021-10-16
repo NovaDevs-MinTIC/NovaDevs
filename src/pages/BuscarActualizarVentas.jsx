@@ -367,17 +367,19 @@ const Ventas = () => {
             cliente: formData.cliente,
             idCliente: formData.idCliente,
             vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
-            cantidad: formData.valor,
+            cantidad: formData.cantidad,
             productos: productosTabla,
         }
     
         await crearVenta(
             DataVenta,
             (response) => {
-            console.log(response);
+                console.log(response);
+                toast.success('Venta agregada con éxito');
             },
             (error) => {
-            console.error(error);
+                console.error(error);
+                toast.error('Error creando una venta');
             }
         );
     };
@@ -467,7 +469,7 @@ const Ventas = () => {
                         </button>
                     </div>
                 </div>
-                <ToastContainer position="bottom-center" autoClose={1500} />
+                <ToastContainer position="bottom-center" autoClose={900} />
             </form>
         </div>
     );
@@ -566,7 +568,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                                 <td className='text-center'>{el.idProducto}</td>
                                 <td className='text-center'>{el.descripcion}</td>
                                 <td className='text-center'>
-                                    <label htmlFor={`valor_${index}`}>
+                                    <label htmlFor={`cantidad_${index}`}>
                                         <input 
                                         type='number' 
                                         name={`cantidad_${index}`} 

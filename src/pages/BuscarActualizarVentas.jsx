@@ -431,18 +431,18 @@ const Ventas = () => {
                             <label 
                             className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" 
                             htmlFor='vendedor'>Vendedor
-                            <select 
-                            name='vendedor'
-                            required
-                            defaultValue=''
-                            className='border-2 border-novablue mx-2 px-3 py-2 self-start rounded-md focus:outline-none focus:border-gray-500'>
-                                <option  disabled selected value=''>Seleccione un vendedor</option>
-                                {vendedores.map((el)=>{
-                                    return(
-                                        <option key={nanoid()}>{`${el.nombre} ${el.correo}`}</option>
-                                    )
-                                })}
-                            </select>
+                                <select 
+                                name='vendedor'
+                                required
+                                defaultValue=''
+                                className='border-2 border-novablue mx-2 px-3 py-2 self-start rounded-md focus:outline-none focus:border-gray-500'>
+                                    <option  disabled selected value=''>Seleccione un vendedor</option>
+                                    {vendedores.map((el)=>{
+                                        return(
+                                            <option key={nanoid()}>{`${el.nombre} ${el.correo}`}</option>
+                                        )
+                                    })}
+                                </select>
                             </label>
                         </div>
                     </div>

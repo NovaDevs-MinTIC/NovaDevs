@@ -349,28 +349,28 @@ const Ventas = () => {
 
         console.log('formData: ', formData); 
 
-        const ListaProductos = Object.keys(formData)
-        .map((k) => {
-            if (k.includes('producto')) {
-                return productosTabla.filter((v) => v._id === formData[k][0]);
+        Object.keys(formData).forEach(
+            (k)=>{
+                if (k.includes('cantidad')){
+                    const Indice = parseInt(k.split('_')[1]);
+                    productosTabla[Indice]['cantidad'] = formData[k];
+                }
             }
-            return null;
-        })
-        .filter((v) => v);
-    
-        console.log('lista Productos', ListaProductos);
+        )
+
+        console.log("vendedor",formData.vendedor)
 
         const DataVenta = {
-            //HAY QUE CAMBIAR ESTO
             idVenta: formData.idVenta,
             fechaVenta: formData.fechaVenta,
             cliente: formData.cliente,
             idCliente: formData.idCliente,
-            vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
-            cantidad: formData.cantidad,
+            vendedor: formData.vendedor,
             productos: productosTabla,
         }
     
+        console.log(DataVenta)
+
         await crearVenta(
             DataVenta,
             (response) => {
@@ -430,18 +430,20 @@ const Ventas = () => {
                         <div>
                             <label 
                             className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" 
-                            htmlFor='vendedor'>Vendedor</label>
+                            htmlFor='vendedor'>Vendedor
                             <select 
-                            name='vendedores'
+                            name='vendedor'
                             required
+                            defaultValue=''
                             className='border-2 border-novablue mx-2 px-3 py-2 self-start rounded-md focus:outline-none focus:border-gray-500'>
-                                <option  disabled selected>Seleccione un vendedor</option>
+                                <option  disabled selected value=''>Seleccione un vendedor</option>
                                 {vendedores.map((el)=>{
                                     return(
                                         <option key={nanoid()}>{`${el.nombre} ${el.correo}`}</option>
                                     )
                                 })}
                             </select>
+                            </label>
                         </div>
                     </div>
                 <TablaArticulos 
@@ -478,13 +480,9 @@ const Ventas = () => {
 const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
     const [productoAAgregar, setProductoAAgregar] = useState({});
     const [filasTabla, setFilasTabla] = useState([]);
-
-    useEffect(() => {
-        console.log("hola", productoAAgregar);
-    }, [productoAAgregar]);
     
     useEffect(() => {
-        console.log('filasTabla', filasTabla);
+        /* console.log('filasTabla', filasTabla); */
         setProductosTabla(filasTabla);
     }, [filasTabla, setProductosTabla]);
 
@@ -498,6 +496,15 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
         setFilasTabla(filasTabla.filter((v) => v._id !== productoAEliminar._id));
         setProductos([...productos, productoAEliminar]);
     };
+
+    /* const modificarProducto = (producto, cantidad) => {
+        const ProModificado = filasTabla.filter((v) => v._id === producto._id)[0];
+        ProModificado.cantidad = cantidad;
+        let ft = [...filasTabla];
+        ft = ft.filter((v) => v._id !== producto._id);
+        ft = [...ft, ProModificado];
+        setFilasTabla(ft);
+      }; */
 
     return(
         <div className="w-full h-2/5 overflow-y-scroll overflow-x-hidden">
@@ -514,7 +521,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                                 </span>
                                 <select 
                                 className='border-2 border-novablue mx-2 px-3 py-2 self-start rounded-md focus:outline-none focus:border-gray-500'
-                                value={productoAAgregar._id ?? ''}
+                                value={productoAAgregar.idProducto ?? ''}
                                 onChange={(e) =>
                                     setProductoAAgregar(productos.filter((v) => v._id === e.target.value)[0])
                                 }
@@ -568,12 +575,14 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                                 <td className='text-center'>{el.idProducto}</td>
                                 <td className='text-center'>{el.descripcion}</td>
                                 <td className='text-center'>
-                                    <label htmlFor={`cantidad_${index}`}>
+                                    <label htmlFor={`contenido_${index}`}>
                                         <input 
                                         type='number' 
                                         name={`cantidad_${index}`} 
-                                        value={el.cantidad}
-                                        className='border border-novablue mx-1 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'/>
+                                        /* value={el.cantidad}  */
+                                        /* onBlur={(e)=> modificarProducto(el, e.target.value)} */
+                                        className='border border-novablue mx-1 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                                        />
                                     </label>
                                 </td>
                                 <td className='text-center'>{el.valorU}</td>
@@ -588,7 +597,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                                     </div>
                                 </td>
                                 <td>
-                                    <input hidden defaultValue={el._id} name={`el_${index}`} />
+                                    <input hidden defaultValue={el.idProducto} name={`el_${index}`} />
                                 </td>
                             </tr>
                         )

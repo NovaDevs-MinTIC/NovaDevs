@@ -349,39 +349,37 @@ const Ventas = () => {
 
         console.log('formData: ', formData); 
 
-        const listaProductos = Object.keys(formData)
-        .map((k) => {
-            if (k.includes('producto')) {
-                return productosTabla.filter((v) => v._id === formData[k][0]);
+        Object.keys(formData).forEach(
+            (k)=>{
+                if (k.includes('cantidad')){
+                    const Indice = parseInt(k.split('_')[1]);
+                    productosTabla[Indice]['cantidad'] = formData[k];
+                }
             }
-            return null;
-        })
-        .filter((v) => v);
-    
-        console.log('lista Productos', listaProductos);
-    
-        const datosVenta = {
-            
-    /*         subtotal: formData.sub */
-        };
-    
-        await crearVenta({
-            //HAY QUE CAMBIAR ESTO
+        )
 
+        console.log("vendedor",formData.vendedor)
+
+        const DataVenta = {
             idVenta: formData.idVenta,
             fechaVenta: formData.fechaVenta,
             cliente: formData.cliente,
             idCliente: formData.idCliente,
-            vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
-            cantidad: formData.cantidad,
+            vendedor: formData.vendedor,
             productos: productosTabla,
-        },
+        }
+    
+        console.log(DataVenta)
+
+        await crearVenta(
+            DataVenta,
             (response) => {
-            console.log(response);
+                console.log(response);
+                toast.success('Venta agregada con éxito');
             },
             (error) => {
-            console.error(error);
-            
+                console.error(error);
+                toast.error('Error creando una venta');
             }
         );
     };
@@ -389,7 +387,7 @@ const Ventas = () => {
     return (
         <div className='h-full w-auto'>
             <form ref={form} onSubmit={submitForm}>
-                    <div className = "flex justify-around" >
+                    <div className = "flex justify-center" >
                         <div>
                             <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='idVenta'>ID Venta</label>
                             <input
@@ -430,19 +428,18 @@ const Ventas = () => {
                             />
                         </div>
                         <div>
-                            <label 
-                            className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" 
-                            htmlFor='vendedor'>Vendedor</label>
-                            <select 
-                            name='vendedores'
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='id-cliente'>Vendedor</label>
+                            <select
+                            name = 'idCliente'
+                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                             required
-                            className='border-2 border-novablue mx-2 px-3 py-2 self-start rounded-md focus:outline-none focus:border-gray-500'>
-                                <option  disabled selected>Seleccione un vendedor</option>
-                                {vendedores.map((el)=>{
-                                    return(
-                                        <option key={nanoid()}>{`${el.nombre} ${el.correo}`}</option>
-                                    )
-                                })}
+                            defaultValue=''>
+                                <option  disabled selected value=''>Seleccione un vendedor</option>
+                                    {vendedores.map((el)=>{
+                                        return(
+                                            <option key={nanoid()}>{`${el.nombre} ${el.correo}`}</option>
+                                        )
+                                    })}
                             </select>
                         </div>
                     </div>
@@ -471,7 +468,7 @@ const Ventas = () => {
                         </button>
                     </div>
                 </div>
-                <ToastContainer position="bottom-center" autoClose={1500} />
+                <ToastContainer position="bottom-center" autoClose={900} />
             </form>
         </div>
     );
@@ -480,14 +477,9 @@ const Ventas = () => {
 const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
     const [productoAAgregar, setProductoAAgregar] = useState({});
     const [filasTabla, setFilasTabla] = useState([]);
-    /* const [cantidadProducto, setCantidadProducto] = useState(''); */
-
-    useEffect(() => {
-        console.log("hola", productoAAgregar);
-    }, [productoAAgregar]);
     
     useEffect(() => {
-        console.log('filasTabla', filasTabla);
+        /* console.log('filasTabla', filasTabla); */
         setProductosTabla(filasTabla);
     }, [filasTabla, setProductosTabla]);
 
@@ -502,22 +494,31 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
         setProductos([...productos, productoAEliminar]);
     };
 
+    /* const modificarProducto = (producto, cantidad) => {
+        const ProModificado = filasTabla.filter((v) => v._id === producto._id)[0];
+        ProModificado.cantidad = cantidad;
+        let ft = [...filasTabla];
+        ft = ft.filter((v) => v._id !== producto._id);
+        ft = [...ft, ProModificado];
+        setFilasTabla(ft);
+      }; */
+
     return(
         <div className="w-full h-2/5 overflow-y-scroll overflow-x-hidden">
             {/* FORMULARIO PARA AGREGAR PRODUCTO */}
-            <div className="h-auto w-full my-2">
-                <div className="flex flex-wrap items-end justify-center">
+            <div className="h-auto w-full my-4">
+                <div className="flex items-start justify-center">
                     <div className="flex flex-wrap justify-center">
-                        <div>	
+                        <div className='flex items-end justify-end'>	
                             <label 
                             htmlFor='producto'
-                            className="block mx-3 text-2xl text-center tracking-wide text-gray-700 font-bold mb-2">
+                            className="mx-3 text-lg text-center tracking-wide text-gray-700 font-bold mb-2">
                                 <span>
                                     Agregar Producto
                                 </span>
                                 <select 
-                                className='border-2 border-novablue mx-2 px-3 py-2 self-start rounded-md focus:outline-none focus:border-gray-500'
-                                value={productoAAgregar._id ?? ''}
+                                className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                                value={productoAAgregar.idProducto ?? ''}
                                 onChange={(e) =>
                                     setProductoAAgregar(productos.filter((v) => v._id === e.target.value)[0])
                                 }
@@ -552,7 +553,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                 </div>   
             </div>
 
-            <table className="tabla mt-4 mr-4">
+            <table className="tabla mt-4">
                 <thead>
                     <tr>
                         <th className="text-center">ID Producto</th>
@@ -570,13 +571,15 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                             <tr key={nanoid()}> 
                                 <td className='text-center'>{el.idProducto}</td>
                                 <td className='text-center'>{el.descripcion}</td>
-                                <td className='text-center ' >
-                                    <label htmlFor={`valor_${index}`}>
+                                <td className='text-center'>
+                                    <label htmlFor={`contenido_${index}`}>
                                         <input 
                                         type='number' 
                                         name={`cantidad_${index}`} 
-                                        value={el.cantidad}
-                                        className='border border-novablue mx-1 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'/>
+                                        /* value={el.cantidad}  */
+                                        /* onBlur={(e)=> modificarProducto(el, e.target.value)} */
+                                        className='border border-novablue mx-1 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                                        />
                                     </label>
                                 </td>
                                 <td className='text-center'>{el.valorU}</td>
@@ -591,7 +594,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                                     </div>
                                 </td>
                                 <td>
-                                    <input hidden defaultValue={el._id} name={`el_${index}`} />
+                                    <input hidden defaultValue={el.idProducto} name={`el_${index}`} />
                                 </td>
                             </tr>
                         )

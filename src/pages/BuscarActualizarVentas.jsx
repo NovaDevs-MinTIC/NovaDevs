@@ -313,6 +313,7 @@ const Ventas = () => {
     
     useEffect(() => {
         const fetchVendedores = async () =>{
+
             await obtenerUsuarios(
                 (response) => {
                     console.log('respuesta a GET usuarios: ', response);
@@ -323,6 +324,11 @@ const Ventas = () => {
                 }
             )
         }
+        
+        fetchVendedores();
+    }, []);
+
+    useEffect (() => {
         const fetchProductos = async () =>{
             await obtenerProductos(
                 (response) => {
@@ -334,7 +340,6 @@ const Ventas = () => {
                 }
             )
         }
-        fetchVendedores();
         fetchProductos();
     }, []);
 
@@ -430,14 +435,14 @@ const Ventas = () => {
                         <div>
                             <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='id-cliente'>Vendedor</label>
                             <select
-                            name = 'idCliente'
+                            name = 'vendedor'
                             className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                             required
                             defaultValue=''>
                                 <option  disabled selected value=''>Seleccione un vendedor</option>
                                     {vendedores.map((el)=>{
                                         return(
-                                            <option key={nanoid()}>{`${el.nombre} ${el.correo}`}</option>
+                                            <option key={nanoid()}>{`${el.nombre}`}</option>
                                         )
                                     })}
                             </select>
@@ -476,7 +481,7 @@ const Ventas = () => {
 
 const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
     const [productoAAgregar, setProductoAAgregar] = useState({});
-    const [filasTabla, setFilasTabla] = useState([]);
+    const [filasTabla, setFilasTabla] = useState([]); 
     
     useEffect(() => {
         /* console.log('filasTabla', filasTabla); */
@@ -494,14 +499,17 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
         setProductos([...productos, productoAEliminar]);
     };
 
-    /* const modificarProducto = (producto, cantidad) => {
-        const ProModificado = filasTabla.filter((v) => v._id === producto._id)[0];
-        ProModificado.cantidad = cantidad;
-        let ft = [...filasTabla];
-        ft = ft.filter((v) => v._id !== producto._id);
-        ft = [...ft, ProModificado];
-        setFilasTabla(ft);
-      }; */
+    const modificarProducto= (producto, cantidad) => {
+        setFilasTabla(
+          filasTabla.map((ft) => {
+            if (ft._id === producto.id) {
+              ft.cantidad = cantidad;
+              ft.subtotal = producto.valorU * cantidad;
+            }
+            return ft;
+          })
+        );
+      };
 
     return(
         <div className="w-full h-2/5 overflow-y-scroll overflow-x-hidden">
@@ -558,9 +566,9 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                     <tr>
                         <th className="text-center">ID Producto</th>
                         <th className="text-center">Descripción</th>
-                        <th className="text-center">Cantidad</th>
-                        <th className="text-center">Valor Unitario</th>
-                        <th className="text-center">Subtotal</th>
+                        <th className="text-center" id='cantidad'>Cantidad</th>
+                        <th className="text-center" id='valorUnitario'>Valor Unitario</th>
+                        <th className="text-center" id='subtotal'>Subtotal</th>
                         <th className="text-center">Eliminar</th>
                         <th className='hidden'>Input</th>
                     </tr>
@@ -568,35 +576,13 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                 <tbody>
                     {filasTabla.map((el, index) =>{
                         return(
-                            <tr key={nanoid()}> 
-                                <td className='text-center'>{el.idProducto}</td>
-                                <td className='text-center'>{el.descripcion}</td>
-                                <td className='text-center'>
-                                    <label htmlFor={`contenido_${index}`}>
-                                        <input 
-                                        type='number' 
-                                        name={`cantidad_${index}`} 
-                                        /* value={el.cantidad}  */
-                                        /* onBlur={(e)=> modificarProducto(el, e.target.value)} */
-                                        className='border border-novablue mx-1 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
-                                        />
-                                    </label>
-                                </td>
-                                <td className='text-center'>{el.valorU}</td>
-                                <td className='text-center'>
-                                    {"hola"}
-                                </td>
-                                <td className='text-center'>
-                                    <div className='flex justify-around'>
-                                        <div className='hover:bg-red-500'><i 
-                                        onClick={() => eliminarProducto(el)}
-                                        className='fas fa-trash'></i></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <input hidden defaultValue={el.idProducto} name={`el_${index}`} />
-                                </td>
-                            </tr>
+                            <FilaProducto
+                            key={el._id}
+                            pro={el}
+                            index={index}
+                            eliminarProducto={eliminarProducto}
+                            modificarProducto={modificarProducto}
+                            />
                         )
                     })}
                 </tbody>
@@ -605,4 +591,47 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
     );
 };
 
+
+const FilaProducto = (({pro, index, eliminarProducto, modificarProducto}) => {
+    const [producto, setProducto] = useState(pro);
+    useEffect(() => {
+        console.log('veh', producto);
+      }, [producto]);
+      return(
+        <tr>
+            <td>{producto._id}</td>
+            <td>{producto.descripcion}</td>
+            <td>
+                <label htmlFor={`valor_${index}`}>
+                    <input
+                    type='number'
+                    name={`cantidad_${index}`}
+                    value={producto.cantidad}
+                    onChange={(e) => {
+                        modificarProducto(producto, e.target.value === '' ? '0' : e.target.value);
+                        setProducto({
+                        ...producto,
+                        cantidad: e.target.value === '' ? '0' : e.target.value,
+                        subtotal:
+                            parseFloat(producto.valor) *
+                            parseFloat(e.target.value === '' ? '0' : e.target.value),
+                        });
+                    }}
+                    />
+                </label>
+            </td>
+            <td>{producto.valorU}</td>
+            <td>{parseFloat(producto.subtotal ?? 0)}</td>
+            <td>
+                <i
+                    onClick={() => eliminarProducto(producto)}
+                    className='fas fa-trash text-red-500 cursor-pointer'
+                />
+            </td>
+            <td className='hidden'>
+            <input hidden defaultValue={producto._id} name={`vehiculo_${index}`} />
+            </td>
+        </tr>
+      )
+ })
 export default BuscarActualizarVentas

@@ -375,7 +375,7 @@ const Ventas = () => {
     
         console.log(DataVenta)
 
-        /* await crearVenta(
+        await crearVenta(
             DataVenta,
             (response) => {
                 console.log(response);
@@ -385,13 +385,13 @@ const Ventas = () => {
                 console.error(error);
                 toast.error('Error creando una venta');
             }
-        ); */
+        );
     };
 
     return (
         <div className='h-full w-auto'>
             <form ref={form} onSubmit={submitForm}>
-                    <div className = "flex justify-around" >
+                    <div className = "flex justify-center" >
                         <div>
                             <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='idVenta'>ID Venta</label>
                             <input
@@ -432,20 +432,20 @@ const Ventas = () => {
                             />
                         </div>
                         <div>
-                            <label 
-                            className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" 
-                            htmlFor='vendedor'>Vendedor
-                                <select 
-                                name='vendedor'
-                                defaultValue=''
+                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" 
+                            htmlFor='vendedor'>
+                                Vendedor
+                                <select
+                                name = 'vendedor'
+                                className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                                 required
-                                className='border-2 border-novablue mx-2 px-3 py-2 self-start rounded-md focus:outline-none focus:border-gray-500'>
+                                defaultValue=''>
                                     <option  disabled selected value=''>Seleccione un vendedor</option>
-                                    {vendedores.map((el)=>{
-                                        return(
-                                            <option key={nanoid()} value={el._id} >{`${el.nombre} ${el.correo}`}</option>
-                                        )
-                                    })}
+                                        {vendedores.map((el)=>{
+                                            return(
+                                                <option key={nanoid()} value={el._id} >{`${el.nombre} ${el.correo}`}</option>
+                                                )
+                                            })}
                                 </select>
                             </label>
                         </div>
@@ -516,18 +516,18 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
     return(
         <div className="w-full h-2/5 overflow-y-scroll overflow-x-hidden">
             {/* FORMULARIO PARA AGREGAR PRODUCTO */}
-            <div className="h-auto w-full my-2">
-                <div className="flex flex-wrap items-end justify-center">
+            <div className="h-auto w-full my-4">
+                <div className="flex items-start justify-center">
                     <div className="flex flex-wrap justify-center">
-                        <div>	
+                        <div className='flex items-end justify-end'>	
                             <label 
                             htmlFor='producto'
-                            className="block mx-3 text-2xl text-center tracking-wide text-gray-700 font-bold mb-2">
+                            className="mx-3 text-lg text-center tracking-wide text-gray-700 font-bold mb-2">
                                 <span>
                                     Agregar Producto
                                 </span>
                                 <select 
-                                className='border-2 border-novablue mx-2 px-3 py-2 self-start rounded-md focus:outline-none focus:border-gray-500'
+                                className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                                 value={productoAAgregar.idProducto ?? ''}
                                 onChange={(e) =>
                                     setProductoAAgregar(productos.filter((v) => v._id === e.target.value)[0])
@@ -564,7 +564,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                 </div>   
             </div>
 
-            <table className="tabla mt-4 mr-4">
+            <table className="tabla mt-4">
                 <thead>
                     <tr>
                         <th className="text-center">ID Producto</th>

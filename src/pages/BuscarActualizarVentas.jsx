@@ -369,7 +369,7 @@ const Ventas = () => {
             fechaVenta: formData.fechaVenta,
             cliente: formData.cliente,
             idCliente: formData.idCliente,
-            vendedor: formData.vendedor,
+            vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
             productos: productosTabla,
         }
     
@@ -433,7 +433,8 @@ const Ventas = () => {
                         </div>
                         <div>
                             <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" 
-                            htmlFor='vendedor'>
+                            htmlFor='vendedores'>
+                                </label>
                                 Vendedor
                                 <select
                                 name = 'vendedor'
@@ -447,7 +448,6 @@ const Ventas = () => {
                                                 )
                                             })}
                                 </select>
-                            </label>
                         </div>
                     </div>
                 <TablaArticulos 

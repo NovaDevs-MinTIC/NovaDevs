@@ -376,7 +376,7 @@ const Ventas = () => {
     
         console.log(DataVenta)
 
-        /* await crearVenta(
+        await crearVenta(
             DataVenta,
             (response) => {
                 console.log(response);
@@ -386,7 +386,7 @@ const Ventas = () => {
                 console.error(error);
                 toast.error('Error creando una venta');
             }
-        ); */
+        );
     };
 
     return (

@@ -305,8 +305,7 @@ const FilaVentas = ({venta}) =>{
 }
 
 const Ventas = () => {
-    
-    const form = useRef(null)
+    const form = useRef(null);
     const [vendedores, setVendedores] = useState([]);
     const [productos, setProductos] = useState([]);
     const [productosTabla, setProductosTabla] = useState([]);
@@ -337,6 +336,11 @@ const Ventas = () => {
         fetchVendedores();
         fetchProductos();
     }, []);
+    
+    /* const ShowSelected = () =>{
+        let dato = document.getElementById('vendedorLista').value;
+        console.log(dato);
+    } */
 
     const submitForm = async (e) => {
         e.preventDefault();
@@ -371,7 +375,7 @@ const Ventas = () => {
     
         console.log(DataVenta)
 
-        await crearVenta(
+        /* await crearVenta(
             DataVenta,
             (response) => {
                 console.log(response);
@@ -381,7 +385,7 @@ const Ventas = () => {
                 console.error(error);
                 toast.error('Error creando una venta');
             }
-        );
+        ); */
     };
 
     return (
@@ -433,13 +437,13 @@ const Ventas = () => {
                             htmlFor='vendedor'>Vendedor
                                 <select 
                                 name='vendedor'
-                                required
                                 defaultValue=''
+                                required
                                 className='border-2 border-novablue mx-2 px-3 py-2 self-start rounded-md focus:outline-none focus:border-gray-500'>
                                     <option  disabled selected value=''>Seleccione un vendedor</option>
                                     {vendedores.map((el)=>{
                                         return(
-                                            <option key={nanoid()}>{`${el.nombre} ${el.correo}`}</option>
+                                            <option key={nanoid()} value={el._id} >{`${el.nombre} ${el.correo}`}</option>
                                         )
                                     })}
                                 </select>
@@ -497,14 +501,17 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
         setProductos([...productos, productoAEliminar]);
     };
 
-    /* const modificarProducto = (producto, cantidad) => {
-        const ProModificado = filasTabla.filter((v) => v._id === producto._id)[0];
-        ProModificado.cantidad = cantidad;
-        let ft = [...filasTabla];
-        ft = ft.filter((v) => v._id !== producto._id);
-        ft = [...ft, ProModificado];
-        setFilasTabla(ft);
-      }; */
+    const modificarProducto = (producto, cantidad) => {
+        setFilasTabla(
+            filasTabla.map((ft)=>{
+                if (ft._id === producto.idProducto){
+                    ft.cantidad = cantidad;
+                    ft.total = producto.valorU * cantidad;
+                }
+                return ft;
+            })
+        )
+      };
 
     return(
         <div className="w-full h-2/5 overflow-y-scroll overflow-x-hidden">
@@ -529,7 +536,8 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                                 <option  disabled value=''>
                                     Seleccione un producto
                                 </option>
-                                {productos.map((el)=>{
+                                {
+                                productos.map((el)=>{
                                     return(
                                         <option 
                                         key={nanoid()}
@@ -544,7 +552,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                     <div>
                         <button
                         type='button'
-                        onClick={() => agregarNuevoProducto()}
+                        onClick={()=>agregarNuevoProducto()}
                         className='group relative w-auto flex py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-novablue hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
                         >
                         <div className='flex items-center justify-start'>
@@ -571,35 +579,13 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                 <tbody>
                     {filasTabla.map((el, index) =>{
                         return(
-                            <tr key={nanoid()}> 
-                                <td className='text-center'>{el.idProducto}</td>
-                                <td className='text-center'>{el.descripcion}</td>
-                                <td className='text-center'>
-                                    <label htmlFor={`contenido_${index}`}>
-                                        <input 
-                                        type='number' 
-                                        name={`cantidad_${index}`} 
-                                        /* value={el.cantidad}  */
-                                        /* onBlur={(e)=> modificarProducto(el, e.target.value)} */
-                                        className='border border-novablue mx-1 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
-                                        />
-                                    </label>
-                                </td>
-                                <td className='text-center'>{el.valorU}</td>
-                                <td className='text-center'>
-                                    {"hola"}
-                                </td>
-                                <td className='text-center'>
-                                    <div className='flex justify-around'>
-                                        <div className='hover:bg-red-500'><i 
-                                        onClick={() => eliminarProducto(el)}
-                                        className='fas fa-trash'></i></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <input hidden defaultValue={el.idProducto} name={`el_${index}`} />
-                                </td>
-                            </tr>
+                            <FilaProducto 
+                            key = {el._id}
+                            pro = {el}
+                            index = {index}
+                            eliminarProducto = {eliminarProducto}
+                            modificarProducto = {modificarProducto}
+                            />
                         )
                     })}
                 </tbody>
@@ -607,5 +593,53 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
         </div>
     );
 };
+
+const FilaProducto = ({pro, index, eliminarProducto, modificarProducto}) =>{
+    const [producto, setProducto] = useState(pro);
+    useEffect(() => {
+        console.log('pro', producto);
+    }, [producto]); 
+
+    return(
+        <tr> 
+            <td className='text-center'>{producto.idProducto}</td>
+            <td className='text-center'>{producto.descripcion}</td>
+            <td className='text-center'>
+                <label htmlFor={`contenido_${index}`}>
+                    <input 
+                    type='number' 
+                    name={`cantidad_${index}`} 
+                    onChange={(e)=>{
+                        modificarProducto(producto, e.target.value);
+                        setProducto({
+                            ...producto,
+                            cantidad: e.target.value === '' ? '0' : e.target.value,
+                            subTotal:
+                            parseFloat(producto.valorU) *
+                            parseFloat(e.target.value === '' ? '0' : e.target.value),
+                        });
+                    }}
+                    className='border border-novablue mx-1 px-1 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                    />
+                </label>
+            </td>
+            <td className='text-center'>{producto.valorU}</td>
+            <td className='text-center'>
+                {parseFloat(producto.subTotal ?? 0)}
+            </td>
+            <td className='text-center'>
+                <div className='flex justify-around'>
+                    <div className='hover:bg-red-500'><i 
+                    onClick={() => eliminarProducto(producto)}
+                    className='fas fa-trash'></i></div>
+                </div>
+            </td>
+            <td>
+                <input hidden defaultValue={producto.idProducto} name={`producto_${index}`} />
+            </td>
+        </tr>
+    )
+
+}
 
 export default BuscarActualizarVentas

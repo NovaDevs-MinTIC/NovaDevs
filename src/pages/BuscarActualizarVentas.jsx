@@ -65,7 +65,7 @@ const BuscarActualizarVentas = () => {
             {mostrarTabla ? (
                 <GestionVentas listaVentas = {ventas} setEjecutarConsulta={setEjecutarConsulta} />
                 ) : (
-                <Ventas setEjecutarConsulta={setEjecutarConsulta}/>
+                <Ventas setEjecutarConsulta={setEjecutarConsulta} setMostrarTabla={setMostrarTabla}/>
             )}
             <ToastContainer position='bottom-center' autoClose={5000} />
         </div>
@@ -304,7 +304,7 @@ const FilaVentas = ({venta, setEjecutarConsulta}) =>{
     )  
 }
 
-const Ventas = () => {
+const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
     const form = useRef(null);
     const [vendedores, setVendedores] = useState([]);
     const [productos, setProductos] = useState([]);
@@ -382,6 +382,8 @@ const Ventas = () => {
             (response) => {
                 console.log(response);
                 toast.success('Venta agregada con éxito');
+                setMostrarTabla(true);
+                setEjecutarConsulta(true)
             },
             (error) => {
                 console.error(error);

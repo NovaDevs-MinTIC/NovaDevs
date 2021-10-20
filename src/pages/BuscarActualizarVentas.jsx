@@ -5,54 +5,7 @@ import { Dialog, Tooltip } from '@material-ui/core';
 import { useState, useEffect, useRef } from 'react'
 import 'react-toastify/dist/ReactToastify.css';
 import { obtenerUsuarios, obtenerProductos } from 'utils/api';
-import { crearVenta } from 'utils/api';
-
-const VentaBackend = [
-    {
-        idVenta:9898,
-        descripcionVenta:"zapatos,tennis,chanclas",
-        fechaVenta:"25/1/2003",
-        idCliente:65165184,
-        nombreCliente: "juan Perez Toro",
-        idVendedor:651954194,
-        nombreVendedor:"Jose tobar taberas",
-        valorVenta:6545116541,
-        estado:"Entregado"
-    },
-    {
-        idVenta:4545,
-        descripcionVenta:"tennis, zapatillas, tacones",
-        fechaVenta:"44/5/2001",
-        idCliente:65165184,
-        nombreCliente: "juan Perez Toro",
-        idVendedor:651954194,
-        nombreVendedor:"Jose tobar taberas",
-        valorVenta:6545116541,
-        estado:"Entregado"
-    },
-    {
-        idVenta:7878,
-        descripcionVenta:"zapatos,tennis,chanclas",
-        fechaVenta:"25/1/2003",
-        idCliente:65165184,
-        nombreCliente: "juan Perez Toro",
-        idVendedor:651954194,
-        nombreVendedor:"Jose tobar taberas",
-        valorVenta:6545116541,
-        estado:"En proceso"
-    },
-    {
-        idVenta:3232,
-        descripcionVenta:"zapatos,tennis,chanclas",
-        fechaVenta:"25/1/2003",
-        idCliente:65165184,
-        nombreCliente: "Maria euclide tartago",
-        idVendedor:651954194,
-        nombreVendedor:"Jose maria maria",
-        valorVenta:6545116541,
-        estado:"Cancelado"
-    }
-]
+import { crearVenta, obtenerVentas, editarVenta, quitarVenta } from 'utils/api';
 
 const BuscarActualizarVentas = () => {
     const [ventas, setVentas] = useState([]);
@@ -72,9 +25,20 @@ const BuscarActualizarVentas = () => {
             setTitulo('Registro de Ventas')
         }
     }, [mostrarTabla]);
-    
-    useEffect(() => {
-        setVentas(VentaBackend)
+
+    useEffect(() =>{
+        const fetchVentas = async () =>{
+            await obtenerVentas(
+                (response) => {
+                    console.log('respuesta a GET usuarios: ', response);
+                    setVentas(response.data);
+                },
+                (error) => {
+                    console.error(error);
+                }
+            )
+        }
+        fetchVentas();
     }, []);
 
     
@@ -107,7 +71,7 @@ const BuscarActualizarVentas = () => {
     );
 }
 
-const GestionVentas = ({listaVentas}) => {
+const GestionVentas = ({listaVentas, setEjecutarConsulta}) => {
     const [busqueda, setBusqueda] = useState('');
     const [ventasFiltradas, setVentasFiltradas] = useState(listaVentas);
 
@@ -140,7 +104,7 @@ const GestionVentas = ({listaVentas}) => {
                             <th>Fecha de venta</th>
                             <th>ID Cliente</th>
                             <th>Nombre del cliente</th>
-                            <th>ID Vendedor</th>
+                            {/* <th>ID Vendedor</th> */}
                             <th>Nombre del vendedor</th>                                
                             <th>Valor Venta</th> 
                             <th className='w-1/12'>Estado</th>
@@ -152,7 +116,8 @@ const GestionVentas = ({listaVentas}) => {
                             return(
                                 <FilaVentas 
                                 key = {nanoid()}
-                                venta = {venta} />
+                                venta = {venta}
+                                setEjecutarConsulta={setEjecutarConsulta} />
                             )
                         })}
                     </tbody>
@@ -162,26 +127,59 @@ const GestionVentas = ({listaVentas}) => {
     )
 }
 
-const FilaVentas = ({venta}) =>{
+const FilaVentas = ({venta, setEjecutarConsulta}) =>{
     const [edit,setEdit] = useState(false);
     const [openDialog,setOpenDialog] = useState(false);
     const [alerta, setAlerta] = useState('')
     const [infoNuevaVenta, setInfoNuevaVenta] = useState({
-        idVenta: venta.idVenta,
+        idVenta: venta._id.slice(18),
         descripcionVenta: venta.descripcionVenta,
         fechaVenta: venta.fechaVenta,
         idCliente: venta.idCliente,
-        nombreCliente: venta.nombreCliente,
-        idVendedor: venta.idVendedor,
-        nombreVendedor: venta.nombreVendedor,
+        nombreCliente: venta.cliente,
+        // idVendedor: venta.idVendedor,
+        nombreVendedor: venta.vendedornombre,
         valorVenta: venta.valorVenta,
-        estado: venta.estado
+        estado: venta.estado,
     });
 
+    const actualizarVenta = async () => {
+        await editarVenta(
+            venta._id,
+            { ...infoNuevaVenta },
+            (response)=>{
+                console.log(response.data);
+                toast.success('Venta modificada con éxito');
+                setEdit(false);
+                setEjecutarConsulta(true);
+            },
+            (error)=>{
+                toast.error('Error modificando la venta');
+                console.error(error);
+            }
+        )
+    }
+
+    const eliminarVenta = async () => {
+        await quitarVenta(
+            venta._id,
+            (response)=>{
+                console.log(response.data);
+                toast.success('Venta eliminada con éxito');
+                setEjecutarConsulta(true);
+            },
+            (error)=>{
+                console.error(error);
+                toast.error('Error eliminando la venta');
+            }
+        )
+    setOpenDialog(false);
+    }; 
+
     useEffect(() => {
-        if(infoNuevaVenta.estado === "Entregado"){
+        if(infoNuevaVenta.estado === "Entregado" || infoNuevaVenta.estado === "entregado"){
             setAlerta('success')
-        }else if (infoNuevaVenta.estado === "En proceso") {
+        }else if (infoNuevaVenta.estado === "En proceso" || infoNuevaVenta.estado === "en proceso") {
             setAlerta('warning')
         }else{
             setAlerta('danger')
@@ -204,7 +202,7 @@ const FilaVentas = ({venta}) =>{
                     <td className='text-center'>{infoNuevaVenta.fechaVenta}</td>
                     <td className='text-center'>{infoNuevaVenta.idCliente}</td>
                     <td className='text-center'>{infoNuevaVenta.nombreCliente}</td>
-                    <td className='text-center'>{infoNuevaVenta.idVendedor}</td>
+                    {/* <td className='text-center'>{infoNuevaVenta.idVendedor}</td> */}
                     <td className='text-center'>{infoNuevaVenta.nombreVendedor}</td>
                     <td className='text-center'>
                         <input 
@@ -231,17 +229,17 @@ const FilaVentas = ({venta}) =>{
                 </>
             ):(
             <>
-                <td>{venta.idVenta}</td>
+                <td className='text-center'>{infoNuevaVenta.idVenta}</td>
                 <td className="text-center">
                     <i className="rounded bg-novablue border-solid border-2 border-novablue far fa-eye"></i>
                 </td>
-                <td>{venta.fechaVenta}</td>
-                <td>{venta.idCliente}</td>
-                <td>{venta.nombreCliente}</td>
-                <td>{venta.idVendedor}</td>
-                <td>{venta.nombreVendedor}</td>
-                <td>{venta.valorVenta}</td>
-                <td className={`bg-${alerta}`}>{venta.estado}</td>
+                <td className='text-center'>{infoNuevaVenta.fechaVenta}</td>
+                <td className='text-center'>{infoNuevaVenta.idCliente}</td>
+                <td className='text-center'>{infoNuevaVenta.nombreCliente}</td>
+                {/* <td>{venta.idVendedor}</td> */}
+                <td className='text-center'>{infoNuevaVenta.nombreVendedor}</td>
+                <td className='text-center'>{infoNuevaVenta.valorVenta}</td>
+                <td className={`bg-${alerta} text-center`}>{infoNuevaVenta.estado}</td>
             </>
             )}
 
@@ -252,6 +250,7 @@ const FilaVentas = ({venta}) =>{
                             <i
                             /* onClick= llama a la petición de editar */
                             className='fas fa-check text-green-700 hover:text-green-500'
+                            onClick={() => actualizarVenta()}
                             />
                         </Tooltip>
                         <Tooltip title='Cancelar edición' arrow>
@@ -265,13 +264,13 @@ const FilaVentas = ({venta}) =>{
             ):(
                 <>
                     <div className = "flex justify-around mt-2">
-                        <Tooltip title='Editar Producto' arrow>
+                        <Tooltip title='Editar Venta' arrow>
                             <button
                             onClick={() => setEdit(!edit)} 
                             className="rounded border-solid border-2 border-novablue far fa-edit bg-info">
                             </button>
                         </Tooltip>
-                        <Tooltip title='Eliminar Producto' arrow>
+                        <Tooltip title='Eliminar Venta' arrow>
                             <button 
                             onClick={() => setOpenDialog(true)}
                             className="rounded border-solid border-2 border-red-600 far fa-trash-alt bg-danger">
@@ -283,11 +282,11 @@ const FilaVentas = ({venta}) =>{
             <Dialog open={openDialog}>
                 <div className='p-8 flex flex-col'>
                     <h1 className='text-gray-900 text-2xl font-bold'>
-                    ¿Está seguro de querer eliminar el producto?
+                    ¿Está seguro de querer eliminar la venta?
                     </h1>
                     <div className='flex w-full items-center justify-center my-4'>
                         <button
-                        /* onClick={() => eliminarProducto()} */
+                        onClick={() => eliminarVenta()}
                         className='mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md'>
                             Sí
                         </button>
@@ -367,11 +366,12 @@ const Ventas = () => {
         const DataVenta = {
             idVenta: formData.idVenta,
             fechaVenta: formData.fechaVenta,
-            cliente: formData.cliente,
             idCliente: formData.idCliente,
+            cliente: formData.cliente,
             vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
-            productos: productosTabla,
+            valorVenta : '$ 300000',   // SE DEBE MODIFICAR CUANDO HALLEMOS LA FORMA DE BUSCAR EL VALOR TOTAL
             estado: "en proceso",
+            productos: productosTabla,
         }
     
         console.log(DataVenta)
@@ -640,7 +640,6 @@ const FilaProducto = ({pro, index, eliminarProducto, modificarProducto}) =>{
             </td>
         </tr>
     )
-
 }
 
 export default BuscarActualizarVentas

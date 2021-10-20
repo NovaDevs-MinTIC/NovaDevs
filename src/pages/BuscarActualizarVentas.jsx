@@ -12,7 +12,7 @@ const BuscarActualizarVentas = () => {
     const [mostrarTabla, setMostrarTabla] = useState(false);
     const [textoBoton, setTextoBoton] = useState('Crear Nuevo Vehículo');
     const [titulo, setTitulo] = useState('Ventas');
-    const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
+    const [ejecutarConsulta, setEjecutarConsulta] = useState(false);
 
     
     useEffect(() => {
@@ -38,8 +38,9 @@ const BuscarActualizarVentas = () => {
                 }
             )
         }
+        setEjecutarConsulta();
         fetchVentas();
-    }, []);
+    }, [ejecutarConsulta]);
 
     
 
@@ -64,7 +65,7 @@ const BuscarActualizarVentas = () => {
             {mostrarTabla ? (
                 <GestionVentas listaVentas = {ventas} setEjecutarConsulta={setEjecutarConsulta} />
                 ) : (
-                <Ventas />
+                <Ventas setEjecutarConsulta={setEjecutarConsulta}/>
             )}
             <ToastContainer position='bottom-center' autoClose={5000} />
         </div>
@@ -81,7 +82,7 @@ const GestionVentas = ({listaVentas, setEjecutarConsulta}) => {
             return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
           })
         );
-      }, [busqueda, listaVentas]);
+      }, [busqueda, listaVentas, setEjecutarConsulta]);
 
     return (
         <div className="h-full w-full">

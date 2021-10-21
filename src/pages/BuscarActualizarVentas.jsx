@@ -400,7 +400,7 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
         <div className='h-full w-auto'>
             <form ref={form} onSubmit={submitForm}>
                     <div className = "flex justify-center" >
-                        <div>
+                        {/* <div>
                             <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='idVenta'>ID Venta</label>
                             <input
                             name = 'idVenta'
@@ -409,7 +409,7 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
                             className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                             required
                             />
-                        </div>
+                        </div> */}
                         <div>
                             <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor = 'fecha-venta'>Fecha Venta</label>
                             <input

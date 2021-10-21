@@ -128,7 +128,7 @@ const GestionVentas = ({listaVentas, setEjecutarConsulta}) => {
     )
 }
 
-const FilaVentas = ({venta, setEjecutarConsulta}) =>{
+const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
     const [edit,setEdit] = useState(false);
     const [openDialog,setOpenDialog] = useState(false);
     const [alerta, setAlerta] = useState('')
@@ -139,7 +139,7 @@ const FilaVentas = ({venta, setEjecutarConsulta}) =>{
         idCliente: venta.idCliente,
         nombreCliente: venta.cliente,
         // idVendedor: venta.idVendedor,
-        nombreVendedor: venta.vendedornombre,
+        nombreVendedor: venta.nombreVendedor,
         valorVenta: venta.valorVenta,
         estado: venta.estado,
     });

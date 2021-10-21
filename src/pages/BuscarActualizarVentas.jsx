@@ -12,7 +12,7 @@ const BuscarActualizarVentas = () => {
     const [mostrarTabla, setMostrarTabla] = useState(false);
     const [textoBoton, setTextoBoton] = useState('Crear Nuevo Vehículo');
     const [titulo, setTitulo] = useState('Ventas');
-    const [ejecutarConsulta, setEjecutarConsulta] = useState(false);
+    const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
 
     
     useEffect(() => {
@@ -38,7 +38,7 @@ const BuscarActualizarVentas = () => {
                 }
             )
         }
-        setEjecutarConsulta();
+        setEjecutarConsulta(false);
         fetchVentas();
     }, [ejecutarConsulta]);
 
@@ -371,7 +371,7 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
             cliente: formData.cliente,
             vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
             valorVenta : '$ 300000',   // SE DEBE MODIFICAR CUANDO HALLEMOS LA FORMA DE BUSCAR EL VALOR TOTAL
-            estado: "en proceso",
+            estado: "En proceso",
             productos: productosTabla,
         }
     

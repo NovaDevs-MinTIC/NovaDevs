@@ -139,7 +139,7 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
         idCliente: venta.idCliente,
         nombreCliente: venta.cliente,
         // idVendedor: venta.idVendedor,
-        nombreVendedor: venta.nombreVendedor,
+        nombreVendedor: venta.vendedor.nombre,
         valorVenta: venta.valorVenta,
         estado: venta.estado,
     });

@@ -134,7 +134,9 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
     const [alerta, setAlerta] = useState('')
     const [infoNuevaVenta, setInfoNuevaVenta] = useState({
         idVenta: venta._id.slice(18),
-        descripcionVenta: venta.descripcionVenta,
+        descripcionVenta: venta.productos.map((el) =>{
+            return <p value={`${el._id}`}>{`${el.descripcion}, ${el.cantidad} UN`}</p>
+        }),
         fechaVenta: venta.fechaVenta,
         idCliente: venta.idCliente,
         nombreCliente: venta.cliente,
@@ -233,7 +235,7 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
             <>
                 <td className='text-center'>{infoNuevaVenta.idVenta}</td>
                 <td className="text-center">
-                {infoNuevaVenta.datosProducto}
+                {infoNuevaVenta.descripcionVenta}
                     {/*<i className="rounded bg-novablue border-solid border-2 border-novablue far fa-eye"></i>*/}
                 </td>
                 <td className='text-center'>{infoNuevaVenta.fechaVenta}</td>
@@ -439,9 +441,8 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
                         </div>
                         <div>
                             <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" 
-                            htmlFor='vendedores'>
+                            htmlFor='vendedores'>Vendedor
                                 </label>
-                                Vendedor
                                 <select
                                 name = 'vendedor'
                                 className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
@@ -450,7 +451,7 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
                                     <option  disabled selected value=''>Seleccione un vendedor</option>
                                         {vendedores.map((el)=>{
                                             return(
-                                                <option key={nanoid()} value={el._id} >{`${el.nombre} ${el.correo}`}</option>
+                                                <option key={nanoid()} value={el._id} >{`${el.nombre}`}</option>
                                                 )
                                             })}
                                 </select>
@@ -548,7 +549,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                                         <option 
                                         key={nanoid()}
                                         value={el._id} 
-                                        >{`${el.idProducto} ${el.descripcion} ${el.estadoP}`}</option>
+                                        >{`${el.idProducto} ${el.descripcion}`}</option>
                                         )
                                     })}
                                 </select>

@@ -139,6 +139,7 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
         idCliente: venta.idCliente,
         nombreCliente: venta.cliente,
         // idVendedor: venta.idVendedor,
+        datosProducto : JSON.stringify(venta.productos),
         nombreVendedor: venta.vendedor.nombre,
         valorVenta: venta.valorVenta,
         estado: venta.estado,
@@ -232,7 +233,8 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
             <>
                 <td className='text-center'>{infoNuevaVenta.idVenta}</td>
                 <td className="text-center">
-                    <i className="rounded bg-novablue border-solid border-2 border-novablue far fa-eye"></i>
+                {infoNuevaVenta.datosProducto}
+                    {/*<i className="rounded bg-novablue border-solid border-2 border-novablue far fa-eye"></i>*/}
                 </td>
                 <td className='text-center'>{infoNuevaVenta.fechaVenta}</td>
                 <td className='text-center'>{infoNuevaVenta.idCliente}</td>

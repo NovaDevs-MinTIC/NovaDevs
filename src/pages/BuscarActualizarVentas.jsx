@@ -128,17 +128,24 @@ const GestionVentas = ({listaVentas, setEjecutarConsulta}) => {
     )
 }
 
-const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
+const FilaVentas = ({venta, setEjecutarConsulta}) =>{
     const [edit,setEdit] = useState(false);
     const [openDialog,setOpenDialog] = useState(false);
     const [alerta, setAlerta] = useState('')
+    const [vendedores, setVendedores] = useState([]);
     const [infoNuevaVenta, setInfoNuevaVenta] = useState({
         idVenta: venta._id.slice(18),
-        descripcionVenta: venta.descripcionVenta,
+        descripcionVenta: 
+            venta.productos.map((el) =>{
+                return <>
+                        {`${el.descripcion}, ${el.cantidad} UN`}
+                        <br />
+                        </>
+                    }),                
         fechaVenta: venta.fechaVenta,
         idCliente: venta.idCliente,
         nombreCliente: venta.cliente,
-        // idVendedor: venta.idVendedor,
+        vendedor: venta.vendedor,
         nombreVendedor: venta.vendedor.nombre,
         valorVenta: venta.valorVenta,
         estado: venta.estado,
@@ -186,32 +193,74 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
             setAlerta('danger')
         }
     }, [alerta, infoNuevaVenta.estado]);
+
+    useEffect(() => {
+        const fetchVendedores = async () =>{
+            await obtenerUsuarios(
+                (response) => {
+                    console.log('respuesta a GET usuarios: ', response);
+                    setVendedores(response.data);
+                },
+                (error) => {
+                    console.error(error);
+                }
+            )
+        }
+        fetchVendedores();
+    },[]);
     
     return(
         <tr>
             {edit ? (
                 <>
                     <td className='text-center'>{infoNuevaVenta.idVenta}</td>
+                    <td className='text-center'>{infoNuevaVenta.descripcionVenta}</td>
+                    <td className='text-center'>
+                        <input 
+                            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                            type='date'
+                            value={infoNuevaVenta.fechaVenta}
+                            onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, fechaVenta: e.target.value })}
+                        />
+                    </td>
                     <td className='text-center'>
                         <input 
                             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
                             type='text'
-                            value={infoNuevaVenta.descripcion}
-                            onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, descripcion: e.target.value })}
+                            value={infoNuevaVenta.idCliente}
+                            onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, idCliente: e.target.value })}
                         />
                     </td>
-                    <td className='text-center'>{infoNuevaVenta.fechaVenta}</td>
-                    <td className='text-center'>{infoNuevaVenta.idCliente}</td>
-                    <td className='text-center'>{infoNuevaVenta.nombreCliente}</td>
-                    {/* <td className='text-center'>{infoNuevaVenta.idVendedor}</td> */}
-                    <td className='text-center'>{infoNuevaVenta.nombreVendedor}</td>
                     <td className='text-center'>
                         <input 
+                            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                            type='text'
+                            value={infoNuevaVenta.nombreCliente}
+                            onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, nombreCliente: e.target.value })}
+                        />
+                    </td>
+                    <td className='text-center'>
+                        <select
+                            name = 'vendedor'
+                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
+                            value= {infoNuevaVenta.vendedor}
+                            onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, vendedor: e.target.value })}
+                            >
+                                <option  disabled selected value=''>Seleccione un vendedor</option>
+                                    {vendedores.map((el)=>{
+                                        return(
+                                            <option key={nanoid()}>{`${el.nombre}`}</option>
+                                            )
+                                        })}
+                        </select>    
+                    </td>
+                    <td className='text-center'>{infoNuevaVenta.valorVenta}
+                        {/* <input 
                             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
                             type='text'
                             value={infoNuevaVenta.valorVenta}
                             onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, valorVenta: e.target.value })}
-                        />
+                        /> */}
                     </td>
                     <td className='text-center'>
                         <select 
@@ -231,16 +280,13 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
             ):(
             <>
                 <td className='text-center'>{infoNuevaVenta.idVenta}</td>
-                <td className="text-center">
-                    <i className="rounded bg-novablue border-solid border-2 border-novablue far fa-eye"></i>
-                </td>
+                <td className="text-center">{infoNuevaVenta.descripcionVenta}</td>
                 <td className='text-center'>{infoNuevaVenta.fechaVenta}</td>
                 <td className='text-center'>{infoNuevaVenta.idCliente}</td>
                 <td className='text-center'>{infoNuevaVenta.nombreCliente}</td>
-                {/* <td>{venta.idVendedor}</td> */}
                 <td className='text-center'>{infoNuevaVenta.nombreVendedor}</td>
                 <td className='text-center'>{infoNuevaVenta.valorVenta}</td>
-                <td className={`bg-${alerta} text-center`}>{infoNuevaVenta.estado}</td>
+                <td className={`bg-${alerta}`}>{infoNuevaVenta.estado}</td>
             </>
             )}
 
@@ -396,7 +442,7 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
         <div className='h-full w-auto'>
             <form ref={form} onSubmit={submitForm}>
                     <div className = "flex justify-center" >
-                        <div>
+                        {/* <div>
                             <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='idVenta'>ID Venta</label>
                             <input
                             name = 'idVenta'
@@ -405,7 +451,7 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
                             className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
                             required
                             />
-                        </div>
+                        </div> */}
                         <div>
                             <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor = 'fecha-venta'>Fecha Venta</label>
                             <input
@@ -437,9 +483,8 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
                         </div>
                         <div>
                             <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" 
-                            htmlFor='vendedores'>
-                                </label>
-                                Vendedor
+                            htmlFor='vendedores'>Vendedor</label>
+                                
                                 <select
                                 name = 'vendedor'
                                 className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
@@ -448,7 +493,7 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
                                     <option  disabled selected value=''>Seleccione un vendedor</option>
                                         {vendedores.map((el)=>{
                                             return(
-                                                <option key={nanoid()} value={el._id} >{`${el.nombre} ${el.correo}`}</option>
+                                                <option key={nanoid()} value={el._id} >{`${el.nombre}`}</option>
                                                 )
                                             })}
                                 </select>
@@ -546,7 +591,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                                         <option 
                                         key={nanoid()}
                                         value={el._id} 
-                                        >{`${el.idProducto} ${el.descripcion} ${el.estadoP}`}</option>
+                                        >{`${el.idProducto} ${el.descripcion}`}</option>
                                         )
                                     })}
                                 </select>

@@ -1,5 +1,5 @@
 .tabla {
-  width: 100%;
+  width: 98%;
   margin: 10px;
   overflow-y: scroll;
 }
@@ -8,6 +8,7 @@
 .tabla th {
   padding: 8px;
   border: 1px solid #ddd;
+  width: auto;
 }
 
 .tabla th {
@@ -15,7 +16,7 @@
   color: white;
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: left;
+  text-align: center;
 }
 
 .tabla tr:nth-child(even) {

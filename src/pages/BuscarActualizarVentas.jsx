@@ -137,17 +137,23 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
             return val.descripcion
         })
     }
-    const [infoNuevaVenta, setInfoNuevaVenta] = useState({
-        idVenta: venta._id.slice(18),
-        descripcionVenta: /* ObtenerDescripcion() */"hola",    
-        fechaVenta: venta.fechaVenta,
-        idCliente: venta.idCliente,
-        nombreCliente: venta.cliente,
-        // idVendedor: venta.idVendedor,
-        nombreVendedor: venta.vendedor.nombre,
-        valorVenta: venta.valorVenta,
-        estado: venta.estado,
-    });
+    const [infoNuevaVenta, setInfoNuevaVenta] = useState({});
+
+    const infoVenta = () =>{
+        let array = {
+            idVenta: venta._id.slice(18),
+            descripcionVenta: ObtenerDescripcion() ,    
+            fechaVenta: venta.fechaVenta,
+            idCliente: venta.idCliente,
+            nombreCliente: venta.cliente,
+            // idVendedor: venta.idVendedor,
+            nombreVendedor: venta.vendedor.nombre,
+            valorVenta: venta.valorVenta,
+            estado: venta.estado,
+        }
+        setInfoNuevaVenta(array)
+    }
+
 
     const actualizarVenta = async () => {
         await editarVenta(
@@ -190,7 +196,9 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
         }else{
             setAlerta('danger')
         }
+        infoVenta()
     }, [alerta, infoNuevaVenta.estado]);
+
     
     return(
         <tr>
@@ -223,8 +231,8 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
                         <input 
                             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
                             type='text'
-                            value={infoNuevaVenta.nombreCliente}
-                        onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, nombreCliente: e.target.value})}
+                            value={infoNuevaVenta.cliente}
+                        onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, cliente: e.target.value})}
                         /></td>
                     <td className='text-center'>{infoNuevaVenta.nombreVendedor}</td>
                     <td className='text-center'>

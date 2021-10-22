@@ -255,12 +255,6 @@ const FilaVentas = ({venta, setEjecutarConsulta}) =>{
                         </select>    
                     </td>
                     <td className='text-center'>{infoNuevaVenta.valorVenta}
-                        {/* <input 
-                            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-                            type='text'
-                            value={infoNuevaVenta.valorVenta}
-                            onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, valorVenta: e.target.value })}
-                        /> */}
                     </td>
                     <td className='text-center'>
                         <select 
@@ -383,11 +377,6 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
         fetchProductos();
     }, []);
     
-    /* const ShowSelected = () =>{
-        let dato = document.getElementById('vendedorLista').value;
-        console.log(dato);
-    } */
-
     const submitForm = async (e) => {
         e.preventDefault();
         const fd = new FormData(form.current);
@@ -442,16 +431,6 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
         <div className='h-full w-auto'>
             <form ref={form} onSubmit={submitForm}>
                     <div className = "flex justify-center" >
-                        {/* <div>
-                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='idVenta'>ID Venta</label>
-                            <input
-                            name = 'idVenta'
-                            placeholder='ID Venta'
-                            type="text"
-                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
-                            required
-                            />
-                        </div> */}
                         <div>
                             <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor = 'fecha-venta'>Fecha Venta</label>
                             <input

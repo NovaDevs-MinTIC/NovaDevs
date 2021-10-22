@@ -277,7 +277,6 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
                     <div className= "flex justify-around mt-2">
                         <Tooltip title='Confirmar Edición' arrow>
                             <i
-                            /* onClick= llama a la petición de editar */
                             className='fas fa-check text-green-700 hover:text-green-500'
                             onClick={() => actualizarVenta()}
                             />
@@ -337,6 +336,7 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
     const [vendedores, setVendedores] = useState([]);
     const [productos, setProductos] = useState([]);
     const [productosTabla, setProductosTabla] = useState([]);
+    const [totalVenta, setTotalVenta] = useState(0);
     
     useEffect(() => {
         const fetchVendedores = async () =>{
@@ -364,11 +364,6 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
         fetchVendedores();
         fetchProductos();
     }, []);
-    
-    /* const ShowSelected = () =>{
-        let dato = document.getElementById('vendedorLista').value;
-        console.log(dato);
-    } */
 
     const submitForm = async (e) => {
         e.preventDefault();
@@ -390,15 +385,13 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
             }
         )
 
-        console.log("vendedor",formData.vendedor)
-
         const DataVenta = {
             idVenta: formData.idVenta,
             fechaVenta: formData.fechaVenta,
             idCliente: formData.idCliente,
             cliente: formData.cliente,
             vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
-            valorVenta : '$ 300000',   // SE DEBE MODIFICAR CUANDO HALLEMOS LA FORMA DE BUSCAR EL VALOR TOTAL
+            valorVenta : totalVenta,   // SE DEBE MODIFICAR CUANDO HALLEMOS LA FORMA DE BUSCAR EL VALOR TOTAL
             estado: "En proceso",
             productos: productosTabla,
         }
@@ -485,19 +478,12 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
                 <TablaArticulos 
                 productos={productos}
                 setProductos={setProductos}
-                setProductosTabla={setProductosTabla}/>
+                setProductosTabla={setProductosTabla}
+                setTotalVenta = {setTotalVenta}
+                />
                 
                 {/* PIE DE VENTA */}
                 <div className="w-full  h-auto">
-                    <div className="w-full justify-end flex flex-wrap">
-                        <div>
-                            <span className="mx-8 px-4 font-extrabold uppercase text-xl">VALOR TOTAL</span>
-                        </div>
-                        <div>
-                            <span className="mx-8 px-4 text-lg">$ 3456998231</span>
-                        </div>
-                    </div>
-
                     <div className='flex justify-end mx-4'>
                         <button
                         type='submit'
@@ -513,14 +499,26 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
     );
 };
 
-const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
+const TablaArticulos = ({productos, setProductos, setProductosTabla, setTotalVenta}) => {
     const [productoAAgregar, setProductoAAgregar] = useState({});
     const [filasTabla, setFilasTabla] = useState([]);
+    const [totalVentas, setTotalVentas] = useState(0);
     
+    useEffect(()=>{
+        let total = 0;
+        filasTabla.forEach((f)=>{
+            total = total + f.total
+        })
+        setTotalVentas(total)
+        setTotalVenta(total)
+    },[filasTabla, setTotalVenta])
+
     useEffect(() => {
-        /* console.log('filasTabla', filasTabla); */
         setProductosTabla(filasTabla);
+        console.log(filasTabla)
     }, [filasTabla, setProductosTabla]);
+
+    
 
     const agregarNuevoProducto = () => {
         setFilasTabla([...filasTabla, productoAAgregar]);
@@ -536,7 +534,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
     const modificarProducto = (producto, cantidad) => {
         setFilasTabla(
             filasTabla.map((ft)=>{
-                if (ft._id === producto.idProducto){
+                if (ft._id === producto._id){
                     ft.cantidad = cantidad;
                     ft.total = producto.valorU * cantidad;
                 }
@@ -622,15 +620,20 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla}) => {
                     })}
                 </tbody>
             </table>
+            <div className="w-full justify-end flex flex-wrap">
+                <div>
+                    <span className="mx-8 px-4 font-extrabold uppercase text-xl">VALOR TOTAL</span>
+                </div>
+                <div>
+                    <span className="mx-8 px-4 text-lg">$ {totalVentas}</span>
+                </div>
+            </div>
         </div>
     );
 };
 
 const FilaProducto = ({pro, index, eliminarProducto, modificarProducto}) =>{
     const [producto, setProducto] = useState(pro);
-    useEffect(() => {
-        console.log('pro', producto);
-    }, [producto]); 
 
     return(
         <tr> 

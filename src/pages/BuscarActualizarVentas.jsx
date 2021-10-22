@@ -132,21 +132,15 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
     const [edit,setEdit] = useState(false);
     const [openDialog,setOpenDialog] = useState(false);
     const [alerta, setAlerta] = useState('')
-    const ObtenerDescripcion = () =>{
-        Object.values(venta.productos).forEach(val => {
-            return val.descripcion
-        })
-    }
     const [infoNuevaVenta, setInfoNuevaVenta] = useState({});
 
     const infoVenta = () =>{
         let array = {
-            idVenta: venta._id.slice(18),
-            descripcionVenta: ObtenerDescripcion() ,    
+            idVenta: venta._id.slice(18),  
             fechaVenta: venta.fechaVenta,
             idCliente: venta.idCliente,
-            nombreCliente: venta.cliente,
-            // idVendedor: venta.idVendedor,
+            cliente: venta.cliente,
+            vendedor: venta.vendedor,
             nombreVendedor: venta.vendedor.nombre,
             valorVenta: venta.valorVenta,
             estado: venta.estado,
@@ -206,20 +200,12 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
                 <>
                     <td className='text-center'>{infoNuevaVenta.idVenta}</td>
                     <td className='text-center'>
-                        {/* <input 
-                            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-                            type='text'
-                            value={infoNuevaVenta.descripcion}
-                            onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, descripcion: e.target.value })}
-                        /> */}
                         {venta.productos.map((el) =>{
                             return <>
-                        {`${el.descripcion}, ${el.cantidad} UN`}
+                        {`${el.descripcion}${el.cantidad} UN`}
                         <br />
                         </>
-                    })}, 
-
-
+                    })}
                     </td>
                     <td className='text-center'>
                         <input 
@@ -257,14 +243,14 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
                             type='select'
                             value={infoNuevaVenta.estado}
                             onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, estado: e.target.value })}
-                            defaultValue='0'>
+                            defaultValue="0">
 
-                            <option disabled value="0">Seleccionar una opción</option>
+                            <option disabled value="0">Seleccione una opción</option>
                             <option value="Entregado">Entregado</option>
                             <option value="En proceso">En proceso</option>
                             <option value="Cancelado">Cancelado</option>
                         </select>
-                    </td>
+                    </td>                    
                 </>
             ):(
             <>
@@ -275,12 +261,11 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
                         {`${el.descripcion}, ${el.cantidad} UN`}
                         <br />
                         </>
-                    })},
+                    })}
                 </td>
                 <td className='text-center'>{infoNuevaVenta.fechaVenta}</td>
                 <td className='text-center'>{infoNuevaVenta.idCliente}</td>
-                <td className='text-center'>{infoNuevaVenta.nombreCliente}</td>
-                {/* <td>{venta.idVendedor}</td> */}
+                <td className='text-center'>{infoNuevaVenta.cliente}</td>
                 <td className='text-center'>{infoNuevaVenta.nombreVendedor}</td>
                 <td className='text-center'>{infoNuevaVenta.valorVenta}</td>
                 <td className={`bg-${alerta} text-center`}>{infoNuevaVenta.estado}</td>

@@ -19,7 +19,7 @@ function App() {
       <Auth0Provider
       domain="novadevs.us.auth0.com"
       clientId="aBmaNrxZ6TjfoMqTa5lUzhabnxXlEzmr"
-      redirectUri={window.location.origin}>
+      redirectUri='http://localhost:3000/home'>
         <Router>
           <Switch>
             <Route path={['/home', '/ventas', '/BuscarActualizarVentas', '/gestionProducto', '/gestionUsuarios']}>

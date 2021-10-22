@@ -128,7 +128,7 @@ const GestionVentas = ({listaVentas, setEjecutarConsulta}) => {
     )
 }
 
-const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
+const FilaVentas = ({venta, setEjecutarConsulta}) =>{
     const [edit,setEdit] = useState(false);
     const [openDialog,setOpenDialog] = useState(false);
     const [alerta, setAlerta] = useState('')
@@ -183,6 +183,10 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
     }; 
 
     useEffect(() => {
+        infoVenta()
+    }, []);
+
+    useEffect(() => {
         if(infoNuevaVenta.estado === "Entregado" || infoNuevaVenta.estado === "entregado"){
             setAlerta('success')
         }else if (infoNuevaVenta.estado === "En proceso" || infoNuevaVenta.estado === "en proceso") {
@@ -190,7 +194,6 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
         }else{
             setAlerta('danger')
         }
-        infoVenta()
     }, [alerta, infoNuevaVenta.estado]);
 
     
@@ -229,14 +232,7 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
                         onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, cliente: e.target.value})}
                         /></td>
                     <td className='text-center'>{infoNuevaVenta.nombreVendedor}</td>
-                    <td className='text-center'>
-                        <input 
-                            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-                            type='text'
-                            value={infoNuevaVenta.valorVenta}
-                            onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, valorVenta: e.target.value })}
-                        />
-                    </td>
+                    <td className='text-center'>{infoNuevaVenta.valorVenta}</td>
                     <td className='text-center'>
                         <select 
                             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
@@ -386,7 +382,6 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
         )
 
         const DataVenta = {
-            idVenta: formData.idVenta,
             fechaVenta: formData.fechaVenta,
             idCliente: formData.idCliente,
             cliente: formData.cliente,
@@ -418,16 +413,6 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
             <form ref={form} onSubmit={submitForm}>
                     <div className = "flex justify-center" >
                         <div>
-                            <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor='idVenta'>ID Venta</label>
-                            <input
-                            name = 'idVenta'
-                            placeholder='ID Venta'
-                            type="text"
-                            className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
-                            required
-                            />
-                        </div>
-                        <div>
                             <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" htmlFor = 'fecha-venta'>Fecha Venta</label>
                             <input
                             name = 'fechaVenta' 
@@ -458,9 +443,7 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
                         </div>
                         <div>
                             <label className="mx-3 block uppercase tracking-wide text-gray-700 font-bold mb-2" 
-                            htmlFor='vendedores'>
-                                </label>
-                                Vendedor
+                            htmlFor='vendedores'>Vendedor</label>
                                 <select
                                 name = 'vendedor'
                                 className='border-2 border-novablue mx-2 px-3 py-1 self-start rounded-md focus:outline-none focus:border-gray-500'
@@ -572,7 +555,7 @@ const TablaArticulos = ({productos, setProductos, setProductosTabla, setTotalVen
                                         <option 
                                         key={nanoid()}
                                         value={el._id} 
-                                        >{`${el.idProducto} ${el.descripcion} ${el.estadoP}`}</option>
+                                        >{`${el.descripcion}`}</option>
                                         )
                                     })}
                                 </select>

@@ -132,9 +132,14 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
     const [edit,setEdit] = useState(false);
     const [openDialog,setOpenDialog] = useState(false);
     const [alerta, setAlerta] = useState('')
+    const ObtenerDescripcion = () =>{
+        Object.values(venta.productos).forEach(val => {
+            return val.descripcion
+        })
+    }
     const [infoNuevaVenta, setInfoNuevaVenta] = useState({
         idVenta: venta._id.slice(18),
-        descripcionVenta: venta.descripcionVenta,
+        descripcionVenta: /* ObtenerDescripcion() */"hola",    
         fechaVenta: venta.fechaVenta,
         idCliente: venta.idCliente,
         nombreCliente: venta.cliente,
@@ -200,10 +205,27 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
                             onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, descripcion: e.target.value })}
                         />
                     </td>
-                    <td className='text-center'>{infoNuevaVenta.fechaVenta}</td>
-                    <td className='text-center'>{infoNuevaVenta.idCliente}</td>
-                    <td className='text-center'>{infoNuevaVenta.nombreCliente}</td>
-                    {/* <td className='text-center'>{infoNuevaVenta.idVendedor}</td> */}
+                    <td className='text-center'>
+                        <input 
+                            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                            type='date'
+                            value={infoNuevaVenta.fechaVenta}
+                            onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, fechaVenta: e.target.value })}
+                        /></td>
+                    <td className='text-center'>
+                        <input 
+                            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                            type='text'
+                            value={infoNuevaVenta.idCliente}
+                            onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, idCliente: e.target.value })}
+                        /></td>
+                    <td className='text-center'>
+                        <input 
+                            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                            type='text'
+                            value={infoNuevaVenta.nombreCliente}
+                        onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, nombreCliente: e.target.value})}
+                        /></td>
                     <td className='text-center'>{infoNuevaVenta.nombreVendedor}</td>
                     <td className='text-center'>
                         <input 
@@ -232,7 +254,7 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
             <>
                 <td className='text-center'>{infoNuevaVenta.idVenta}</td>
                 <td className="text-center">
-                    <i className="rounded bg-novablue border-solid border-2 border-novablue far fa-eye"></i>
+                    {infoNuevaVenta.descripcionVenta}
                 </td>
                 <td className='text-center'>{infoNuevaVenta.fechaVenta}</td>
                 <td className='text-center'>{infoNuevaVenta.idCliente}</td>

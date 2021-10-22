@@ -206,12 +206,20 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
                 <>
                     <td className='text-center'>{infoNuevaVenta.idVenta}</td>
                     <td className='text-center'>
-                        <input 
+                        {/* <input 
                             className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
                             type='text'
                             value={infoNuevaVenta.descripcion}
                             onChange={(e) => setInfoNuevaVenta({ ...infoNuevaVenta, descripcion: e.target.value })}
-                        />
+                        /> */}
+                        {venta.productos.map((el) =>{
+                            return <>
+                        {`${el.descripcion}, ${el.cantidad} UN`}
+                        <br />
+                        </>
+                    })}, 
+
+
                     </td>
                     <td className='text-center'>
                         <input 
@@ -262,7 +270,12 @@ const FilaVentas = ({venta, setEjecutarConsulta, vendedores}) =>{
             <>
                 <td className='text-center'>{infoNuevaVenta.idVenta}</td>
                 <td className="text-center">
-                    {infoNuevaVenta.descripcionVenta}
+                    {venta.productos.map((el) =>{
+                            return <>
+                        {`${el.descripcion}, ${el.cantidad} UN`}
+                        <br />
+                        </>
+                    })},
                 </td>
                 <td className='text-center'>{infoNuevaVenta.fechaVenta}</td>
                 <td className='text-center'>{infoNuevaVenta.idCliente}</td>

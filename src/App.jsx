@@ -19,7 +19,8 @@ function App() {
       <Auth0Provider
       domain="novadevs.us.auth0.com"
       clientId="aBmaNrxZ6TjfoMqTa5lUzhabnxXlEzmr"
-      redirectUri='http://localhost:3000/home'>
+      redirectUri='http://localhost:3000/home'
+      audience='api-autenticacion-novadevs'>
         <Router>
           <Switch>
             <Route path={['/home', '/ventas', '/BuscarActualizarVentas', '/gestionProducto', '/gestionUsuarios']}>

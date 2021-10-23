@@ -13,12 +13,6 @@ const PrivateLayout = ({ children }) => {
  const { setUserData } = useUser()
  useEffect(() => {
    const fetchAuth0Token = async () => {
-     // si se quieren hacer validaciones con el token:
-     // if (localStorage.getItem('token')) {
-     //   // validar fecha de expiracion del token
-     // } else {
-     //   // pedir token
-     // 
      // 1. pedir token a auth0
      setLoadingUserInformation(true);
      const accessToken = await getAccessTokenSilently({
@@ -37,7 +31,7 @@ const PrivateLayout = ({ children }) => {
        (err) => {
          console.log('err', err);
          setLoadingUserInformation(false);
-         logout({ returnTo: 'http://localhost:3000/home' });
+         logout({ returnTo: 'http://localhost:3000/' });
        }
      );
    };

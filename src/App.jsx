@@ -1,3 +1,4 @@
+import React, { useState} from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'styles/App.scss'
 import 'styles/Home.css'
@@ -11,53 +12,58 @@ import PrivateLayout from 'Layouts/PrivateLayout';
 import LoginLayout from 'Layouts/LoginLayout';
 import { Auth0Provider } from "@auth0/auth0-react";
 import PrivateRoute from 'components/PrivateRoute';
+import { UserContext } from 'context/userContext';
 
 
 function App() {
-  return (
-    <div className='App'>
-      <Auth0Provider
-      domain="novadevs.us.auth0.com"
-      clientId="aBmaNrxZ6TjfoMqTa5lUzhabnxXlEzmr"
-      redirectUri='http://localhost:3000/home'
-      audience='api-autenticacion-novadevs'>
-        <Router>
-          <Switch>
-            <Route path={['/home', '/ventas', '/BuscarActualizarVentas', '/gestionProducto', '/gestionUsuarios']}>
-              <PrivateRoute>
-                <PrivateLayout>
-                    <Switch>
-                      <Route path='/home'>
-                        <Home />
-                      </Route>
-                      <Route path='/ventas'>
-                        <Ventas />
-                      </Route>
-                      <Route path='/BuscarActualizarVentas'>
-                        <BuscarActualizarVentas />
-                      </Route>
-                      <Route path='/gestionProducto'>
-                        <GestionProducto />
-                      </Route>
-                      <Route path='/gestionUsuarios'>
-                        <Usuarios />
-                      </Route>
-                    </Switch>
-                </PrivateLayout>
-              </PrivateRoute>
-            </Route>
+  const [userData, setUserData] = useState({});
 
-            <Route path={['/']}>
-              <LoginLayout>
-                <Route path='/'>
-                  <Login />
+  return (
+    <Auth0Provider
+    domain="novadevs.us.auth0.com"
+    clientId="aBmaNrxZ6TjfoMqTa5lUzhabnxXlEzmr"
+    redirectUri='http://localhost:3000/home'
+    audience='api-autenticacion-novadevs'>
+      <div className='App'>
+        <UserContext.Provider value={{ userData, setUserData }}>
+            <Router>
+              <Switch>
+                <Route path={['/home', '/ventas', '/BuscarActualizarVentas', '/gestionProducto', '/gestionUsuarios']}>
+                  <PrivateRoute>
+                    <PrivateLayout>
+                        <Switch>
+                          <Route path='/home'>
+                            <Home />
+                          </Route>
+                          <Route path='/ventas'>
+                            <Ventas />
+                          </Route>
+                          <Route path='/BuscarActualizarVentas'>
+                            <BuscarActualizarVentas />
+                          </Route>
+                          <Route path='/gestionProducto'>
+                            <GestionProducto />
+                          </Route>
+                          <Route path='/gestionUsuarios'>
+                            <Usuarios />
+                          </Route>
+                        </Switch>
+                    </PrivateLayout>
+                  </PrivateRoute>
                 </Route>
-              </LoginLayout>
-            </Route>
-          </Switch>
-        </Router>
-      </Auth0Provider>
-    </div>
+
+                <Route path={['/']}>
+                  <LoginLayout>
+                    <Route path='/'>
+                      <Login />
+                    </Route>
+                  </LoginLayout>
+                </Route>
+              </Switch>
+            </Router>
+          </UserContext.Provider>
+      </div>
+    </Auth0Provider>
   );
 }
 

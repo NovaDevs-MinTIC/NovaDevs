@@ -37,7 +37,7 @@ const PrivateLayout = ({ children }) => {
        (err) => {
          console.log('err', err);
          setLoadingUserInformation(false);
-         logout({ returnTo: 'http://localhost:3000/home' });
+         logout({ returnTo: 'http://localhost:3000/' });
        }
      );
    };
@@ -45,6 +45,7 @@ const PrivateLayout = ({ children }) => {
      fetchAuth0Token();
    }
  }, [isAuthenticated, getAccessTokenSilently, logout, setUserData])
+
  if (isLoading || loadingUserInformation)
    return <ReactLoading type='cylon' color='#abc123' height={667} width={375} />
  if (!isAuthenticated) {

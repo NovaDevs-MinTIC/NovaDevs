@@ -26,42 +26,50 @@ function App() {
     audience='api-autenticacion-novadevs'>
       <div className='App'>
         <UserContext.Provider value={{ userData, setUserData }}>
-            <Router>
-              <Switch>
-                <Route path={['/home', '/ventas', '/BuscarActualizarVentas', '/gestionProducto', '/gestionUsuarios']}>
-                  <PrivateRoute>
-                    <PrivateLayout>
-                        <Switch>
-                          <Route path='/home'>
+          <Router>
+            <Switch>
+              <Route path={['/home', '/ventas', '/BuscarActualizarVentas', '/gestionProducto', '/gestionUsuarios']}>
+                  <PrivateLayout>
+                      <Switch>
+                        <Route path='/home'>
+                          <PrivateRoute roleList={['Administrador', 'sin rol']}>
                             <Home />
-                          </Route>
-                          <Route path='/ventas'>
+                          </PrivateRoute>
+                        </Route>
+                        <Route path='/ventas'>
+                          <PrivateRoute roleList={['Administrador', 'sin rol']}>
                             <Ventas />
-                          </Route>
-                          <Route path='/BuscarActualizarVentas'>
+                          </PrivateRoute>
+                        </Route>
+                        <Route path='/BuscarActualizarVentas'>
+                          <PrivateRoute roleList={['Administrador', 'sin rol']}>
                             <BuscarActualizarVentas />
-                          </Route>
-                          <Route path='/gestionProducto'>
+                          </PrivateRoute>
+                        </Route>
+                        <Route path='/gestionProducto'>
+                          <PrivateRoute roleList={['Administrador', 'sin rol']}>
                             <GestionProducto />
-                          </Route>
-                          <Route path='/gestionUsuarios'>
+                          </PrivateRoute>
+                        </Route>
+                        <Route path='/gestionUsuarios'>
+                          <PrivateRoute roleList={['Administrador', 'sin rol']}>
                             <Usuarios />
-                          </Route>
-                        </Switch>
-                    </PrivateLayout>
-                  </PrivateRoute>
-                </Route>
+                          </PrivateRoute>
+                        </Route>
+                      </Switch>
+                  </PrivateLayout>
+              </Route>
 
-                <Route path={['/']}>
-                  <LoginLayout>
-                    <Route path='/'>
-                      <Login />
-                    </Route>
-                  </LoginLayout>
-                </Route>
-              </Switch>
-            </Router>
-          </UserContext.Provider>
+              <Route path={['/']}>
+                <LoginLayout>
+                  <Route path='/'>
+                    <Login />
+                  </Route>
+                </LoginLayout>
+              </Route>
+            </Switch>
+          </Router>
+        </UserContext.Provider>
       </div>
     </Auth0Provider>
   );

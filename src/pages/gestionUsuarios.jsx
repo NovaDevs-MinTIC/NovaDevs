@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import { Dialog, Tooltip } from '@material-ui/core';
-import axios from 'axios'
-import {obtenerUsuarios} from 'utils/api'
 import { nanoid } from 'nanoid';
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../styles/usuarios.css';
+import { obtenerUsuarios, editarUsuario, quitarUsuario } from 'utils/api';
 
 const  Usuarios = () => {
   const [usuarios, setUsuarios] =useState([]);
@@ -38,54 +37,42 @@ const FilaUsuario = ({usuario, setEjecutarConsulta}) => {
   const [edit, setEdit] = useState(false);
   const [openDialog,setOpenDialog] = useState(false);
   const [infoNuevoUsuario, setInfoNuevoUsuario] = useState({
-    nombre : usuario.nombre,
-    correo : usuario.correo,
+    nombre : usuario.name,
+    correo : usuario.email,
     rol : usuario.rol,
     estado : usuario.estado
 });
 
-const actualizarUsuario = async () => {
-  //enviar la info al backend
-  const options = {
-    method: 'PATCH',
-    url: `http://localhost:5000/usuarios/${usuario._id}/`,
-    headers: { 'Content-Type': 'application/json' },
-    data: { ...infoNuevoUsuario }
-  };
-
-  await axios
-    .request(options)
-    .then(function (response) {
+const actualizarUsuario = async () =>{
+  await editarUsuario(
+    usuario._id,
+    {...infoNuevoUsuario},
+    (response)=>{
       console.log(response.data);
       toast.success('Usuario modificado con éxito');
       setEdit(false);
       setEjecutarConsulta(true);
-    })
-    .catch(function (error) {
+    },
+    (error)=>{
       toast.error('Error modificando el usuario');
       console.error(error);
-    });
-};
+    }
+  )
+}
 
 const eliminarUsuario = async () => {
-  const options = {
-      method: 'DELETE',
-      url: `http://localhost:5000/usuarios/${usuario._id}/`,
-      headers: { 'Content-Type': 'application/json' },
-      data: { id: usuario._id },
-  };
-
-  await axios
-      .request(options)
-      .then(function (response) {
+  await quitarUsuario(
+    usuario._id,
+    (response)=>{
       console.log(response.data);
       toast.success('Usuario eliminado con éxito');
       setEjecutarConsulta(true);
-      })
-      .catch(function (error) {
+    },
+    (error)=>{
       console.error(error);
       toast.error('Error eliminando el usuario');
-      });
+    }
+  )
   setOpenDialog(false);
   };
 
@@ -93,8 +80,8 @@ const eliminarUsuario = async () => {
     <tr>
       {edit ? (
           <>
-              <td className='text-center'>{usuario.nombre}</td>
-              <td className='text-center'>{usuario.correo}</td>
+              <td className='text-center'>{infoNuevoUsuario.nombre}</td>
+              <td className='text-center'>{infoNuevoUsuario.correo}</td>
               <td className='text-center'>
                 <select 
                   className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
@@ -124,10 +111,10 @@ const eliminarUsuario = async () => {
           </>
       ) : (
           <>
-              <td className='text-center'>{usuario.nombre}</td>
-              <td className='text-center'>{usuario.correo}</td>
-              <td className='text-center'>{usuario.rol}</td>
-              <td className='text-center'>{usuario.estado}</td>
+              <td className='text-center'>{infoNuevoUsuario.nombre}</td>
+              <td className='text-center'>{infoNuevoUsuario.correo}</td>
+              <td className='text-center'>{infoNuevoUsuario.rol}</td>
+              <td className='text-center'>{infoNuevoUsuario.estado}</td>
           </>
       )}
       <td>
@@ -207,50 +194,47 @@ const TablaUsuarios = ({listaUsuarios, setEjecutarConsulta}) =>{
 
 
 return(
-  <>
-    <div className='flex items-center justify-center w-full h-1/6'>
-      <h2 className='text-4xl font-extrabold text-gray-900'>
-      Gestión de Usuarios
-      </h2>
-    </div>
-    <div className='flex items-center justify-center w-full h-auto'>
-      <input 
-      type="text"
-      value = {buscar}
-      placeholder='Buscar'
-      className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
-      onChange={(e) => {setBuscar(e.target.value)}}
-       />
-    </div>
-    <div className='hidden md:flex w-full mt-12'>
-      <table className="tabla">
-          <thead>
-              <tr>
-                  <th className="text-center">Nombre</th>
-                  <th className="text-center">Correo</th>
-                  <th className="text-center w-1/10">Rol</th>
-                  <th className="text-center w-1/10" >Estado</th>
-                  <th className="text-center">Acciones</th>
-              </tr>
-          </thead>
-          <tbody>
-              {usuariosFiltrados.map((usuario) => {
-                  return(
-                      <FilaUsuario
-                      key={nanoid()}
-                      usuario={usuario}
-                      setEjecutarConsulta={setEjecutarConsulta}
-                      />
-                  )
-              })}
-          </tbody>
-      </table>
-    </div>
-
-  </>
-  
-
-)
+    <>
+      <div className='flex items-center justify-center w-full h-1/6'>
+        <h2 className='text-4xl font-extrabold text-gray-900'>
+        Gestión de Usuarios
+        </h2>
+      </div>
+      <div className='flex items-center justify-center w-full h-auto'>
+        <input 
+        type="text"
+        value = {buscar}
+        placeholder='Buscar'
+        className='border-2 border-novablue mx-2 px-3 py-1 rounded-md focus:outline-none focus:border-gray-500'
+        onChange={(e) => {setBuscar(e.target.value)}}
+        />
+      </div>
+      <div className='hidden md:flex w-full mt-12'>
+        <table className="tabla">
+            <thead>
+                <tr>
+                    <th className="text-center">Nombre</th>
+                    <th className="text-center">Correo</th>
+                    <th className="text-center w-1/10">Rol</th>
+                    <th className="text-center w-1/10" >Estado</th>
+                    <th className="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {usuariosFiltrados.map((usuario) => {
+                    return(
+                        <FilaUsuario
+                        key={nanoid()}
+                        usuario={usuario}
+                        setEjecutarConsulta={setEjecutarConsulta}
+                        />
+                    )
+                })}
+            </tbody>
+        </table>
+      </div>
+    </>
+  )
 }
 export default Usuarios;
 

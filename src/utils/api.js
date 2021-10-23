@@ -80,6 +80,15 @@ export const editarUsuario = async (id, data, successCallback, errorCallback) =>
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
+export const quitarUsuario = async (id, successCallback, errorCallback) => {
+  const options = {
+    method: 'DELETE',
+    url: `${baseURL}/usuarios/${id}/`,
+    headers: { 'Content-Type': 'application/json', Authorization: getToken() }
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
 // CRUD DE VENTAS
 
 export const crearVenta = async (data, successCallback, errorCallback) => {

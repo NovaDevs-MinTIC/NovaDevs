@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://salty-plateau-22180.herokuapp.com/'
+const baseURL = 'https://salty-plateau-22180.herokuapp.com'
 
 const getToken = () => {
   return `Bearer ${localStorage.getItem('token')}`;

@@ -32,27 +32,27 @@ function App() {
                   <PrivateLayout>
                       <Switch>
                         <Route path='/home'>
-                          <PrivateRoute roleList={['Administrador', 'sin rol']}>
+                          <PrivateRoute roleList={['Administrador', 'Vendedor', 'sin rol']}>
                             <Home />
                           </PrivateRoute>
                         </Route>
                         <Route path='/ventas'>
-                          <PrivateRoute roleList={['Administrador', 'sin rol']}>
+                          <PrivateRoute roleList={['Administrador', 'Vendedor', 'sin rol']}>
                             <Ventas />
                           </PrivateRoute>
                         </Route>
                         <Route path='/BuscarActualizarVentas'>
-                          <PrivateRoute roleList={['Administrador', 'sin rol']}>
+                          <PrivateRoute roleList={['Administrador', 'Vendedor', 'sin rol']}>
                             <BuscarActualizarVentas />
                           </PrivateRoute>
                         </Route>
                         <Route path='/gestionProducto'>
-                          <PrivateRoute roleList={['Administrador', 'sin rol']}>
+                          <PrivateRoute roleList={['Administrador', 'Vendedor', 'sin rol']}>
                             <GestionProducto />
                           </PrivateRoute>
                         </Route>
                         <Route path='/gestionUsuarios'>
-                          <PrivateRoute roleList={['Administrador', 'sin rol']}>
+                          <PrivateRoute roleList={['Administrador', 'Vendedor', 'sin rol']}>
                             <Usuarios />
                           </PrivateRoute>
                         </Route>

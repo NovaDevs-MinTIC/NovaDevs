@@ -23,14 +23,14 @@ const  Usuarios = () => {
         );
         setEjecutarConsulta(false);
       }
-}, [ejecutarConsulta]);
+    }, [ejecutarConsulta]);
 
     return(
         <div className='w-full h-full'>
           <TablaUsuarios listaUsuarios={usuarios} setEjecutarConsulta = {setEjecutarConsulta} />
           <ToastContainer position='bottom-center' autoClose={3000} />
         </div>
-          )
+      )
 }
 
 const FilaUsuario = ({usuario, setEjecutarConsulta}) => {
@@ -40,7 +40,6 @@ const FilaUsuario = ({usuario, setEjecutarConsulta}) => {
     nombre : usuario.name,
     correo : usuario.email,
     rol : usuario.rol,
-    estado : usuario.estado
 });
 
 const actualizarUsuario = async () =>{
@@ -94,27 +93,12 @@ const eliminarUsuario = async () => {
                     <option value="Administrador">Administrador</option>
                   </select>
               </td>
-              <td className='text-center'>
-                <select 
-                    className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-                    type='select'
-                    value={infoNuevoUsuario.estado}
-                    onChange={(e) => setInfoNuevoUsuario({ ...infoNuevoUsuario, estado: e.target.value })}
-                    defaultValue='0'
-                >
-                  <option disabled value="0">Seleccione una opción</option>
-                  <option value="Pendiente">Pendiente</option>
-                  <option value="Aceptado">Aceptado</option>
-                  <option value="Rechazado">Rechazado</option>
-                </select>
-              </td>
           </>
       ) : (
           <>
               <td className='text-center'>{infoNuevoUsuario.nombre}</td>
               <td className='text-center'>{infoNuevoUsuario.correo}</td>
               <td className='text-center'>{infoNuevoUsuario.rol}</td>
-              <td className='text-center'>{infoNuevoUsuario.estado}</td>
           </>
       )}
       <td>
@@ -151,33 +135,30 @@ const eliminarUsuario = async () => {
           </>
           )}
           </div>
-        <Dialog open={openDialog}>
-          <div className='p-8 flex flex-col'>
-              <h1 className='text-gray-900 text-2xl font-bold'>
-              ¿Está seguro de querer eliminar el usuario?
-              </h1>
-              <div className='flex w-full items-center justify-center my-4'>
-              <button
-                  onClick={() => eliminarUsuario()}
-                  className='mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md'
-              >
-                  Sí
-              </button>
-              <button
-                  onClick={() => setOpenDialog(false)}
-                  className='mx-2 px-4 py-2 bg-red-500 text-white hover:bg-red-700 rounded-md shadow-md'
-              >
-                  No
-              </button>
-              </div>
-          </div>
-        </Dialog>
+          <Dialog open={openDialog}>
+            <div className='p-8 flex flex-col'>
+                <h1 className='text-gray-900 text-2xl font-bold'>
+                ¿Está seguro de querer eliminar el usuario?
+                </h1>
+                <div className='flex w-full items-center justify-center my-4'>
+                <button
+                    onClick={() => eliminarUsuario()}
+                    className='mx-2 px-4 py-2 bg-green-500 text-white hover:bg-green-700 rounded-md shadow-md'
+                >
+                    Sí
+                </button>
+                <button
+                    onClick={() => setOpenDialog(false)}
+                    className='mx-2 px-4 py-2 bg-red-500 text-white hover:bg-red-700 rounded-md shadow-md'
+                >
+                    No
+                </button>
+                </div>
+            </div>
+          </Dialog>
       </td>
     </tr>
   )
-
-
-
 }
 
 const TablaUsuarios = ({listaUsuarios, setEjecutarConsulta}) =>{
@@ -216,19 +197,18 @@ return(
                     <th className="text-center">Nombre</th>
                     <th className="text-center">Correo</th>
                     <th className="text-center w-1/10">Rol</th>
-                    <th className="text-center w-1/10" >Estado</th>
                     <th className="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 {usuariosFiltrados.map((usuario) => {
-                    return(
-                        <FilaUsuario
-                        key={nanoid()}
-                        usuario={usuario}
-                        setEjecutarConsulta={setEjecutarConsulta}
-                        />
-                    )
+                  return(
+                    <FilaUsuario
+                    key={nanoid()}
+                    usuario={usuario}
+                    setEjecutarConsulta={setEjecutarConsulta}
+                    />
+                  )
                 })}
             </tbody>
         </table>

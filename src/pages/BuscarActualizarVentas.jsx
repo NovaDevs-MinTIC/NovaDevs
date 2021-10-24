@@ -141,7 +141,7 @@ const FilaVentas = ({venta, setEjecutarConsulta}) =>{
             idCliente: venta.idCliente,
             cliente: venta.cliente,
             vendedor: venta.vendedor,
-            nombreVendedor: venta.vendedor.nombre,
+            nombreVendedor: venta.vendedor.name,
             valorVenta: venta.valorVenta,
             estado: venta.estado,
         }
@@ -452,7 +452,7 @@ const Ventas = ({setEjecutarConsulta, setMostrarTabla}) => {
                                     <option  disabled selected value=''>Seleccione un vendedor</option>
                                         {vendedores.map((el)=>{
                                             return(
-                                                <option key={nanoid()} value={el._id} >{`${el.nombre} ${el.correo}`}</option>
+                                                <option key={nanoid()} value={el._id} >{`${el.name}`}</option>
                                                 )
                                             })}
                                 </select>
